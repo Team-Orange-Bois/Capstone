@@ -100,34 +100,67 @@ class Routes extends Component {
     // }
 
     return (
-      <>
-        <h1>Siq Beets</h1>
-        <form>
+      <div
+        id="outercontainer"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+          backgroundColor: '#490769',
+          height: '100vh'
+        }}
+      >
+        <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
+        <form
+          style={{
+            backgroundColor: '#490769',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            borderRadius: '2px'
+          }}
+        >
           <input
+            style={{
+              backgroundColor: '#35054C',
+              color: '#24C0F9'
+            }}
             type="text"
             placeholder="Click here to use keyboard"
             value=""
             onKeyPress={e => handleKeyPress(e)}
           />
-          <Keyboard
-            display={{
-              q: 'kick',
-              w: 'snare',
-              e: 'hat',
-              r: 'chord1',
-              t: 'chord2',
-              y: 'chord3'
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column'
             }}
-            layoutName="default"
-            onKeyPress={button => handleKeyboardPress(button)}
-          />
+          >
+            <Keyboard
+              display={{
+                q: 'kick',
+                w: 'snare',
+                e: 'hat',
+                r: 'chord1',
+                t: 'chord2',
+                y: 'chord3'
+              }}
+              style={{
+                backgroundColor: '#35054C',
+                color: '#24C0F9'
+              }}
+              layoutName="default"
+              onKeyPress={button => handleKeyboardPress(button)}
+            />
+          </div>
         </form>
         {/* <div>
           <button type="button" onClick={() => handleClickSong()}>
             Play Song
           </button>
         </div> */}
-      </>
+      </div>
     )
   }
 }
