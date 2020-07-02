@@ -58,7 +58,7 @@ input {
 .hg-theme-default {
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
     Helvetica, Arial, 'Lucida Grande', sans-serif;
-  background-color: #ececec;
+  background-color: #490769;
   padding: 5px;
   border-radius: 5px;
 }
@@ -99,7 +99,7 @@ input {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 5px;
-  background: white;
+  background-color: #af2df0;
   border-bottom: 1px solid #b5b5b5;
   cursor: pointer;
   display: flex;
