@@ -29,6 +29,12 @@ input {
   box-sizing: border-box;
 }
 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #24c0f9;
+  opacity: 1; /* Firefox */
+}
+
 .simple-keyboard {
   max-width: 850px;
 }
@@ -46,6 +52,7 @@ input {
 
 .hg-theme-default .hg-button span {
   pointer-events: none;
+  color: #24c0f9;
 }
 
 /* When using option "useButtonTag" */
@@ -58,7 +65,7 @@ input {
 .hg-theme-default {
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
     Helvetica, Arial, 'Lucida Grande', sans-serif;
-  background-color: #ececec;
+  background-color: #36054d;
   padding: 5px;
   border-radius: 5px;
 }
@@ -99,9 +106,8 @@ input {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 5px;
-  background: white;
-  border-bottom: 1px solid #b5b5b5;
-  cursor: pointer;
+  background-color: #490769;
+  border-bottom: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,7 +115,7 @@ input {
 }
 
 .hg-theme-default .hg-button.hg-activeButton {
-  background: #efefef;
+  background: #fe1bcb;
 }
 
 .hg-theme-default.hg-layout-numeric .hg-button {
@@ -151,4 +157,8 @@ input {
 
 .hg-theme-default .hg-button.hg-standardBtn[data-skbtn='@'] {
   max-width: 60px;
+}
+
+#outercontainer {
+  background-image: url('./vaaaaape.jpg');
 }
