@@ -107,7 +107,10 @@ class Routes extends Component {
           alignItems: 'center',
           flexDirection: 'column',
           backgroundColor: '#490769',
-          height: '100vh'
+          height: '100vh',
+          width: '100vw',
+          position: 'absolute',
+          overflow: 'auto'
         }}
       >
         <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
