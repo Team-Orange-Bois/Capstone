@@ -106,11 +106,8 @@ input {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 5px;
-  <<<<<<<headbackground-color: #af2df0;
-  border-bottom: 1px solid #b5b5b5;
-  =======background-color: #490769;
+  background-color: #490769;
   border-bottom: 1px solid black;
-  >>>>>>>07e9a2f95ea6f560f4ec8abf339162b02c4b5984cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
