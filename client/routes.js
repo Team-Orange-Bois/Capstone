@@ -82,22 +82,22 @@ class Routes extends Component {
       }
     }
 
-    const handleClickSong = () => {
-      kick.off()
-      snare.off()
-      hat.off()
-      kick.play()
-      kick.on('end', function() {
-        hat.play()
-      })
-      hat.on('end', function() {
-        snare.play()
-      })
-      snare.on('end', function() {
-        hat.play()
-        hat.off()
-      })
-    }
+    // const handleClickSong = () => {
+    //   kick.off()
+    //   snare.off()
+    //   hat.off()
+    //   kick.play()
+    //   kick.on('end', function() {
+    //     hat.play()
+    //   })
+    //   hat.on('end', function() {
+    //     snare.play()
+    //   })
+    //   snare.on('end', function() {
+    //     hat.play()
+    //     hat.off()
+    //   })
+    // }
 
     return (
       <>
@@ -122,11 +122,11 @@ class Routes extends Component {
             onKeyPress={button => handleKeyboardPress(button)}
           />
         </form>
-        <div>
+        {/* <div>
           <button type="button" onClick={() => handleClickSong()}>
             Play Song
           </button>
-        </div>
+        </div> */}
       </>
     )
   }
