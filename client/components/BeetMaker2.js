@@ -35,36 +35,35 @@ export default function BeetMaker2() {
   })
 
   let keySounds = {
-    q: [kick, 'kick'],
-    w: [snare, 'snare'],
-    e: [hat, 'hat'],
-    r: [chord1, 'chord1'],
-    t: [chord2, 'chord2'],
-    y: [chord3, 'chord3']
+    q: kick,
+    w: snare,
+    e: hat,
+    r: chord1,
+    t: chord2,
+    y: chord3
   }
-  let count = 0
-  document.addEventListener('keydown', e => {
-    if (keySounds[e.key] && count < 1) {
-      const key = document.getElementById(keySounds[e.key][1])
-      key.setAttribute('class', 'butts btn active-button')
-      keySounds[e.key][0].play()
-      count++
-    }
-    document.addEventListener('keyup', e => {
-      if (keySounds[e.key]) {
-        const key = document.getElementById(keySounds[e.key][1])
-        key.setAttribute('class', 'butts btn btn-primary')
-        count = 0
-      }
-    })
-  })
 
-  // document.addEventListener('keyup', e => {
-  //   if (e.key === 'r') {
-  //     const r = document.getElementById('chord')
-  //     r.setAttribute('class', 'poop btn btn-primary')
-  //   }
-  // })
+  const handleKeyDown = identifier => {
+    if (keySounds[identifier]) {
+      const button = document.getElementById(identifier)
+      button.setAttribute('class', 'butts btn active-button')
+      keySounds[identifier].play()
+    }
+  }
+
+  const handleKeyUp = identifier => {
+    if (keySounds[identifier]) {
+      const button = document.getElementById(identifier)
+      button.setAttribute('class', 'butts btn btn-primary')
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (keySounds[e.key] && !e.repeat) handleKeyDown(e.key)
+  })
+  document.addEventListener('keyup', e => {
+    if (keySounds[e.key]) handleKeyUp(e.key)
+  })
 
   return (
     <div
@@ -83,13 +82,23 @@ export default function BeetMaker2() {
           backgroundColor: '#490769',
           display: 'flex',
           alignItems: 'center',
-          flexDirection: 'column',
+          flexDirection: 'row',
           borderRadius: '2px'
         }}
       >
-        <Button id="chord1" className="butts">
-          press r
-        </Button>
+        {Object.keys(keySounds).map(key => {
+          return (
+            <Button
+              id={key}
+              key={key}
+              className="butts"
+              onMouseDown={e => handleKeyDown(e.target.id)}
+              onMouseUp={e => handleKeyUp(e.target.id)}
+            >
+              press {key}
+            </Button>
+          )
+        })}
       </div>
     </div>
   )
