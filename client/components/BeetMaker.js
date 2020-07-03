@@ -34,44 +34,25 @@ export default function BeetMaker() {
     ]
   })
 
-  const handleKeyPress = event => {
-    if (event.key === 'q') {
+  //could be a "button" or an "event.key" depending on if it was clicked or
+  //used the keyboard
+  const handleKeyboardPress = identifier => {
+    if (identifier === 'q') {
       kick.play()
     }
-    if (event.key === 'w') {
+    if (identifier === 'w') {
       snare.play()
     }
-    if (event.key === 'e') {
+    if (identifier === 'e') {
       hat.play()
     }
-    if (event.key === 'r') {
+    if (identifier === 'r') {
       chord1.play()
     }
-    if (event.key === 't') {
+    if (identifier === 't') {
       chord2.play()
     }
-    if (event.key === 'y') {
-      chord3.play()
-    }
-  }
-
-  const handleKeyboardPress = button => {
-    if (button === 'q') {
-      kick.play()
-    }
-    if (button === 'w') {
-      snare.play()
-    }
-    if (button === 'e') {
-      hat.play()
-    }
-    if (button === 'r') {
-      chord1.play()
-    }
-    if (button === 't') {
-      chord2.play()
-    }
-    if (button === 'y') {
+    if (identifier === 'y') {
       chord3.play()
     }
   }
@@ -105,7 +86,7 @@ export default function BeetMaker() {
           type="text"
           placeholder="Click here to use keyboard"
           value=""
-          onKeyPress={e => handleKeyPress(e)}
+          onKeyPress={e => handleKeyboardPress(e.key)}
         />
         <div
           style={{
