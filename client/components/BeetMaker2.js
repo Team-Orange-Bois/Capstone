@@ -1,8 +1,8 @@
 import React from 'react'
 import {Howl} from 'howler'
-import Keyboard from 'react-simple-keyboard'
+import {Button} from 'react-bootstrap'
 
-export default function BeetMaker() {
+export default function BeetMaker2() {
   let kick = new Howl({
     src: [
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
@@ -34,47 +34,37 @@ export default function BeetMaker() {
     ]
   })
 
-  const handleKeyPress = event => {
-    if (event.key === 'q') {
-      kick.play()
-    }
-    if (event.key === 'w') {
-      snare.play()
-    }
-    if (event.key === 'e') {
-      hat.play()
-    }
-    if (event.key === 'r') {
-      chord1.play()
-    }
-    if (event.key === 't') {
-      chord2.play()
-    }
-    if (event.key === 'y') {
-      chord3.play()
-    }
+  let keySounds = {
+    q: [kick, 'kick'],
+    w: [snare, 'snare'],
+    e: [hat, 'hat'],
+    r: [chord1, 'chord1'],
+    t: [chord2, 'chord2'],
+    y: [chord3, 'chord3']
   }
+  let count = 0
+  document.addEventListener('keydown', e => {
+    if (keySounds[e.key] && count < 1) {
+      const key = document.getElementById(keySounds[e.key][1])
+      key.setAttribute('class', 'butts btn active-button')
+      keySounds[e.key][0].play()
+      count++
+    }
+    document.addEventListener('keyup', e => {
+      if (keySounds[e.key]) {
+        const key = document.getElementById(keySounds[e.key][1])
+        key.setAttribute('class', 'butts btn btn-primary')
+        count = 0
+      }
+    })
+  })
 
-  const handleKeyboardPress = button => {
-    if (button === 'q') {
-      kick.play()
-    }
-    if (button === 'w') {
-      snare.play()
-    }
-    if (button === 'e') {
-      hat.play()
-    }
-    if (button === 'r') {
-      chord1.play()
-    }
-    if (button === 't') {
-      chord2.play()
-    }
-    if (button === 'y') {
-      chord3.play()
-    }
-  }
+  // document.addEventListener('keyup', e => {
+  //   if (e.key === 'r') {
+  //     const r = document.getElementById('chord')
+  //     r.setAttribute('class', 'poop btn btn-primary')
+  //   }
+  // })
 
   return (
     <div
@@ -88,7 +78,7 @@ export default function BeetMaker() {
       }}
     >
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
-      <form
+      <div
         style={{
           backgroundColor: '#490769',
           display: 'flex',
@@ -97,41 +87,10 @@ export default function BeetMaker() {
           borderRadius: '2px'
         }}
       >
-        <input
-          style={{
-            backgroundColor: '#35054C',
-            color: '#24C0F9'
-          }}
-          type="text"
-          placeholder="Click here to use keyboard"
-          value=""
-          onKeyPress={e => handleKeyPress(e)}
-        />
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column'
-          }}
-        >
-          <Keyboard
-            display={{
-              q: 'kick',
-              w: 'snare',
-              e: 'hat',
-              r: 'chord1',
-              t: 'chord2',
-              y: 'chord3'
-            }}
-            style={{
-              backgroundColor: '#35054C',
-              color: '#24C0F9'
-            }}
-            layoutName="default"
-            onKeyPress={button => handleKeyboardPress(button)}
-          />
-        </div>
-      </form>
+        <Button id="chord1" className="butts">
+          press r
+        </Button>
+      </div>
     </div>
   )
 }
