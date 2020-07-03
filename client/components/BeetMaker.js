@@ -36,13 +36,7 @@ export default function BeetMaker() {
 
   //could be a "button" or an "event.key" depending on if it was clicked or
   //used the keyboard
-  const handleKeyboardPress = thang => {
-    let identifier
-    if (thang.key) {
-      identifier = thang.key
-    } else {
-      identifier = thang
-    }
+  const handleKeyboardPress = identifier => {
     if (identifier === 'q') {
       kick.play()
     }
@@ -92,7 +86,7 @@ export default function BeetMaker() {
           type="text"
           placeholder="Click here to use keyboard"
           value=""
-          onKeyPress={e => handleKeyboardPress(e)}
+          onKeyPress={e => handleKeyboardPress(e.key)}
         />
         <div
           style={{
