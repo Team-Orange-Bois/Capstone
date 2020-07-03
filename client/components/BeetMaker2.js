@@ -58,7 +58,7 @@ export default function BeetMaker2() {
         }}
       >
         <Button id="chord" className="poop">
-          Chord 1
+          press r
         </Button>
       </div>
     </div>
