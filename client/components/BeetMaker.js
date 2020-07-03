@@ -1,5 +1,5 @@
 import React from 'react'
-import {Howl, Howler} from 'howler'
+import {Howl} from 'howler'
 import Keyboard from 'react-simple-keyboard'
 
 export default function BeetMaker() {
@@ -78,7 +78,7 @@ export default function BeetMaker() {
 
   return (
     <div
-      id="outercontainer"
+      className="outercontainer"
       style={{
         display: 'flex',
         alignItems: 'center',
