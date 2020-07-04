@@ -6,8 +6,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 export function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" id="navbar" color="white">
-      <Navbar.Brand href="/">Siq Beets</Navbar.Brand>
+    <Navbar collapseOnSelect expand="lg" id="navbar" bg="dark" variant="dark">
+      <Navbar.Brand href="#home">Siq Beets</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
