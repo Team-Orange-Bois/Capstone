@@ -1,8 +1,8 @@
 import React from 'react'
 import {Howl} from 'howler'
-import Keyboard from 'react-simple-keyboard'
+import {Button} from 'react-bootstrap'
 
-export default function BeetMaker() {
+export default function BeetMaker2() {
   let kick = new Howl({
     src: [
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
@@ -34,28 +34,36 @@ export default function BeetMaker() {
     ]
   })
 
-  //could be a "button" or an "event.key" depending on if it was clicked or
-  //used the keyboard
-  const handleKeyboardPress = identifier => {
-    if (identifier === 'q') {
-      kick.play()
-    }
-    if (identifier === 'w') {
-      snare.play()
-    }
-    if (identifier === 'e') {
-      hat.play()
-    }
-    if (identifier === 'r') {
-      chord1.play()
-    }
-    if (identifier === 't') {
-      chord2.play()
-    }
-    if (identifier === 'y') {
-      chord3.play()
+  let keySounds = {
+    q: kick,
+    w: snare,
+    e: hat,
+    r: chord1,
+    t: chord2,
+    y: chord3
+  }
+
+  const handleKeyDown = identifier => {
+    if (keySounds[identifier]) {
+      const button = document.getElementById(identifier)
+      button.setAttribute('class', 'butts btn active-button')
+      keySounds[identifier].play()
     }
   }
+
+  const handleKeyUp = identifier => {
+    if (keySounds[identifier]) {
+      const button = document.getElementById(identifier)
+      button.setAttribute('class', 'butts btn btn-primary')
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (keySounds[e.key] && !e.repeat) handleKeyDown(e.key)
+  })
+  document.addEventListener('keyup', e => {
+    if (keySounds[e.key]) handleKeyUp(e.key)
+  })
 
   return (
     <div
@@ -69,50 +77,29 @@ export default function BeetMaker() {
       }}
     >
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
-      <form
+      <div
         style={{
           backgroundColor: '#490769',
           display: 'flex',
           alignItems: 'center',
-          flexDirection: 'column',
+          flexDirection: 'row',
           borderRadius: '2px'
         }}
       >
-        <input
-          style={{
-            backgroundColor: '#35054C',
-            color: '#24C0F9'
-          }}
-          type="text"
-          placeholder="Click here to use keyboard"
-          value=""
-          onKeyPress={e => handleKeyboardPress(e.key)}
-        />
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column'
-          }}
-        >
-          <Keyboard
-            display={{
-              q: 'kick',
-              w: 'snare',
-              e: 'hat',
-              r: 'chord1',
-              t: 'chord2',
-              y: 'chord3'
-            }}
-            style={{
-              backgroundColor: '#35054C',
-              color: '#24C0F9'
-            }}
-            layoutName="default"
-            onKeyPress={button => handleKeyboardPress(button)}
-          />
-        </div>
-      </form>
+        {Object.keys(keySounds).map(key => {
+          return (
+            <Button
+              id={key}
+              key={key}
+              className="butts"
+              onMouseDown={e => handleKeyDown(e.target.id)}
+              onMouseUp={e => handleKeyUp(e.target.id)}
+            >
+              press {key}
+            </Button>
+          )
+        })}
+      </div>
     </div>
   )
 }

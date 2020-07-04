@@ -118,6 +118,15 @@ input {
 .hg-theme-default .hg-button.hg-activeButton {
   background: #fe1bcb;
 }
+.butts.btn.btn-primary {
+  color: #24c0f9;
+  background-color: #35054c;
+  border-color: #24c0f9;
+}
+
+.butts.btn.active-button {
+  background-color: #fe1bcb;
+}
 
 .hg-theme-default.hg-layout-numeric .hg-button {
   width: 33.3%;
@@ -160,7 +169,7 @@ input {
   max-width: 60px;
 }
 
-#outercontainer {
+.outercontainer {
   background-image: url('./vaaaaape.jpg');
 }
 
