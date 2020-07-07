@@ -3,6 +3,7 @@ import {Form} from 'react-bootstrap'
 import * as Tone from 'tone'
 
 export default function DrumMachine() {
+  Tone.context.latencyHint = 'fastest'
   let Pattern = {
     kick: '1n',
     snare: '2n',
@@ -33,15 +34,15 @@ export default function DrumMachine() {
   ).toMaster()
 
   function hatFunc() {
-    hat.triggerAttackRelease('c4', '1n')
+    hat.triggerAttackRelease('c4', '4n')
   }
 
   function kickFunc() {
-    kick.triggerAttackRelease('c4', '1n')
+    kick.triggerAttackRelease('c4', '4n')
   }
 
   function snareFunc() {
-    snare.triggerAttackRelease('c4', '1n')
+    snare.triggerAttackRelease('c4', '4n')
   }
 
   function loopDrums() {
