@@ -9,7 +9,7 @@ const App = () => {
     <div>
       <NavBar />
       <Routes />
-      <TonePractice />
+      {/* <TonePractice /> */}
     </div>
   )
 }

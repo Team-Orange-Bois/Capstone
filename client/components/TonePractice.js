@@ -11,8 +11,8 @@ export default function TonePractice() {
 
   function setup() {
     loopBeat = new Tone.Loop(song, '4n')
-    // Tone.Transport.bpm.value = 120
-    //Tone.Transport.bpm.rampTo(120, 10)
+    Tone.Transport.bpm.value = 120
+    Tone.Transport.bpm.rampTo(120, 10)
     Tone.Transport.start()
     loopBeat.start(0)
   }
@@ -28,17 +28,17 @@ export default function TonePractice() {
   }
 
   return (
-    <div>
-      <button type="button" onClick={() => setup()}>
-        Play example of ramp up loop
-      </button>
-      <input
-        type="range"
-        min="-30"
-        max="10"
-        id="volume"
-        onChange={e => changeVolume(e.target.value)}
-      ></input>
+//     <div>
+//       <button type="button" onClick={() => setup()}>
+//         Play example of ramp up loop
+//       </button>
+//       <input
+//         type="range"
+//         min="-30"
+//         max="10"
+//         id="volume"
+//         onChange={e => changeVolume(e.target.value)}
+//       ></input>
       <DrumMachine />
     </div>
   )
