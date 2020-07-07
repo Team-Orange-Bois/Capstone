@@ -176,3 +176,21 @@ input {
 #navbar {
   background: linear-gradient(to top right, #490769, #fe1bcb, #fdc925);
 }
+
+#controlContainer {
+  display: flex;
+}
+
+#controlSliders {
+  width: 50vw;
+  background-color: #fe1bcb;
+}
+
+#controlOptions {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fdc925;
+}
