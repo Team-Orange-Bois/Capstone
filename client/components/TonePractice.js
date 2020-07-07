@@ -29,7 +29,7 @@ export default function TonePractice() {
 
   return (
     <div>
-      <button type="button" onClick={() => setup()}>
+      {/* <button type="button" onClick={() => setup()}>
         Play example of ramp up loop
       </button>
       <input
@@ -38,7 +38,7 @@ export default function TonePractice() {
         max="10"
         id="volume"
         onChange={e => changeVolume(e.target.value)}
-      ></input>
+      ></input> */}
       <DrumMachine />
     </div>
   )
