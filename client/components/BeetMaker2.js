@@ -36,6 +36,8 @@ export default function BeetMaker2() {
   //   ]
   // })
 
+  Tone.context.latencyHint = 'fastest'
+
   const kick = new Tone.Sampler({
     C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
