@@ -10,21 +10,21 @@ export default function DrumMachine() {
   }
   let kick = new Tone.Sampler(
     {
-      c4: './samples/lofi/kick.mp3'
+      c4: './siqbeets/kick.mp3'
     },
     () => console.log('loaded kick')
   ).toMaster()
 
   let snare = new Tone.Sampler(
     {
-      c4: './samples/lofi/snare.mp3'
+      c4: './siqbeets/snare.mp3'
     },
     () => console.log('loaded snare')
   ).toMaster()
 
   let hat = new Tone.Sampler(
     {
-      c4: './samples/lofi/closedHat.mp3'
+      c4: './siqbeets/closedHat.mp3'
     },
     () => console.log('loaded hat')
   ).toMaster()
