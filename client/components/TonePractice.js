@@ -11,8 +11,8 @@ export default function TonePractice() {
 
   function setup() {
     loopBeat = new Tone.Loop(song, '4n')
-    // Tone.Transport.bpm.value = 120
-    //Tone.Transport.bpm.rampTo(120, 10)
+    Tone.Transport.bpm.value = 120
+    Tone.Transport.bpm.rampTo(120, 10)
     Tone.Transport.start()
     loopBeat.start(0)
   }
