@@ -33,18 +33,19 @@ export default function DrumMachine() {
   ).toMaster()
 
   function hatFunc() {
-    hat.triggerAttackRelease('c4', '8n')
+    hat.triggerAttackRelease('c4', '4n')
   }
 
   function kickFunc() {
-    kick.triggerAttackRelease('c4', '8n')
+    kick.triggerAttackRelease('c4', '4n')
   }
 
   function snareFunc() {
-    snare.triggerAttackRelease('c4', '8n')
+    snare.triggerAttackRelease('c4', '4n')
   }
 
   function loopDrums() {
+    Tone.context.latencyHint = 'fastest'
     Tone.Transport.cancel()
     let loopKick = new Tone.Loop(kickFunc, Pattern.kick)
     let loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
@@ -127,11 +128,9 @@ export default function DrumMachine() {
       <div id="controlOptions" onChange={e => changePattern(e.target)}>
         <div>
           <label>Kick Pattern:</label>
-          <select name="kick">
+          <select defaultValue="1n" name="kick">
             <option value="null">None</option>
-            <option selected value="1n">
-              Whole Notes
-            </option>
+            <option value="1n">Whole Notes</option>
             <option value="2n">Half Notes </option>
             <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
@@ -139,25 +138,21 @@ export default function DrumMachine() {
         </div>
         <div>
           <label>Snare Pattern:</label>
-          <select name="snare">
+          <select defaultValue="2n" name="snare">
             <option value="null">None</option>
             <option value="1n">Whole Notes</option>
-            <option selected value="2n">
-              Half Notes{' '}
-            </option>
+            <option value="2n">Half Notes </option>
             <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
           </select>
         </div>
         <div>
           <label>Hat Pattern:</label>
-          <select name="hat">
+          <select defaultValue="4n" name="hat">
             <option value="null">None</option>
             <option value="1n">Whole Notes</option>
             <option value="2n">Half Notes </option>
-            <option selected value="4n">
-              Quarter Notes
-            </option>
+            <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
             <option value="16n">Sixteenth Notes</option>
           </select>

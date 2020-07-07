@@ -2,6 +2,7 @@ import React from 'react'
 //import {Howl} from 'howler'
 import * as Tone from 'tone'
 import {Button} from 'react-bootstrap'
+import LoopStation from './Looper'
 
 export default function BeetMaker2() {
   // let kick = new Howl({
@@ -34,6 +35,8 @@ export default function BeetMaker2() {
   //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord3.mp3?alt=media&token=6bbb174c-b951-4eed-ae84-de4dd65535da'
   //   ]
   // })
+
+  Tone.context.latencyHint = 'fastest'
 
   const kick = new Tone.Sampler({
     C3:
@@ -73,7 +76,8 @@ export default function BeetMaker2() {
     if (keySounds[identifier]) {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
-      keySounds[identifier].triggerAttackRelease('C3', '4n')
+      keySounds[identifier].triggerAttackRelease('C3', '1n')
+      // keySounds[identifier].start()
     }
   }
 
@@ -126,6 +130,7 @@ export default function BeetMaker2() {
           )
         })}
       </div>
+      <LoopStation />
     </div>
   )
 }
