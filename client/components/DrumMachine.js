@@ -10,21 +10,24 @@ export default function DrumMachine() {
   }
   let kick = new Tone.Sampler(
     {
-      c4: './siqbeets/kick.mp3'
+      c4:
+        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
     },
     () => console.log('loaded kick')
   ).toMaster()
 
   let snare = new Tone.Sampler(
     {
-      c4: './siqbeets/snare.mp3'
+      c4:
+        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
     },
     () => console.log('loaded snare')
   ).toMaster()
 
   let hat = new Tone.Sampler(
     {
-      c4: './siqbeets/closedHat.mp3'
+      c4:
+        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
     },
     () => console.log('loaded hat')
   ).toMaster()
