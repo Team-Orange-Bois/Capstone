@@ -134,9 +134,9 @@ export default function DrumMachine() {
       <div id="controlOptions" onChange={e => changePattern(e.target)}>
         <div>
           <label>Kick Pattern:</label>
-          <select name="kick">
+          <select defaultValue="1n" name="kick">
             <option value="null">None</option>
-            <option selected value="1n">
+            <option value="1n">
               Whole Notes
             </option>
             <option value="2n">Half Notes </option>
