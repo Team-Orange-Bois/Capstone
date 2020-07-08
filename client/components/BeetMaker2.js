@@ -91,6 +91,7 @@ export default function BeetMaker2() {
     "'": cmaj7Oct
   }
 
+  //Object used for storing sounds for the loop. Key is the timing the note will play
   const samplerObj = {
     '0:0:0': [],
     '0:0:0.5': [],
@@ -126,8 +127,7 @@ export default function BeetMaker2() {
     '0:3:3.5': []
   }
 
-  // Tone.context.latencyHint = 'fastest'
-
+  //Loop initialization. Activates on button click
   function startLoop() {
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
@@ -139,12 +139,14 @@ export default function BeetMaker2() {
       .toBarsBeatsSixteenths()
       .split(':')[0]
 
+    //loop through the samplerobj and set its timing for activation equal to the time it is stored
     Object.keys(samplerObj).forEach(key => {
       if (samplerObj[key].length) {
         const splitTime = key.split(':')
         const beat = splitTime[1]
         const sixteenth = splitTime[2]
 
+        // cycle through all notes on a key and trigger attack release
         samplerObj[key].forEach(note => {
           note.triggerAttackRelease('C3', '4n', `${bar}:${beat}:${sixteenth}`)
         })
@@ -157,7 +159,11 @@ export default function BeetMaker2() {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
       keySounds[identifier].triggerAttackRelease('C3', '4n')
+
+      //find the current transport time
       let beat = Tone.Transport.position.split(':')[1]
+
+      //convert current transport time sixteenths into nearest 32n for timing
       let sixteenths = (
         Math.ceil(parseFloat(Tone.Transport.position.split(':')[2], 10) * 2) / 2
       ).toString()
@@ -172,8 +178,8 @@ export default function BeetMaker2() {
       }
 
       const timing = `0:${beat}:${sixteenths}`
-      console.log(timing)
 
+      //ensure note currently does not reside within the same beat, to prevent stacking
       if (!samplerObj[timing].includes(keySounds[identifier])) {
         samplerObj[timing].push(keySounds[identifier])
       }
