@@ -75,7 +75,9 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.22.3",
     "socket.io": "^2.3.0",
-    "tone": "^13.8.25"
+    "tone": "^13.8.25",
+    "travis": "^0.1.1",
+    "travis-cli": "^1.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
