@@ -145,6 +145,10 @@ export default function BeetMaker2() {
     loopBeat.start(0)
   }
 
+  const metronome = new Tone.Loop(function() {
+    woodblock.start()
+  }, '4n')
+
   function beatLoop(time) {
     const bar = Tone.Time(time)
       .toBarsBeatsSixteenths()
@@ -261,12 +265,9 @@ export default function BeetMaker2() {
             metronomeOn = !metronomeOn
 
             if (metronomeOn) {
-              const metronome = new Tone.Loop(function() {
-                woodblock.start()
-              }, '4n')
-
               metronome.start(0)
             } else {
+              metronome.cancel()
               metronome.stop()
             }
           }}
