@@ -13,7 +13,7 @@
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
-    "deploy": "script/deploy",
+    "deploy": "firebase deploy",
     "heroku-token": "script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
@@ -24,7 +24,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "test": ""
   },
   "husky": {
     "hooks": {
@@ -45,6 +45,7 @@
   "authors": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@shopify/draggable": "^1.0.0-beta.8",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "compression": "^1.7.3",
