@@ -3,6 +3,8 @@ import * as Tone from 'tone'
 import {Button} from 'react-bootstrap'
 import LoopStation from './Looper'
 
+//test 4 travis again
+
 export default function BeetMaker2() {
   const kick = new Tone.Sampler({
     C3:
@@ -12,8 +14,8 @@ export default function BeetMaker2() {
     C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
   }).toMaster()
-  const hat = new Tone.Sampler({
-    C3:
+  const hat = new Tone.Player({
+    url:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
   }).toMaster()
   const chord1 = new Tone.Sampler({
@@ -73,6 +75,18 @@ export default function BeetMaker2() {
   }).toMaster()
 
   let keySounds = {
+    '1': null,
+    '2': null,
+    '3': null,
+    '4': null,
+    '5': null,
+    '6': null,
+    '7': null,
+    '8': null,
+    '9': null,
+    '0': null,
+    '-': null,
+    '=': null,
     q: kick,
     w: snare,
     e: hat,
@@ -81,6 +95,13 @@ export default function BeetMaker2() {
     y: chord3,
     u: chord4,
     i: chord5,
+    o: null,
+    p: null,
+    '[': null,
+    ']': null,
+    a: null,
+    s: null,
+    d: null,
     f: cmaj7,
     g: dmin7,
     h: emin7,
@@ -88,30 +109,56 @@ export default function BeetMaker2() {
     k: g7,
     l: amin7,
     ';': bmin7b5,
-    "'": cmaj7Oct
+    "'": cmaj7Oct,
+    z: null,
+    x: null,
+    c: null,
+    v: null,
+    b: null,
+    n: null,
+    m: null,
+    ',': null,
+    '.': null,
+    '/': null
   }
 
+  //Object used for storing sounds for the loop. Key is the timing the note will play
   const samplerObj = {
     '0:0:0': [],
+    '0:0:0.5': [],
     '0:0:1': [],
+    '0:0:1.5': [],
     '0:0:2': [],
+    '0:0:2.5': [],
     '0:0:3': [],
+    '0:0:3.5': [],
     '0:1:0': [],
+    '0:1:0.5': [],
     '0:1:1': [],
+    '0:1:1.5': [],
     '0:1:2': [],
+    '0:1:2.5': [],
     '0:1:3': [],
+    '0:1:3.5': [],
     '0:2:0': [],
+    '0:2:0.5': [],
     '0:2:1': [],
+    '0:2:1.5': [],
     '0:2:2': [],
+    '0:2:2.5': [],
     '0:2:3': [],
+    '0:2:3.5': [],
     '0:3:0': [],
+    '0:3:0.5': [],
     '0:3:1': [],
+    '0:3:1.5': [],
     '0:3:2': [],
-    '0:3:3': []
+    '0:3:2.5': [],
+    '0:3:3': [],
+    '0:3:3.5': []
   }
 
-  // Tone.context.latencyHint = 'fastest'
-
+  //Loop initialization. Activates on button click
   function startLoop() {
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
@@ -123,16 +170,16 @@ export default function BeetMaker2() {
       .toBarsBeatsSixteenths()
       .split(':')[0]
 
+    //loop through the samplerobj and set its timing for activation equal to the time it is stored
     Object.keys(samplerObj).forEach(key => {
       if (samplerObj[key].length) {
         const splitTime = key.split(':')
-        console.log(splitTime)
         const beat = splitTime[1]
         const sixteenth = splitTime[2]
 
-        console.log({beat}, {sixteenth})
+        // cycle through all notes on a key and trigger attack release
         samplerObj[key].forEach(note => {
-          note.triggerAttackRelease('C3', '4n', `${bar}:${beat}:${sixteenth}`)
+          note.start(`${bar}:${beat}:${sixteenth}`)
         })
       }
     })
@@ -143,19 +190,38 @@ export default function BeetMaker2() {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
       keySounds[identifier].triggerAttackRelease('C3', '4n')
-      console.log(Tone.Transport.position)
-      const beat = Tone.Transport.position.split(':')[1]
-      const sixteenths = Math.round(
-        parseInt(Tone.Transport.position.split(':')[2], 10)
-      ).toString()
+
+      //find the current transport time
+      let beat = Tone.Transport.position.split(':')[1]
+
+      //convert current transport time sixteenths into nearest 32n for timing
+      let sixteenths
+      if (
+        parseInt(Tone.Transport.position.split(':')[2], 10) > 0 &&
+        parseInt(Tone.Transport.position.split(':')[2], 10) <= 2
+      ) {
+        sixteenths = '2'
+      } else if (parseInt(Tone.Transport.position.split(':')[2], 10) > 2) {
+        sixteenths = '4'
+      } else {
+        sixteenths = '0'
+      }
+
+      if (sixteenths === '4') {
+        beat = (parseFloat(beat) + 1).toString()
+        sixteenths = '0'
+      }
+
+      if (beat === '4') {
+        beat = '0'
+      }
 
       const timing = `0:${beat}:${sixteenths}`
 
+      //ensure note currently does not reside within the same beat, to prevent stacking
       if (!samplerObj[timing].includes(keySounds[identifier])) {
         samplerObj[timing].push(keySounds[identifier])
       }
-
-      keySounds[identifier].start()
     }
   }
 
@@ -191,7 +257,8 @@ export default function BeetMaker2() {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
-          borderRadius: '2px'
+          borderRadius: '2px',
+          flexWrap: 'wrap'
         }}
       >
         {Object.keys(keySounds).map(key => {
