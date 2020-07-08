@@ -6,6 +6,13 @@ import LoopStation from './Looper'
 //test 4 travis again
 
 export default function BeetMaker2() {
+  const woodblock = new Tone.Player({
+    url:
+      'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fwoodblock.mp3?alt=media&token=c2192730-64fe-41e6-a744-0df8d7d99ca0'
+  })
+    .toMaster()
+    .sync()
+
   const kick = new Tone.Sampler({
     C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
@@ -158,12 +165,18 @@ export default function BeetMaker2() {
     '0:3:3.5': []
   }
 
+  let metronomeOn = false
+
   //Loop initialization. Activates on button click
   function startLoop() {
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
     loopBeat.start(0)
   }
+
+  const metronome = new Tone.Loop(function() {
+    woodblock.start()
+  }, '4n')
 
   function beatLoop(time) {
     const bar = Tone.Time(time)
@@ -276,6 +289,21 @@ export default function BeetMaker2() {
         })}
         <Button onClick={() => startLoop()} className="butts">
           Play loop
+        </Button>
+        <Button
+          onClick={() => {
+            metronomeOn = !metronomeOn
+
+            if (metronomeOn) {
+              metronome.start(0)
+            } else {
+              metronome.cancel()
+              metronome.stop()
+            }
+          }}
+          className="butts"
+        >
+          Toggle Metronome
         </Button>
       </div>
     </div>
