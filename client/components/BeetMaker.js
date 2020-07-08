@@ -85,7 +85,7 @@ export default function BeetMaker() {
           }}
           type="text"
           placeholder="Click here to use keyboard"
-          value=""
+          readOnly
           onKeyPress={e => handleKeyboardPress(e.key)}
         />
         <div
