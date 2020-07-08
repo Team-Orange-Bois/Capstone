@@ -110,7 +110,7 @@ export default function BeetMaker2() {
     '0:3:3': []
   }
 
-  // Tone.context.latencyHint = 'fastest'
+  Tone.context.latencyHint = 0.1
 
   function startLoop() {
     Tone.Transport.start()
@@ -126,7 +126,6 @@ export default function BeetMaker2() {
     Object.keys(samplerObj).forEach(key => {
       if (samplerObj[key].length) {
         const splitTime = key.split(':')
-        console.log('key of samplerObj split time:', splitTime)
         const beat = splitTime[1]
         const sixteenth = splitTime[2]
 
@@ -155,7 +154,7 @@ export default function BeetMaker2() {
         samplerObj[timing].push(keySounds[identifier])
       }
 
-      keySounds[identifier].start()
+      // keySounds[identifier].start()
     }
   }
 
