@@ -257,7 +257,8 @@ export default function BeetMaker2() {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
-          borderRadius: '2px'
+          borderRadius: '2px',
+          flexWrap: 'wrap'
         }}
       >
         {Object.keys(keySounds).map(key => {
