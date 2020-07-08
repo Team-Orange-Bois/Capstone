@@ -28,6 +28,10 @@
 language: node_js
 node_js:
   - 12 # uses version 12
+install:
+  - npm install
+script:
+  - npm run build
 deploy:
   provider: firebase
   token:
