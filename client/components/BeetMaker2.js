@@ -93,21 +93,37 @@ export default function BeetMaker2() {
 
   const samplerObj = {
     '0:0:0': [],
+    '0:0:0.5': [],
     '0:0:1': [],
+    '0:0:1.5': [],
     '0:0:2': [],
+    '0:0:2.5': [],
     '0:0:3': [],
+    '0:0:3.5': [],
     '0:1:0': [],
+    '0:1:0.5': [],
     '0:1:1': [],
+    '0:1:1.5': [],
     '0:1:2': [],
+    '0:1:2.5': [],
     '0:1:3': [],
+    '0:1:3.5': [],
     '0:2:0': [],
+    '0:2:0.5': [],
     '0:2:1': [],
+    '0:2:1.5': [],
     '0:2:2': [],
+    '0:2:2.5': [],
     '0:2:3': [],
+    '0:2:3.5': [],
     '0:3:0': [],
+    '0:3:0.5': [],
     '0:3:1': [],
+    '0:3:1.5': [],
     '0:3:2': [],
-    '0:3:3': []
+    '0:3:2.5': [],
+    '0:3:3': [],
+    '0:3:3.5': []
   }
 
   // Tone.context.latencyHint = 'fastest'
@@ -141,18 +157,26 @@ export default function BeetMaker2() {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
       keySounds[identifier].triggerAttackRelease('C3', '4n')
-      const beat = Tone.Transport.position.split(':')[1]
-      const sixteenths = Math.round(
-        parseInt(Tone.Transport.position.split(':')[2], 10)
+      let beat = Tone.Transport.position.split(':')[1]
+      let sixteenths = (
+        Math.ceil(parseFloat(Tone.Transport.position.split(':')[2], 10) * 2) / 2
       ).toString()
 
+      if (sixteenths === '4') {
+        beat = (parseFloat(beat) + 1).toString()
+        sixteenths = '0'
+      }
+
+      if (beat === '4') {
+        beat = '0'
+      }
+
       const timing = `0:${beat}:${sixteenths}`
+      console.log(timing)
 
       if (!samplerObj[timing].includes(keySounds[identifier])) {
         samplerObj[timing].push(keySounds[identifier])
       }
-
-      keySounds[identifier].start()
     }
   }
 
