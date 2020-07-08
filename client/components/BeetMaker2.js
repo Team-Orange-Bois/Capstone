@@ -14,8 +14,8 @@ export default function BeetMaker2() {
     C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
   }).toMaster()
-  const hat = new Tone.Sampler({
-    C3:
+  const hat = new Tone.Player({
+    url:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
   }).toMaster()
   const chord1 = new Tone.Sampler({
@@ -75,6 +75,18 @@ export default function BeetMaker2() {
   }).toMaster()
 
   let keySounds = {
+    '1': null,
+    '2': null,
+    '3': null,
+    '4': null,
+    '5': null,
+    '6': null,
+    '7': null,
+    '8': null,
+    '9': null,
+    '0': null,
+    '-': null,
+    '=': null,
     q: kick,
     w: snare,
     e: hat,
@@ -83,6 +95,13 @@ export default function BeetMaker2() {
     y: chord3,
     u: chord4,
     i: chord5,
+    o: null,
+    p: null,
+    '[': null,
+    ']': null,
+    a: null,
+    s: null,
+    d: null,
     f: cmaj7,
     g: dmin7,
     h: emin7,
@@ -90,7 +109,17 @@ export default function BeetMaker2() {
     k: g7,
     l: amin7,
     ';': bmin7b5,
-    "'": cmaj7Oct
+    "'": cmaj7Oct,
+    z: null,
+    x: null,
+    c: null,
+    v: null,
+    b: null,
+    n: null,
+    m: null,
+    ',': null,
+    '.': null,
+    '/': null
   }
 
   //Object used for storing sounds for the loop. Key is the timing the note will play
@@ -150,7 +179,7 @@ export default function BeetMaker2() {
 
         // cycle through all notes on a key and trigger attack release
         samplerObj[key].forEach(note => {
-          note.triggerAttackRelease('C3', '4n', `${bar}:${beat}:${sixteenth}`)
+          note.start(`${bar}:${beat}:${sixteenth}`)
         })
       }
     })
@@ -228,7 +257,8 @@ export default function BeetMaker2() {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
-          borderRadius: '2px'
+          borderRadius: '2px',
+          flexWrap: 'wrap'
         }}
       >
         {Object.keys(keySounds).map(key => {

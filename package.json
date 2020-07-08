@@ -45,7 +45,6 @@
   "authors": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
-    "@shopify/draggable": "^1.0.0-beta.8",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "compression": "^1.7.3",
@@ -76,7 +75,9 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.22.3",
     "socket.io": "^2.3.0",
-    "tone": "^13.8.25"
+    "tone": "^13.8.25",
+    "travis": "^0.1.1",
+    "travis-cli": "^1.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
