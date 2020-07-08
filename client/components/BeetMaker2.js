@@ -1,43 +1,9 @@
 import React from 'react'
-//import {Howl} from 'howler'
 import * as Tone from 'tone'
 import {Button} from 'react-bootstrap'
 import LoopStation from './Looper'
 
 export default function BeetMaker2() {
-  // let kick = new Howl({
-  //   src: [
-  //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
-  //   ]
-  // })
-  // let snare = new Howl({
-  //   src: [
-  //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
-  //   ]
-  // })
-  // let hat = new Howl({
-  //   src: [
-  //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
-  //   ]
-  // })
-  // let chord1 = new Howl({
-  //   src: [
-  //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord1.mp3?alt=media&token=57981212-6cec-4d07-989e-a0d53b8aa39b'
-  //   ]
-  // })
-  // let chord2 = new Howl({
-  //   src: [
-  //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord2.mp3?alt=media&token=e2dfac36-7c86-4d8f-916b-d1f49f1068c1'
-  //   ]
-  // })
-  // let chord3 = new Howl({
-  //   src: [
-  //     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord3.mp3?alt=media&token=6bbb174c-b951-4eed-ae84-de4dd65535da'
-  //   ]
-  // })
-
-  Tone.context.latencyHint = 'fastest'
-
   const kick = new Tone.Sampler({
     C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
@@ -125,12 +91,71 @@ export default function BeetMaker2() {
     "'": cmaj7Oct
   }
 
+  const samplerObj = {
+    '0:0:0': [],
+    '0:0:1': [],
+    '0:0:2': [],
+    '0:0:3': [],
+    '0:1:0': [],
+    '0:1:1': [],
+    '0:1:2': [],
+    '0:1:3': [],
+    '0:2:0': [],
+    '0:2:1': [],
+    '0:2:2': [],
+    '0:2:3': [],
+    '0:3:0': [],
+    '0:3:1': [],
+    '0:3:2': [],
+    '0:3:3': []
+  }
+
+  // Tone.context.latencyHint = 'fastest'
+
+  function startLoop() {
+    Tone.Transport.start()
+    const loopBeat = new Tone.Loop(beatLoop, '1m')
+    loopBeat.start(0)
+  }
+
+  function beatLoop(time) {
+    const bar = Tone.Time(time)
+      .toBarsBeatsSixteenths()
+      .split(':')[0]
+
+    Object.keys(samplerObj).forEach(key => {
+      if (samplerObj[key].length) {
+        const splitTime = key.split(':')
+        console.log(splitTime)
+        const beat = splitTime[1]
+        const sixteenth = splitTime[2]
+
+        console.log({beat}, {sixteenth})
+        samplerObj[key].forEach(note => {
+          note.triggerAttackRelease('C3', '4n', `${bar}:${beat}:${sixteenth}`)
+        })
+      }
+    })
+  }
+
   const handleKeyDown = identifier => {
     if (keySounds[identifier]) {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
-      keySounds[identifier].triggerAttackRelease('C3', '1n')
-      // keySounds[identifier].start()
+      keySounds[identifier].triggerAttackRelease('C3', '4n')
+      console.log(Tone.Transport.position)
+      const beat = Tone.Transport.position.split(':')[1]
+      const sixteenths = Math.round(
+        parseInt(Tone.Transport.position.split(':')[2], 10)
+      ).toString()
+
+      const timing = `0:${beat}:${sixteenths}`
+
+      if (!samplerObj[timing].includes(keySounds[identifier])) {
+        samplerObj[timing].push(keySounds[identifier])
+      }
+
+      keySounds[identifier].start()
     }
   }
 
@@ -182,6 +207,9 @@ export default function BeetMaker2() {
             </Button>
           )
         })}
+        <Button onClick={() => startLoop()} className="butts">
+          Play loop
+        </Button>
       </div>
       <LoopStation />
     </div>
