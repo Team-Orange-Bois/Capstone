@@ -84,14 +84,38 @@ export default function DrumMachine() {
     }
   }
 
+  function handleButtonDown(e) {
+    console.log('clicked')
+    const button = document.getElementById(e.target.id)
+    button.setAttribute('class', 'butts btn active-button')
+  }
+
+  function handleButtonUp(e) {
+    const button = document.getElementById(e.target.id)
+    button.setAttribute('class', 'butts btn btn-primary')
+  }
   return (
     <div id="controlContainer">
       <h1 style={{color: '#FE1BCB'}}>Beet Dropper</h1>
       <div id="controlSliders">
-        <Button className="butts" type="button" onClick={() => loopDrums()}>
+        <Button
+          id="start"
+          className="butts"
+          type="button"
+          onClick={() => loopDrums()}
+          onMouseDown={e => handleButtonDown(e)}
+          onMouseUp={e => handleButtonUp(e)}
+        >
           Play simple drum loop
         </Button>
-        <Button className="butts" type="button" onClick={() => stopLoop()}>
+        <Button
+          id="stop"
+          className="butts"
+          type="button"
+          onClick={() => stopLoop()}
+          onMouseDown={e => handleButtonDown(e)}
+          onMouseUp={e => handleButtonUp(e)}
+        >
           Stop drum loop
         </Button>
         <Form>
