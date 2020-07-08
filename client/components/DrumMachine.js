@@ -44,9 +44,14 @@ export default function DrumMachine() {
     snare.triggerAttackRelease('c4', '4n')
   }
 
+  Tone.context.latencyHint = 'fastest'
+
+  let isPlaying = false
   function loopDrums() {
-    Tone.context.latencyHint = 'fastest'
-    Tone.Transport.cancel()
+    if (isPlaying) {
+      Tone.Transport.cancel()
+    }
+    isPlaying = true
     let loopKick = new Tone.Loop(kickFunc, Pattern.kick)
     let loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
     let loopHat = new Tone.Loop(hatFunc, Pattern.hat)
@@ -57,6 +62,7 @@ export default function DrumMachine() {
   }
 
   function stopLoop() {
+    isPlaying = false
     Tone.Transport.cancel()
     Tone.Transport.stop()
   }
@@ -130,7 +136,9 @@ export default function DrumMachine() {
           <label>Kick Pattern:</label>
           <select defaultValue="1n" name="kick">
             <option value="null">None</option>
-            <option value="1n">Whole Notes</option>
+            <option value="1n">
+              Whole Notes
+            </option>
             <option value="2n">Half Notes </option>
             <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
