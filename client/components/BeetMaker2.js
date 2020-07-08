@@ -211,7 +211,6 @@ export default function BeetMaker2() {
           Play loop
         </Button>
       </div>
-      <LoopStation />
     </div>
   )
 }
