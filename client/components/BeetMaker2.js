@@ -166,9 +166,17 @@ export default function BeetMaker2() {
       let beat = Tone.Transport.position.split(':')[1]
 
       //convert current transport time sixteenths into nearest 32n for timing
-      let sixteenths = (
-        Math.ceil(parseFloat(Tone.Transport.position.split(':')[2], 10) * 2) / 2
-      ).toString()
+      let sixteenths
+      if (
+        parseInt(Tone.Transport.position.split(':')[2], 10) > 0 &&
+        parseInt(Tone.Transport.position.split(':')[2], 10) <= 2
+      ) {
+        sixteenths = '2'
+      } else if (parseInt(Tone.Transport.position.split(':')[2], 10) > 2) {
+        sixteenths = '4'
+      } else {
+        sixteenths = '0'
+      }
 
       if (sixteenths === '4') {
         beat = (parseFloat(beat) + 1).toString()
