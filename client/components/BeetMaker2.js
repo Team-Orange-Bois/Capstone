@@ -126,7 +126,7 @@ export default function BeetMaker2() {
     Object.keys(samplerObj).forEach(key => {
       if (samplerObj[key].length) {
         const splitTime = key.split(':')
-        console.log(splitTime)
+        console.log('key of samplerObj split time:', splitTime)
         const beat = splitTime[1]
         const sixteenth = splitTime[2]
 
