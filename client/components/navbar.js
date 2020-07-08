@@ -13,6 +13,7 @@ export function NavBar() {
         <Nav className="mr-auto">
           <Nav.Link href="/beetmaker">Beet Maker</Nav.Link>
           <Nav.Link href="/beetmaker2">Beet Maker 2</Nav.Link>
+          <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link>
           <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">

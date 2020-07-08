@@ -183,7 +183,6 @@ export default function BeetMaker2() {
           )
         })}
       </div>
-      <LoopStation />
     </div>
   )
 }

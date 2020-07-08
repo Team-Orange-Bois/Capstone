@@ -1,6 +1,5 @@
 import React from 'react'
 import * as Tone from 'tone'
-import DrumMachine from './DrumMachine'
 
 export default function TonePractice() {
   // let loopBeat
@@ -39,7 +38,6 @@ export default function TonePractice() {
         id="volume"
         onChange={e => changeVolume(e.target.value)}
       ></input> */}
-      <DrumMachine />
     </div>
   )
 }
