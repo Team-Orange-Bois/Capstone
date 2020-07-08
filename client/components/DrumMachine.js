@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import * as Tone from 'tone'
 
 export default function DrumMachine() {
@@ -77,18 +77,23 @@ export default function DrumMachine() {
 
   function changePattern(target) {
     Pattern[target.name] = target.value
-    loopDrums()
+    console.log(Pattern)
+    console.log('isPlaying: ', isPlaying)
+    if (isPlaying) {
+      loopDrums()
+    }
   }
 
   return (
     <div id="controlContainer">
+      <h1 style={{color: '#FE1BCB'}}>Beet Dropper</h1>
       <div id="controlSliders">
-        <button type="button" onClick={() => loopDrums()}>
+        <Button className="butts" type="button" onClick={() => loopDrums()}>
           Play simple drum loop
-        </button>
-        <button type="button" onClick={() => stopLoop()}>
+        </Button>
+        <Button className="butts" type="button" onClick={() => stopLoop()}>
           Stop drum loop
-        </button>
+        </Button>
         <Form>
           <Form.Group>
             <Form.Label>Volume</Form.Label>
@@ -133,37 +138,35 @@ export default function DrumMachine() {
       </div>
       <div id="controlOptions" onChange={e => changePattern(e.target)}>
         <div>
-          <label>Kick Pattern:</label>
-          <select defaultValue="1n" name="kick">
-            <option value="null">None</option>
-            <option value="1n">
-              Whole Notes
-            </option>
+          <Form.Label>Kick Pattern:</Form.Label>
+          <Form.Control as="select" defaultValue="1n" name="kick">
+            {/* <option value="null">None</option> */}
+            <option value="1n">Whole Notes</option>
             <option value="2n">Half Notes </option>
             <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
-          </select>
+          </Form.Control>
         </div>
         <div>
-          <label>Snare Pattern:</label>
-          <select defaultValue="2n" name="snare">
+          <Form.Label>Snare Pattern:</Form.Label>
+          <Form.Control as="select" defaultValue="2n" name="snare">
             <option value="null">None</option>
             <option value="1n">Whole Notes</option>
             <option value="2n">Half Notes </option>
             <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
-          </select>
+          </Form.Control>
         </div>
         <div>
-          <label>Hat Pattern:</label>
-          <select defaultValue="4n" name="hat">
+          <Form.Label>Hat Pattern:</Form.Label>
+          <Form.Control as="select" defaultValue="4n" name="hat">
             <option value="null">None</option>
             <option value="1n">Whole Notes</option>
             <option value="2n">Half Notes </option>
             <option value="4n">Quarter Notes</option>
             <option value="8n">Eighth Notes</option>
             <option value="16n">Sixteenth Notes</option>
-          </select>
+          </Form.Control>
         </div>
       </div>
     </div>
