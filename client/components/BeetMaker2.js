@@ -126,11 +126,9 @@ export default function BeetMaker2() {
     Object.keys(samplerObj).forEach(key => {
       if (samplerObj[key].length) {
         const splitTime = key.split(':')
-        console.log(splitTime)
         const beat = splitTime[1]
         const sixteenth = splitTime[2]
 
-        console.log({beat}, {sixteenth})
         samplerObj[key].forEach(note => {
           note.triggerAttackRelease('C3', '4n', `${bar}:${beat}:${sixteenth}`)
         })
@@ -143,7 +141,6 @@ export default function BeetMaker2() {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
       keySounds[identifier].triggerAttackRelease('C3', '4n')
-      console.log(Tone.Transport.position)
       const beat = Tone.Transport.position.split(':')[1]
       const sixteenths = Math.round(
         parseInt(Tone.Transport.position.split(':')[2], 10)
