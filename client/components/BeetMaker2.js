@@ -3,6 +3,8 @@ import * as Tone from 'tone'
 import {Button} from 'react-bootstrap'
 import LoopStation from './Looper'
 
+//test
+
 export default function BeetMaker2() {
   const kick = new Tone.Sampler({
     C3:
@@ -238,7 +240,6 @@ export default function BeetMaker2() {
           Play loop
         </Button>
       </div>
-      <LoopStation />
     </div>
   )
 }
