@@ -93,27 +93,43 @@ export default function BeetMaker2() {
     "'": cmaj7Oct
   }
 
+  //Object used for storing sounds for the loop. Key is the timing the note will play
   const samplerObj = {
     '0:0:0': [],
+    '0:0:0.5': [],
     '0:0:1': [],
+    '0:0:1.5': [],
     '0:0:2': [],
+    '0:0:2.5': [],
     '0:0:3': [],
+    '0:0:3.5': [],
     '0:1:0': [],
+    '0:1:0.5': [],
     '0:1:1': [],
+    '0:1:1.5': [],
     '0:1:2': [],
+    '0:1:2.5': [],
     '0:1:3': [],
+    '0:1:3.5': [],
     '0:2:0': [],
+    '0:2:0.5': [],
     '0:2:1': [],
+    '0:2:1.5': [],
     '0:2:2': [],
+    '0:2:2.5': [],
     '0:2:3': [],
+    '0:2:3.5': [],
     '0:3:0': [],
+    '0:3:0.5': [],
     '0:3:1': [],
+    '0:3:1.5': [],
     '0:3:2': [],
-    '0:3:3': []
+    '0:3:2.5': [],
+    '0:3:3': [],
+    '0:3:3.5': []
   }
 
-  // Tone.context.latencyHint = 'fastest'
-
+  //Loop initialization. Activates on button click
   function startLoop() {
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
@@ -125,14 +141,14 @@ export default function BeetMaker2() {
       .toBarsBeatsSixteenths()
       .split(':')[0]
 
+    //loop through the samplerobj and set its timing for activation equal to the time it is stored
     Object.keys(samplerObj).forEach(key => {
       if (samplerObj[key].length) {
         const splitTime = key.split(':')
-        console.log(splitTime)
         const beat = splitTime[1]
         const sixteenth = splitTime[2]
 
-        console.log({beat}, {sixteenth})
+        // cycle through all notes on a key and trigger attack release
         samplerObj[key].forEach(note => {
           note.triggerAttackRelease('C3', '4n', `${bar}:${beat}:${sixteenth}`)
         })
@@ -145,19 +161,30 @@ export default function BeetMaker2() {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
       keySounds[identifier].triggerAttackRelease('C3', '4n')
-      console.log(Tone.Transport.position)
-      const beat = Tone.Transport.position.split(':')[1]
-      const sixteenths = Math.round(
-        parseInt(Tone.Transport.position.split(':')[2], 10)
+
+      //find the current transport time
+      let beat = Tone.Transport.position.split(':')[1]
+
+      //convert current transport time sixteenths into nearest 32n for timing
+      let sixteenths = (
+        Math.ceil(parseFloat(Tone.Transport.position.split(':')[2], 10) * 2) / 2
       ).toString()
+
+      if (sixteenths === '4') {
+        beat = (parseFloat(beat) + 1).toString()
+        sixteenths = '0'
+      }
+
+      if (beat === '4') {
+        beat = '0'
+      }
 
       const timing = `0:${beat}:${sixteenths}`
 
+      //ensure note currently does not reside within the same beat, to prevent stacking
       if (!samplerObj[timing].includes(keySounds[identifier])) {
         samplerObj[timing].push(keySounds[identifier])
       }
-
-      keySounds[identifier].start()
     }
   }
 
