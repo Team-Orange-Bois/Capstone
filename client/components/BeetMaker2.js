@@ -160,6 +160,8 @@ export default function BeetMaker2() {
 
   //Loop initialization. Activates on button click
   function startLoop() {
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
     loopBeat.start(0)
