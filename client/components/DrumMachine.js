@@ -63,7 +63,7 @@ export default function DrumMachine() {
 
   function stopLoop() {
     isPlaying = false
-    Tone.Transport.cancel()
+
     Tone.Transport.stop()
   }
   function changeVolume(value) {
