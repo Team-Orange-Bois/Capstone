@@ -35,7 +35,7 @@ export default function LoopStation() {
       if (initialDropzone === dropzone) {
         clonedNode.style.display = 'none'
       } else {
-        originalNode.setAttribute('class', 'loopStationButt')
+        originalNode.classList.replace('active-btn', 'loopStationButts')
         console.log('new style:', originalNode.style)
       }
     }
@@ -49,8 +49,6 @@ export default function LoopStation() {
       console.log('drag:over:container')
     )
     draggable.on('droppable:dropped', dragDropped)
-
-    // const dragHolder = new Draggable(document.getElementById('dragTest'))
   })
 
   const samplerArr = [
