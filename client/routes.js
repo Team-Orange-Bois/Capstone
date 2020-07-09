@@ -6,6 +6,7 @@ import BeetMaker from './components/BeetMaker'
 import BeetMaker2 from './components/BeetMaker2'
 import GuestHome from './components/GuestHome'
 import DrumMachine from './components/DrumMachine'
+import LoopStation from './components/Looper'
 
 /**
  * COMPONENT
@@ -18,6 +19,7 @@ class Routes extends Component {
         <Route exact path="/beetmaker" component={BeetMaker} />
         <Route exact path="/beetmaker2" component={BeetMaker2} />
         <Route exact path="/beetdropper" component={DrumMachine} />
+        <Route exact path="/looper" component={LoopStation} />
       </Switch>
     )
   }

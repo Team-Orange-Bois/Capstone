@@ -47,6 +47,7 @@ export default function DrumMachine() {
   Tone.context.latencyHint = 'fastest'
 
   let isPlaying = false
+
   function loopDrums() {
     if (isPlaying) {
       Tone.Transport.cancel()

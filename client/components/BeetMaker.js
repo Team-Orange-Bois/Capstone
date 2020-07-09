@@ -1,6 +1,7 @@
 import React from 'react'
 import {Howl} from 'howler'
 import Keyboard from 'react-simple-keyboard'
+import Looper from './Looper'
 
 export default function BeetMaker() {
   let kick = new Howl({

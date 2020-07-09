@@ -169,6 +169,8 @@ export default function BeetMaker2() {
 
   //Loop initialization. Activates on button click
   function startLoop() {
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
     loopBeat.start(0)
@@ -265,6 +267,7 @@ export default function BeetMaker2() {
     >
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
       <div
+        id="sampleParent"
         style={{
           backgroundColor: '#490769',
           display: 'flex',
@@ -306,6 +309,7 @@ export default function BeetMaker2() {
           Toggle Metronome
         </Button>
       </div>
+      <LoopStation />
     </div>
   )
 }
