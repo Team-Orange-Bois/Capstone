@@ -78,15 +78,12 @@ export default function DrumMachine() {
 
   function changePattern(target) {
     Pattern[target.name] = target.value
-    console.log(Pattern)
-    console.log('isPlaying: ', isPlaying)
     if (isPlaying) {
       loopDrums()
     }
   }
 
   function handleButtonDown(e) {
-    console.log('clicked')
     const button = document.getElementById(e.target.id)
     button.setAttribute('class', 'butts btn active-button')
   }

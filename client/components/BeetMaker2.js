@@ -169,8 +169,8 @@ export default function BeetMaker2() {
 
   //Loop initialization. Activates on button click
   function startLoop() {
-    Tone.Transport.cancel()
-    Tone.Transport.stop()
+    // Tone.Transport.cancel()
+    // Tone.Transport.stop()
     Tone.Transport.start()
     const loopBeat = new Tone.Loop(beatLoop, '1m')
     loopBeat.start(0)
@@ -179,6 +179,12 @@ export default function BeetMaker2() {
   const metronome = new Tone.Loop(function() {
     woodblock.start()
   }, '4n')
+
+  function stopLoop() {
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
+    // metronome.stop()
+  }
 
   function beatLoop(time) {
     const bar = Tone.Time(time)
@@ -267,7 +273,7 @@ export default function BeetMaker2() {
     >
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
       <div
-        id="sampleParent"
+        className="dropzoneContainer draggable-dropzone--occupied"
         style={{
           backgroundColor: '#490769',
           display: 'flex',
@@ -279,36 +285,40 @@ export default function BeetMaker2() {
       >
         {Object.keys(keySounds).map(key => {
           return (
-            <Button
-              id={key}
-              key={key}
-              className="butts"
-              onMouseDown={e => handleKeyDown(e.target.id)}
-              onMouseUp={e => handleKeyUp(e.target.id)}
-            >
-              press {key}
-            </Button>
+            <div key={key} className="">
+              <Button
+                id={key}
+                className="butts sample"
+                onMouseDown={e => handleKeyDown(e.target.id)}
+                onMouseUp={e => handleKeyUp(e.target.id)}
+              >
+                press {key}
+              </Button>
+            </div>
           )
         })}
-        <Button onClick={() => startLoop()} className="butts">
-          Play loop
-        </Button>
-        <Button
-          onClick={() => {
-            metronomeOn = !metronomeOn
-
-            if (metronomeOn) {
-              metronome.start(0)
-            } else {
-              metronome.cancel()
-              metronome.stop()
-            }
-          }}
-          className="butts"
-        >
-          Toggle Metronome
-        </Button>
       </div>
+      <Button onClick={() => startLoop()} className="butts">
+        Play loop
+      </Button>
+      <Button onClick={() => stopLoop()} className="butts">
+        Stop loop
+      </Button>
+      <Button
+        onClick={() => {
+          metronomeOn = !metronomeOn
+
+          if (metronomeOn) {
+            metronome.start(0)
+          } else {
+            metronome.cancel()
+            metronome.stop()
+          }
+        }}
+        className="butts"
+      >
+        Toggle Metronome
+      </Button>
       <LoopStation />
     </div>
   )
