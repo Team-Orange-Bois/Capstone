@@ -252,6 +252,7 @@ export default function BeetMaker2() {
     >
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
       <div
+        id="sampleParent"
         style={{
           backgroundColor: '#490769',
           display: 'flex',
@@ -278,6 +279,7 @@ export default function BeetMaker2() {
           Play loop
         </Button>
       </div>
+      <LoopStation />
     </div>
   )
 }
