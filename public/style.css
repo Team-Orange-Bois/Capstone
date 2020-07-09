@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: sans-serif;
   margin: 0;
@@ -203,4 +206,11 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#loopStationButt {
+  height: '100%';
+  background: #fe1bcb;
+  width: '19px';
+  margin: '1px';
 }
