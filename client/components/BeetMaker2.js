@@ -21,8 +21,8 @@ export default function BeetMaker2() {
     C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
   }).toMaster()
-  const hat = new Tone.Player({
-    url:
+  const hat = new Tone.Sampler({
+    C3:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
   }).toMaster()
   const chord1 = new Tone.Sampler({
@@ -192,7 +192,7 @@ export default function BeetMaker2() {
 
         // cycle through all notes on a key and trigger attack release
         samplerObj[key].forEach(note => {
-          note.start(`${bar}:${beat}:${sixteenth}`)
+          note.triggerAttackRelease('C3', '1m', `${bar}:${beat}:${sixteenth}`)
         })
       }
     })
@@ -202,7 +202,7 @@ export default function BeetMaker2() {
     if (keySounds[identifier]) {
       const button = document.getElementById(identifier)
       button.setAttribute('class', 'butts btn active-button')
-      keySounds[identifier].triggerAttackRelease('C3', '4n')
+      keySounds[identifier].triggerAttackRelease('C3', '1m')
 
       //find the current transport time
       let beat = Tone.Transport.position.split(':')[1]
