@@ -6,6 +6,8 @@ import LoopStation from './Looper'
 //test 4 travis again
 
 export default function BeetMaker2() {
+  Tone.context.latencyHint = 'fastest'
+
   const woodblock = new Tone.Player({
     url:
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fwoodblock.mp3?alt=media&token=c2192730-64fe-41e6-a744-0df8d7d99ca0'
@@ -129,74 +131,28 @@ export default function BeetMaker2() {
     '/': null
   }
 
-  //Object used for storing sounds for the loop. Key is the timing the note will play
-  const samplerObj = {
-    '0:0:0': [],
-    '0:0:0.5': [],
-    '0:0:1': [],
-    '0:0:1.5': [],
-    '0:0:2': [],
-    '0:0:2.5': [],
-    '0:0:3': [],
-    '0:0:3.5': [],
-    '0:1:0': [],
-    '0:1:0.5': [],
-    '0:1:1': [],
-    '0:1:1.5': [],
-    '0:1:2': [],
-    '0:1:2.5': [],
-    '0:1:3': [],
-    '0:1:3.5': [],
-    '0:2:0': [],
-    '0:2:0.5': [],
-    '0:2:1': [],
-    '0:2:1.5': [],
-    '0:2:2': [],
-    '0:2:2.5': [],
-    '0:2:3': [],
-    '0:2:3.5': [],
-    '0:3:0': [],
-    '0:3:0.5': [],
-    '0:3:1': [],
-    '0:3:1.5': [],
-    '0:3:2': [],
-    '0:3:2.5': [],
-    '0:3:3': [],
-    '0:3:3.5': []
-  }
+  const samplerArr = []
 
   let metronomeOn = false
 
+  const beat = function(time, value) {
+    value.note.triggerAttackRelease(value.tone, '4n')
+  }
+
+  let parts
   //Loop initialization. Activates on button click
   function startLoop() {
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
+    Tone.Transport.loop = true
+    Tone.Transport.loopEnd = '1m'
     Tone.Transport.start()
-    const loopBeat = new Tone.Loop(beatLoop, '1m')
-    loopBeat.start(0)
+    parts = new Tone.Part(beat, samplerArr).start(0)
   }
 
   const metronome = new Tone.Loop(function() {
-    woodblock.start()
+    woodblock.start(0)
   }, '4n')
-
-  function beatLoop(time) {
-    const bar = Tone.Time(time)
-      .toBarsBeatsSixteenths()
-      .split(':')[0]
-
-    //loop through the samplerobj and set its timing for activation equal to the time it is stored
-    Object.keys(samplerObj).forEach(key => {
-      if (samplerObj[key].length) {
-        const splitTime = key.split(':')
-        const beat = splitTime[1]
-        const sixteenth = splitTime[2]
-
-        // cycle through all notes on a key and trigger attack release
-        samplerObj[key].forEach(note => {
-          note.triggerAttackRelease('C3', '1m', `${bar}:${beat}:${sixteenth}`)
-        })
-      }
-    })
-  }
 
   const handleKeyDown = identifier => {
     if (keySounds[identifier]) {
@@ -204,11 +160,12 @@ export default function BeetMaker2() {
       button.setAttribute('class', 'butts btn active-button')
       keySounds[identifier].triggerAttackRelease('C3', '1m')
 
-      //find the current transport time
+      // find the current transport time
       let beat = Tone.Transport.position.split(':')[1]
 
-      //convert current transport time sixteenths into nearest 32n for timing
+      // //convert current transport time sixteenths into nearest 32n for timing
       let sixteenths
+
       if (
         parseInt(Tone.Transport.position.split(':')[2], 10) > 0 &&
         parseInt(Tone.Transport.position.split(':')[2], 10) <= 2
@@ -232,9 +189,17 @@ export default function BeetMaker2() {
       const timing = `0:${beat}:${sixteenths}`
 
       //ensure note currently does not reside within the same beat, to prevent stacking
-      if (!samplerObj[timing].includes(keySounds[identifier])) {
-        samplerObj[timing].push(keySounds[identifier])
+      const filteredNotes = samplerArr.filter(
+        item => item.note === keySounds[identifier] && item.time === timing
+      )
+
+      console.log(samplerArr)
+      console.log(timing)
+      if (!filteredNotes.length) {
+        samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]})
+        parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
       }
+      console.log(filteredNotes)
     }
   }
 
