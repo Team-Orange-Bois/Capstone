@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import * as Tone from 'tone'
-import {Button} from 'react-bootstrap'
+import {Button, ButtonToolbar} from 'react-bootstrap'
 import Tracks from './Tracks'
 
 //test 4 travis again
@@ -80,51 +80,59 @@ const cmaj7Oct = new Tone.Sampler({
 }).toMaster()
 
 let keySounds = {
-  '1': null,
-  '2': null,
-  '3': null,
-  '4': null,
-  '5': null,
-  '6': null,
-  '7': null,
-  '8': null,
-  '9': null,
-  '0': null,
-  '-': null,
-  '=': null,
-  q: kick,
-  w: snare,
-  e: hat,
-  r: chord1,
-  t: chord2,
-  y: chord3,
-  u: chord4,
-  i: chord5,
-  o: null,
-  p: null,
-  '[': null,
-  ']': null,
-  a: null,
-  s: null,
-  d: null,
-  f: cmaj7,
-  g: dmin7,
-  h: emin7,
-  j: fmaj7,
-  k: g7,
-  l: amin7,
-  ';': bmin7b5,
-  "'": cmaj7Oct,
-  z: null,
-  x: null,
-  c: null,
-  v: null,
-  b: null,
-  n: null,
-  m: null,
-  ',': null,
-  '.': null,
-  '/': null
+  numberRow: {
+    '1': null,
+    '2': null,
+    '3': null,
+    '4': null,
+    '5': null,
+    '6': null,
+    '7': null,
+    '8': null,
+    '9': null,
+    '0': null,
+    '-': null,
+    '=': null
+  },
+  qRow: {
+    q: kick,
+    w: snare,
+    e: hat,
+    r: chord1,
+    t: chord2,
+    y: chord3,
+    u: chord4,
+    i: chord5,
+    o: null,
+    p: null,
+    '[': null,
+    ']': null
+  },
+  aRow: {
+    a: null,
+    s: null,
+    d: null,
+    f: cmaj7,
+    g: dmin7,
+    h: emin7,
+    j: fmaj7,
+    k: g7,
+    l: amin7,
+    ';': bmin7b5,
+    "'": cmaj7Oct
+  },
+  zRow: {
+    z: null,
+    x: null,
+    c: null,
+    v: null,
+    b: null,
+    n: null,
+    m: null,
+    ',': null,
+    '.': null,
+    '/': null
+  }
 }
 
 const samplerArr = []
@@ -225,43 +233,39 @@ export default function BeetMaker2() {
     if (keySounds[e.key]) handleKeyUp(e.key)
   })
 
+  const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
+  let rowIndex = -1
+  const buttonClasses = []
+  let buttonIndex = -1
+
   return (
-    <div
-      className="outercontainer"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        backgroundColor: '#490769',
-        height: '100vh'
-      }}
-    >
+    <div className="outercontainer">
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
-      <div
-        className="dropzoneContainer draggable-dropzone--occupied"
-        style={{
-          backgroundColor: '#490769',
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          borderRadius: '2px',
-          flexWrap: 'wrap'
-        }}
-      >
-        {Object.keys(keySounds).map(key => {
-          return (
-            <div key={key} className="">
-              <Button
-                id={key}
-                className="butts sample"
-                onMouseDown={e => handleKeyDown(e.target.id)}
-                onMouseUp={e => handleKeyUp(e.target.id)}
-              >
-                press {key}
-              </Button>
-            </div>
-          )
-        })}
+      <div className="keyboard-wrap">
+        <div className="keyboard">
+          {Object.keys(keySounds).map(key => {
+            rowIndex++
+            return (
+              <div key={key} className={rowClasses[rowIndex]}>
+                {Object.keys(keySounds[key]).map(button => {
+                  buttonIndex++
+                  return (
+                    <div key={button} className={buttonClasses[buttonIndex]}>
+                      <Button
+                        id={button}
+                        className={`butts sample ${buttonClasses[buttonIndex]}`}
+                        onMouseDown={e => handleKeyDown(e.target.id)}
+                        onMouseUp={e => handleKeyUp(e.target.id)}
+                      >
+                        press {button}
+                      </Button>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
       </div>
       <Button onClick={() => startLoop()} className="butts">
         Play loop

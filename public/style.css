@@ -214,3 +214,27 @@ input {
   width: '19px';
   margin: '1px';
 }
+
+.outercontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.q-row {
+  display: flex;
+  flex-direction: row;
+}
+.a-row {
+  display: flex;
+  flex-direction: row;
+}
+.z-row {
+  display: flex;
+  flex-direction: row;
+}
