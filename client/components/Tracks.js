@@ -36,13 +36,13 @@ const columnsFromBackend = {
     items: []
   },
   '0:1:0': {
-    items: [{id: uuid(), content: 'First task'}]
+    items: []
   },
   '0:1:0.5': {
     items: []
   },
   '0:1:1': {
-    items: [{id: uuid(), content: 'Second task'}]
+    items: []
   },
   '0:1:1.5': {
     items: []
@@ -148,20 +148,20 @@ const onDragEnd = (result, columns, setColumns) => {
 
 export default function Tracks(props) {
   const [columns, setColumns] = useState(columnsFromBackend)
-  let samplerArr = props.samplerArr
-  //const [samplerArr, setSamples] = useState(props.samplerArr)
+  //let samplerArr = props.samplerArr
+  const {samplerArr, setSamples} = props
 
   useEffect(() => {
     //setSamples(props.samplerArr)
     if (samplerArr) {
       console.log(samplerArr)
-      console.log(columns)
       samplerArr.map(sample => {
-        console.log('sample time', sample.time)
-        setColumns(columns[sample.time].items.push(sample))
+        console.log('items? ', columns[sample.time].items)
+        columns[sample.time].items.push(sample)
       })
+      console.log({columns})
     }
-  }, [])
+  }, [samplerArr])
 
   // const handlekey =
 
