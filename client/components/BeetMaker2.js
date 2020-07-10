@@ -127,46 +127,45 @@ let keySounds = {
   '/': null
 }
 
-const samplerArr = []
+// const samplerArr = []
 
 let metronomeOn = false
 
 //Loop initialization. Activates on button click
-const beatLoop = function(time, value) {
-  value.note.triggerAttackRelease(value.tone)
-}
-
-let parts
-let isPlaying = false
-
-function startLoop() {
-  isPlaying = true
-  Tone.Transport.cancel()
-  Tone.Transport.stop()
-  Tone.Transport.loop = true
-  Tone.Transport.loopEnd = '1m'
-  Tone.Transport.start()
-  parts = new Tone.Part(beatLoop, samplerArr).start(0)
-}
-
-function stopLoop() {
-  Tone.Transport.cancel()
-  Tone.Transport.stop()
-}
-
-const metronome = new Tone.Event(function(time) {
-  woodblock.triggerAttackRelease('C4', '4n')
-  woodblock.triggerAttackRelease('C3', '4n', '+4n')
-  woodblock.triggerAttackRelease('C3', '4n', '@2n')
-  woodblock.triggerAttackRelease('C3', '4n', '@2n.')
-})
-metronome.loop = true
-metronome.loopEnd = '1m'
 
 export default function BeetMaker2() {
-  //let [samples, setSamples] = useState([])
-  //samples = samplerArr
+  const [samplerArr, setSamples] = useState([])
 
+  const beatLoop = function(time, value) {
+    value.note.triggerAttackRelease(value.tone)
+  }
+
+  let parts
+  let isPlaying = false
+
+  function startLoop() {
+    isPlaying = true
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
+    Tone.Transport.loop = true
+    Tone.Transport.loopEnd = '1m'
+    Tone.Transport.start()
+    parts = new Tone.Part(beatLoop, samplerArr).start(0)
+  }
+
+  function stopLoop() {
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
+  }
+
+  const metronome = new Tone.Event(function(time) {
+    woodblock.triggerAttackRelease('C4', '4n')
+    woodblock.triggerAttackRelease('C3', '4n', '+4n')
+    woodblock.triggerAttackRelease('C3', '4n', '@2n')
+    woodblock.triggerAttackRelease('C3', '4n', '@2n.')
+  })
+  metronome.loop = true
+  metronome.loopEnd = '1m'
   const handleKeyDown = identifier => {
     const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
@@ -206,7 +205,11 @@ export default function BeetMaker2() {
     )
 
     if (!filteredNotes.length && isPlaying) {
-      samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]})
+      //setSamples(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]})
+      setSamples([
+        ...samplerArr,
+        {time: timing, tone: 'C3', note: keySounds[identifier]}
+      ])
       parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
     }
   }
@@ -284,7 +287,7 @@ export default function BeetMaker2() {
       >
         Toggle Metronome
       </Button>
-      <Tracks samplerArr={samplerArr} />
+      <Tracks samplerArr={samplerArr} setSamples={setSamples} />
     </div>
   )
 }
