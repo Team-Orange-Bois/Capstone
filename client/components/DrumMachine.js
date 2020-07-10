@@ -48,15 +48,22 @@ export default function DrumMachine() {
 
   let isPlaying = false
 
+  let loopKick
+  let loopSnare
+  let loopHat
+
   function loopDrums() {
     if (isPlaying) {
-      Tone.Transport.cancel()
+      // Tone.Transport.cancel()
+      loopKick.cancel().stop()
+      loopSnare.cancel().stop()
+      loopHat.cancel().stop()
     }
     isPlaying = true
-    let loopKick = new Tone.Loop(kickFunc, Pattern.kick)
-    let loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
-    let loopHat = new Tone.Loop(hatFunc, Pattern.hat)
     Tone.Transport.start()
+    loopKick = new Tone.Loop(kickFunc, Pattern.kick)
+    loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
+    loopHat = new Tone.Loop(hatFunc, Pattern.hat)
     loopKick.start(0)
     loopSnare.start(0)
     loopHat.start(0)
@@ -64,8 +71,11 @@ export default function DrumMachine() {
 
   function stopLoop() {
     isPlaying = false
-
-    Tone.Transport.stop()
+    // Tone.Transport.cancel()
+    // Tone.Transport.stop()
+    loopKick.cancel().stop()
+    loopSnare.cancel().stop()
+    loopHat.cancel().stop()
   }
   function changeVolume(value) {
     Tone.Master.volume.value = value

@@ -157,6 +157,7 @@ export default function Tracks(props) {
       console.log(samplerArr)
       console.log(columns)
       samplerArr.map(sample => {
+        console.log('sample time', sample.time)
         setColumns(columns[sample.time].items.push(sample))
       })
     }
