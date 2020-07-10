@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import * as Tone from 'tone'
 import {Button} from 'react-bootstrap'
-import LoopStation from './Looper'
+import Tracks from './Tracks'
 
 //test 4 travis again
 
@@ -131,6 +131,7 @@ const samplerArr = []
 
 let metronomeOn = false
 
+//Loop initialization. Activates on button click
 const beatLoop = function(time, value) {
   value.note.triggerAttackRelease(value.tone)
 }
@@ -138,7 +139,6 @@ const beatLoop = function(time, value) {
 let parts
 let isPlaying = false
 
-//Loop initialization. Activates on button click
 function startLoop() {
   isPlaying = true
   Tone.Transport.cancel()
@@ -147,6 +147,11 @@ function startLoop() {
   Tone.Transport.loopEnd = '1m'
   Tone.Transport.start()
   parts = new Tone.Part(beatLoop, samplerArr).start(0)
+}
+
+function stopLoop() {
+  Tone.Transport.cancel()
+  Tone.Transport.stop()
 }
 
 const metronome = new Tone.Event(function(time) {
@@ -159,7 +164,10 @@ metronome.loop = true
 metronome.loopEnd = '1m'
 
 export default function BeetMaker2() {
-  const handleKeyDown = function(identifier) {
+  //let [samples, setSamples] = useState([])
+  //samples = samplerArr
+
+  const handleKeyDown = identifier => {
     const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
     keySounds[identifier].triggerAttackRelease('C3', '1m')
@@ -196,6 +204,7 @@ export default function BeetMaker2() {
     const filteredNotes = samplerArr.filter(
       item => item.note === keySounds[identifier] && item.time === timing
     )
+
     if (!filteredNotes.length && isPlaying) {
       samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]})
       parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
@@ -275,7 +284,7 @@ export default function BeetMaker2() {
       >
         Toggle Metronome
       </Button>
-      <LoopStation />
+      <Tracks samplerArr={samplerArr} />
     </div>
   )
 }
