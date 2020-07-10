@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import * as Tone from 'tone'
 import {Button, Form} from 'react-bootstrap'
 import Tracks from './Tracks'
+import uuid from 'uuid/v4'
 
 Tone.context.latencyHint = 'fastest'
 const woodblock = new Tone.Sampler({
@@ -203,11 +204,13 @@ export default function BeetMaker2() {
     )
 
     if (!filteredNotes.length && isPlaying) {
-      //setSamples(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]})
+      // setSamples(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
+
       setSamples([
         ...samplerArr,
         {time: timing, tone: 'C3', note: keySounds[identifier]}
       ])
+      console.log('BEETMAKER2 SAMPLES: ', samplerArr)
       parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
     }
   }
