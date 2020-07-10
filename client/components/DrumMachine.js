@@ -46,20 +46,18 @@ export default function DrumMachine() {
 
   Tone.context.latencyHint = 'fastest'
 
-  let isPlaying = false
-
   let loopKick
   let loopSnare
   let loopHat
-
+  let areDrumsPlaying = false
   function loopDrums() {
-    if (isPlaying) {
-      // Tone.Transport.cancel()
+    if (areDrumsPlaying) {
+      Tone.Transport.cancel()
       loopKick.cancel().stop()
       loopSnare.cancel().stop()
       loopHat.cancel().stop()
     }
-    isPlaying = true
+    areDrumsPlaying = true
     Tone.Transport.start()
     loopKick = new Tone.Loop(kickFunc, Pattern.kick)
     loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
@@ -70,9 +68,9 @@ export default function DrumMachine() {
   }
 
   function stopLoop() {
-    isPlaying = false
-    // Tone.Transport.cancel()
-    // Tone.Transport.stop()
+    areDrumsPlaying = false
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
     loopKick.cancel().stop()
     loopSnare.cancel().stop()
     loopHat.cancel().stop()
@@ -88,7 +86,7 @@ export default function DrumMachine() {
 
   function changePattern(target) {
     Pattern[target.name] = target.value
-    if (isPlaying) {
+    if (areDrumsPlaying) {
       loopDrums()
     }
   }

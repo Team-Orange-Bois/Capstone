@@ -142,7 +142,6 @@ metronome.loopEnd = '1m'
 export default function BeetMaker2() {
   //let [samples, setSamples] = useState([])
   //samples = samplerArr
-  const [isPlaying, setIsPlaying] = useState(false)
 
   //Loop initialization. Activates on button click
   const beatLoop = function(time, value) {
@@ -150,12 +149,12 @@ export default function BeetMaker2() {
   }
 
   let parts = new Tone.Part(beatLoop, samplerArr)
-
+  let isPlaying = false
   function startLoop() {
     if (isPlaying) {
       parts.cancel().stop()
     }
-    setIsPlaying(true)
+    isPlaying = true
     // Tone.Transport.cancel()
     // Tone.Transport.stop()
     // parts.cancel().stop()
@@ -166,7 +165,7 @@ export default function BeetMaker2() {
   }
 
   function stopLoop() {
-    setIsPlaying(false)
+    isPlaying = false
     Tone.Transport.cancel()
     Tone.Transport.stop()
     parts.cancel().stop()
@@ -288,8 +287,7 @@ export default function BeetMaker2() {
       >
         Toggle Metronome
       </Button>
-      <Tracks samplerArr={samplerArr} isPlaying={isPlaying} />
-      <DrumMachine />
+      <Tracks samplerArr={samplerArr} />
     </div>
   )
 }
