@@ -153,14 +153,13 @@ export default function Tracks(props) {
 
   useEffect(() => {
     //setSamples(props.samplerArr)
-    if (samplerArr) {
-      console.log(samplerArr)
+    if (samplerArr.length) {
       samplerArr.map(sample => {
-        console.log('items? ', columns[sample.time].items)
-        columns[sample.time].items.push(sample)
+        //console.log('items? ', columns[sample.time].items)
+        columns[sample.time].items = [...columns[sample.time].items, sample]
       })
-      console.log({columns})
     }
+    console.log(samplerArr)
   }, [samplerArr])
 
   // const handlekey =

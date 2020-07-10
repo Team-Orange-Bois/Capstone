@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import * as Tone from 'tone'
 import {Button} from 'react-bootstrap'
 import Tracks from './Tracks'
+import uuid from 'uuid/v4'
 
 //test 4 travis again
 
@@ -205,11 +206,13 @@ export default function BeetMaker2() {
     )
 
     if (!filteredNotes.length && isPlaying) {
-      //setSamples(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]})
+      // setSamples(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
+
       setSamples([
         ...samplerArr,
         {time: timing, tone: 'C3', note: keySounds[identifier]}
       ])
+      console.log('BEETMAKER2 SAMPLES: ', samplerArr)
       parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
     }
   }
