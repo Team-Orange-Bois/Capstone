@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import * as Tone from 'tone'
-import {Button} from 'react-bootstrap'
+import {Button, Form} from 'react-bootstrap'
 import Tracks from './Tracks'
 
 Tone.context.latencyHint = 'fastest'
@@ -212,6 +212,15 @@ export default function BeetMaker2() {
     }
   }
 
+  function changeVolume(value) {
+    Tone.Master.volume.value = value
+    console.log(Tone.Master.volume.value)
+  }
+
+  function changeTempo(value) {
+    Tone.Transport.bpm.value = value
+  }
+
   const handleKeyUp = identifier => {
     if (keySounds[identifier]) {
       const button = document.getElementById(identifier)
@@ -286,6 +295,47 @@ export default function BeetMaker2() {
         Toggle Metronome
       </Button>
       <Tracks samplerArr={samplerArr} setSamples={setSamples} />
+      <Form style={{color: '#fe1bcb'}}>
+        <Form.Group>
+          <Form.Label>Volume</Form.Label>
+          <Form.Control
+            name="Volume"
+            type="range"
+            min="-50"
+            max="5"
+            id="volume"
+            list="volTicks"
+            defaultValue="0"
+            step="0.5"
+            onChange={e => changeVolume(e.target.value)}
+          />
+          <datalist id="volTicks">
+            <option value="-50" />
+            <option value="0" />
+            <option value="5" />
+          </datalist>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Speed</Form.Label>
+          <Form.Control
+            name="BPM"
+            type="range"
+            min="60"
+            max="200"
+            id="bpm"
+            list="bpmTicks"
+            defaultValue="120"
+            step="1"
+            size="lg"
+            onChange={e => changeTempo(e.target.value)}
+          />
+          <datalist id="bpmTicks">
+            <option value="60" />
+            <option value="120" />
+            <option value="200" />
+          </datalist>
+        </Form.Group>
+      </Form>
     </div>
   )
 }
