@@ -95,14 +95,14 @@ let keySounds = {
     '=': null
   },
   qRow: {
-    q: kick,
-    w: snare,
-    e: hat,
-    r: chord1,
-    t: chord2,
-    y: chord3,
-    u: chord4,
-    i: chord5,
+    q: {note: kick, label: 'Kick'},
+    w: {note: snare, label: 'Snare'},
+    e: {note: hat, label: 'Hat'},
+    r: {note: chord1, label: 'Chord 1'},
+    t: {note: chord2, label: 'Chord 2'},
+    y: {note: chord3, label: 'Chord 3'},
+    u: {note: chord4, label: 'Chord 4'},
+    i: {note: chord5, label: 'Chord 5'},
     o: null,
     p: null,
     '[': null,
@@ -112,14 +112,14 @@ let keySounds = {
     a: null,
     s: null,
     d: null,
-    f: cmaj7,
-    g: dmin7,
-    h: emin7,
-    j: fmaj7,
-    k: g7,
-    l: amin7,
-    ';': bmin7b5,
-    "'": cmaj7Oct
+    f: {note: cmaj7, label: 'C Maj 7'},
+    g: {note: dmin7, label: 'D Min 7'},
+    h: {note: emin7, label: 'E Min 7'},
+    j: {note: fmaj7, label: 'F Maj 7'},
+    k: {note: g7, label: 'G7'},
+    l: {note: amin7, label: 'A Min 7'},
+    ';': {note: bmin7b5, label: 'B Min 7'},
+    "'": {note: cmaj7Oct, label: 'C Maj 70ct'}
   },
   zRow: {
     z: null,
@@ -178,7 +178,7 @@ export default function BeetMaker2() {
   const handleKeyDown = (row, identifier) => {
     const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
-    keySounds[row][identifier].triggerAttackRelease('C3', '1m')
+    keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
 
     // find the current transport time
     let beat = Tone.Transport.position.split(':')[1]
@@ -210,30 +210,32 @@ export default function BeetMaker2() {
 
     //ensure note currently does not reside within the same beat, to prevent stacking
     const filteredNotes = samplerArr.filter(
-      item => item.note === keySounds[row][identifier] && item.time === timing
+      item =>
+        item.note === keySounds[row][identifier].note && item.time === timing
     )
 
     if (!filteredNotes.length && isPlaying) {
       samplerArr.push({
         time: timing,
         tone: 'C3',
-        note: keySounds[row][identifier]
+        note: keySounds[row][identifier].note
       })
-      parts.add({time: timing, tone: 'C3', note: keySounds[row][identifier]})
+      parts.add({
+        time: timing,
+        tone: 'C3',
+        note: keySounds[row][identifier].note
+      })
     }
   }
 
   const handleKeyUp = (row, identifier) => {
-    if (keySounds[row][identifier]) {
-      const button = document.getElementById(identifier)
-      button.setAttribute('class', 'butts btn btn-primary')
-    }
+    const button = document.getElementById(identifier)
+    button.setAttribute('class', 'butts btn btn-primary')
   }
 
   document.addEventListener('keydown', e => {
     Object.keys(keySounds).forEach(key => {
       if (keySounds[key][e.key]) {
-        console.log(key, e.key)
         handleKeyDown(key, e.key)
       }
     })
@@ -275,7 +277,9 @@ export default function BeetMaker2() {
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
-                        press {button}
+                        {keySounds[key][button]
+                          ? `${keySounds[key][button].label}`
+                          : `Press ${button}`}
                       </Button>
                     </div>
                   )

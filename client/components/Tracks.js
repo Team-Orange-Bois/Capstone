@@ -154,8 +154,6 @@ export default function Tracks(props) {
   useEffect(() => {
     //setSamples(props.samplerArr)
     if (samplerArr) {
-      console.log(samplerArr)
-      console.log(columns)
       samplerArr.map(sample => {
         setColumns(columns[sample.time].items.push(sample))
       })

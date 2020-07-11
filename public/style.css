@@ -4,6 +4,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  background-color: #35054c;
 }
 
 a {
@@ -125,10 +126,14 @@ input {
   color: #24c0f9;
   background-color: #35054c;
   border-color: #24c0f9;
+  width: 100px;
+  height: 100px;
 }
 
 .butts.btn.active-button {
   background-color: #fe1bcb;
+  width: 100px;
+  height: 100px;
 }
 
 .hg-theme-default.hg-layout-numeric .hg-button {
@@ -226,15 +231,23 @@ input {
   flex-direction: row;
   align-items: center;
 }
+
 .q-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin-left: 35px;
 }
+
 .a-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin-left: 65px;
 }
+
 .z-row {
   display: flex;
   flex-direction: row;
+  margin-left: 100px;
 }
