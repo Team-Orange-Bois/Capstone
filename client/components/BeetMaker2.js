@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import * as Tone from 'tone'
 import {Button, Form} from 'react-bootstrap'
 import Tracks from './Tracks'
@@ -78,6 +78,55 @@ const cmaj7Oct = new Tone.Sampler({
     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fcmaj7Oct.mp3?alt=media&token=cbf85501-0217-434e-8497-f97625364e9a'
 }).toMaster()
 
+const guitar1 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar1.mp3?alt=media&token=b830cdd5-fe9c-4812-94d1-79932eec7394'
+}).toMaster()
+const guitar2 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar2.mp3?alt=media&token=21b286b6-9f11-4777-a082-d084f85dff03'
+}).toMaster()
+const guitar3 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar3.mp3?alt=media&token=806e6b5a-5287-488c-9806-64c337749f6b'
+}).toMaster()
+const guitar4 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar4.mp3?alt=media&token=7691aebb-710a-42cf-80c4-fc115e565398'
+}).toMaster()
+const guitar5 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar5.mp3?alt=media&token=8dfc29b9-54f3-4bf7-9a52-553f801dd082'
+}).toMaster()
+const guitar6 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar6.mp3?alt=media&token=835d0c0b-78b4-4385-988a-6d96045cc1d4'
+}).toMaster()
+const guitar7 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar7.mp3?alt=media&token=28cce534-173f-4fba-9c1d-fb78780aaba7'
+}).toMaster()
+const guitar8 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar8.mp3?alt=media&token=e9bb46a2-1416-409d-be53-2aa16a0e06c5'
+}).toMaster()
+const guitar9 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar9.mp3?alt=media&token=a8a94c2c-0140-4999-afcb-cf75b275f58b'
+}).toMaster()
+const guitar10 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar10.mp3?alt=media&token=084873f0-d6ca-48cc-8e47-3f9a5507ca56'
+}).toMaster()
+const guitar11 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar11.mp3?alt=media&token=0e41ed79-4c78-46e6-acb5-fb9489ccbdb1'
+}).toMaster()
+const guitar12 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar12.mp3?alt=media&token=0fd1ea8a-bd7a-4161-a8ae-5000ed3da5e8'
+}).toMaster()
+
 let keySounds = {
   '1': null,
   '2': null,
@@ -103,8 +152,8 @@ let keySounds = {
   p: null,
   '[': null,
   ']': null,
-  a: null,
-  s: null,
+  a: guitar2,
+  s: guitar1,
   d: null,
   f: cmaj7,
   g: dmin7,
@@ -114,16 +163,16 @@ let keySounds = {
   l: amin7,
   ';': bmin7b5,
   "'": cmaj7Oct,
-  z: null,
-  x: null,
-  c: null,
-  v: null,
-  b: null,
-  n: null,
-  m: null,
-  ',': null,
-  '.': null,
-  '/': null
+  z: guitar11,
+  x: guitar12,
+  c: guitar3,
+  v: guitar4,
+  b: guitar5,
+  n: guitar6,
+  m: guitar7,
+  ',': guitar8,
+  '.': guitar9,
+  '/': guitar10
 }
 
 // const samplerArr = []
@@ -133,8 +182,10 @@ let metronomeOn = false
 //Loop initialization. Activates on button click
 
 export default function BeetMaker2() {
-  const [samplerArr, setSamples] = useState([])
-
+  const [samplerArr, setSamplerArr] = useState([])
+  useEffect(() => {
+    console.log('updated samplerArr...hopefully')
+  }, [samplerArr])
   const beatLoop = function(time, value) {
     value.note.triggerAttackRelease(value.tone)
   }
@@ -204,12 +255,12 @@ export default function BeetMaker2() {
     )
 
     if (!filteredNotes.length && isPlaying) {
-      // setSamples(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
-
-      setSamples([
+      // setSamplerArr(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
+      let tempArrOfSamples = [
         ...samplerArr,
         {time: timing, tone: 'C3', note: keySounds[identifier]}
-      ])
+      ]
+      setSamplerArr(tempArrOfSamples)
       console.log('BEETMAKER2 SAMPLES: ', samplerArr)
       parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
     }
@@ -217,7 +268,6 @@ export default function BeetMaker2() {
 
   function changeVolume(value) {
     Tone.Master.volume.value = value
-    console.log(Tone.Master.volume.value)
   }
 
   function changeTempo(value) {
@@ -297,7 +347,7 @@ export default function BeetMaker2() {
       >
         Toggle Metronome
       </Button>
-      <Tracks samplerArr={samplerArr} setSamples={setSamples} />
+      <Tracks samplerArr={samplerArr} setSamples={setSamplerArr} />
       <Form style={{color: '#fe1bcb'}}>
         <Form.Group>
           <Form.Label>Volume</Form.Label>
