@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, {useState, useEffect} from 'react'
 import * as Tone from 'tone'
 import {Button, Form} from 'react-bootstrap'
@@ -175,17 +176,19 @@ let keySounds = {
   '/': guitar10
 }
 
-// const samplerArr = []
-
 let metronomeOn = false
+
+const samples = {samples: []}
 
 //Loop initialization. Activates on button click
 
 export default function BeetMaker2() {
-  const [samplerArr, setSamplerArr] = useState([])
+  const [samplerObj, setSamplerObj] = useState(samples)
+
   useEffect(() => {
     console.log('updated samplerArr...hopefully')
-  }, [samplerArr])
+  }, [samplerObj.samples])
+
   const beatLoop = function(time, value) {
     value.note.triggerAttackRelease(value.tone)
   }
@@ -200,26 +203,13 @@ export default function BeetMaker2() {
     Tone.Transport.loop = true
     Tone.Transport.loopEnd = '1m'
     Tone.Transport.start()
-    parts = new Tone.Part(beatLoop, samplerArr).start(0)
+    parts = new Tone.Part(beatLoop, samplerObj.samples).start(0)
   }
 
-  function stopLoop() {
-    Tone.Transport.cancel()
-    Tone.Transport.stop()
-  }
-
-  const metronome = new Tone.Event(function(time) {
-    woodblock.triggerAttackRelease('C4', '4n')
-    woodblock.triggerAttackRelease('C3', '4n', '+4n')
-    woodblock.triggerAttackRelease('C3', '4n', '@2n')
-    woodblock.triggerAttackRelease('C3', '4n', '@2n.')
-  })
-  metronome.loop = true
-  metronome.loopEnd = '1m'
-  const handleKeyDown = identifier => {
-    const button = document.getElementById(identifier)
+  const handleKeyDown = function(identifier) {
+    let button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
-    keySounds[identifier].triggerAttackRelease('C3', '1m')
+    if (!isPlaying) keySounds[identifier].triggerAttackRelease('C3', '1m')
 
     // find the current transport time
     let beat = Tone.Transport.position.split(':')[1]
@@ -250,21 +240,43 @@ export default function BeetMaker2() {
     const timing = `0:${beat}:${sixteenths}`
 
     //ensure note currently does not reside within the same beat, to prevent stacking
-    const filteredNotes = samplerArr.filter(
+    const filteredNotes = samplerObj.samples.filter(
       item => item.note === keySounds[identifier] && item.time === timing
     )
 
     if (!filteredNotes.length && isPlaying) {
       // setSamplerArr(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
-      let tempArrOfSamples = [
-        ...samplerArr,
+      // const tempArrOfSamples = [
+      //   {time: timing, tone: 'C3', note: keySounds[identifier]}
+      // ]
+
+      samplerObj.samples = [
+        ...samplerObj.samples,
         {time: timing, tone: 'C3', note: keySounds[identifier]}
       ]
-      setSamplerArr(tempArrOfSamples)
-      console.log('BEETMAKER2 SAMPLES: ', samplerArr)
+
+      setSamplerObj({
+        ...samplerObj,
+        samples: [...samplerObj.samples]
+      })
+
+      console.log('BEETMAKER2 SAMPLES: ', samplerObj.samples)
       parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
     }
   }
+  function stopLoop() {
+    Tone.Transport.cancel()
+    Tone.Transport.stop()
+  }
+
+  const metronome = new Tone.Event(function(time) {
+    woodblock.triggerAttackRelease('C4', '4n')
+    woodblock.triggerAttackRelease('C3', '4n', '+4n')
+    woodblock.triggerAttackRelease('C3', '4n', '@2n')
+    woodblock.triggerAttackRelease('C3', '4n', '@2n.')
+  })
+  metronome.loop = true
+  metronome.loopEnd = '1m'
 
   function changeVolume(value) {
     Tone.Master.volume.value = value
@@ -347,7 +359,6 @@ export default function BeetMaker2() {
       >
         Toggle Metronome
       </Button>
-      <Tracks samplerArr={samplerArr} setSamples={setSamplerArr} />
       <Form style={{color: '#fe1bcb'}}>
         <Form.Group>
           <Form.Label>Volume</Form.Label>
@@ -389,6 +400,7 @@ export default function BeetMaker2() {
           </datalist>
         </Form.Group>
       </Form>
+      <Tracks samplerObj={samplerObj} setSamples={setSamplerObj} />
     </div>
   )
 }

@@ -149,18 +149,20 @@ const onDragEnd = (result, columns, setColumns) => {
 export default function Tracks(props) {
   const [columns, setColumns] = useState(columnsFromBackend)
   //let samplerArr = props.samplerArr
-  const {samplerArr, setSamples} = props
+  const {samplerObj, setSamples} = props
+  console.log('tracks: ', samplerObj)
 
   useEffect(() => {
-    //setSamples(props.samplerArr)
-    if (samplerArr.length) {
-      samplerArr.map(sample => {
-        //console.log('items? ', columns[sample.time].items)
-        columns[sample.time].items = [...columns[sample.time].items, sample]
+    if (samplerObj.samples.length) {
+      samplerObj.samples.map(sample => {
+        if (!columns[sample.time].items.includes(sample)) {
+          columns[sample.time].items = [...columns[sample.time].items, sample]
+        }
       })
     }
-    console.log(samplerArr)
-  }, [samplerArr])
+    console.log(columns)
+    console.log(samplerObj.samples)
+  }, [samplerObj.samples])
 
   // const handlekey =
 
@@ -227,8 +229,8 @@ export default function Tracks(props) {
                           {column.items.map((item, index) => {
                             return (
                               <Draggable
-                                key={item.id}
-                                draggableId={item.id}
+                                key={`${[uuid()]} ${item.time}`}
+                                draggableId={`${[uuid()]} ${item.time}`}
                                 index={index}
                               >
                                 {(provided, snapshot) => {
