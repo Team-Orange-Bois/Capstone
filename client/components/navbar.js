@@ -7,14 +7,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 export function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" id="navbar" bg="dark" variant="dark">
-      <Navbar.Brand href="/">Siq Beets</Navbar.Brand>
+      <Navbar.Brand href="/beetmaker2">Siq Beets</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/beetmaker">Beet Maker</Nav.Link>
-          <Nav.Link href="/beetmaker2">Beet Maker 2</Nav.Link>
+          <Nav.Link href="/beetmaker">Beet Maker Alpha</Nav.Link>
+          <Nav.Link href="/beetmaker2">Beet Maker Beta</Nav.Link>
           <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link>
-          <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+          {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
               Another action
@@ -24,14 +24,14 @@ export function NavBar() {
             <NavDropdown.Item href="#action/3.4">
               Separated link
             </NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
         </Nav>
-        <Nav>
+        {/* <Nav>
           <Nav.Link href="#deets">More deets</Nav.Link>
           <Nav.Link eventKey={2} href="#memes">
             Dank memes
           </Nav.Link>
-        </Nav>
+        </Nav> */}
       </Navbar.Collapse>
     </Navbar>
   )

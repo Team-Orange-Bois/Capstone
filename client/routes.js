@@ -15,7 +15,7 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={GuestHome} />
+        <Route exact path="/" component={BeetMaker2} />
         <Route exact path="/beetmaker" component={BeetMaker} />
         <Route exact path="/beetmaker2" component={BeetMaker2} />
         <Route exact path="/beetdropper" component={DrumMachine} />
