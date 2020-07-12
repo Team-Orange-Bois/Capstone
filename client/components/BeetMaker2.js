@@ -3,7 +3,6 @@ import React, {useState, useEffect} from 'react'
 import * as Tone from 'tone'
 import {Button, Form} from 'react-bootstrap'
 import Tracks from './Tracks'
-import uuid from 'uuid/v4'
 
 Tone.context.latencyHint = 'fastest'
 const woodblock = new Tone.Sampler({
@@ -79,101 +78,60 @@ const cmaj7Oct = new Tone.Sampler({
     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fcmaj7Oct.mp3?alt=media&token=cbf85501-0217-434e-8497-f97625364e9a'
 }).toMaster()
 
-const guitar1 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar1.mp3?alt=media&token=b830cdd5-fe9c-4812-94d1-79932eec7394'
-}).toMaster()
-const guitar2 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar2.mp3?alt=media&token=21b286b6-9f11-4777-a082-d084f85dff03'
-}).toMaster()
-const guitar3 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar3.mp3?alt=media&token=806e6b5a-5287-488c-9806-64c337749f6b'
-}).toMaster()
-const guitar4 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar4.mp3?alt=media&token=7691aebb-710a-42cf-80c4-fc115e565398'
-}).toMaster()
-const guitar5 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar5.mp3?alt=media&token=8dfc29b9-54f3-4bf7-9a52-553f801dd082'
-}).toMaster()
-const guitar6 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar6.mp3?alt=media&token=835d0c0b-78b4-4385-988a-6d96045cc1d4'
-}).toMaster()
-const guitar7 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar7.mp3?alt=media&token=28cce534-173f-4fba-9c1d-fb78780aaba7'
-}).toMaster()
-const guitar8 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar8.mp3?alt=media&token=e9bb46a2-1416-409d-be53-2aa16a0e06c5'
-}).toMaster()
-const guitar9 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar9.mp3?alt=media&token=a8a94c2c-0140-4999-afcb-cf75b275f58b'
-}).toMaster()
-const guitar10 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar10.mp3?alt=media&token=084873f0-d6ca-48cc-8e47-3f9a5507ca56'
-}).toMaster()
-const guitar11 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar11.mp3?alt=media&token=0e41ed79-4c78-46e6-acb5-fb9489ccbdb1'
-}).toMaster()
-const guitar12 = new Tone.Sampler({
-  C3:
-    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/guitar%2Fguitar12.mp3?alt=media&token=0fd1ea8a-bd7a-4161-a8ae-5000ed3da5e8'
-}).toMaster()
-
 let keySounds = {
-  '1': null,
-  '2': null,
-  '3': null,
-  '4': null,
-  '5': null,
-  '6': null,
-  '7': null,
-  '8': null,
-  '9': null,
-  '0': null,
-  '-': null,
-  '=': null,
-  q: kick,
-  w: snare,
-  e: hat,
-  r: chord1,
-  t: chord2,
-  y: chord3,
-  u: chord4,
-  i: chord5,
-  o: null,
-  p: null,
-  '[': null,
-  ']': null,
-  a: guitar2,
-  s: guitar1,
-  d: null,
-  f: cmaj7,
-  g: dmin7,
-  h: emin7,
-  j: fmaj7,
-  k: g7,
-  l: amin7,
-  ';': bmin7b5,
-  "'": cmaj7Oct,
-  z: guitar11,
-  x: guitar12,
-  c: guitar3,
-  v: guitar4,
-  b: guitar5,
-  n: guitar6,
-  m: guitar7,
-  ',': guitar8,
-  '.': guitar9,
-  '/': guitar10
+  numberRow: {
+    '1': null,
+    '2': null,
+    '3': null,
+    '4': null,
+    '5': null,
+    '6': null,
+    '7': null,
+    '8': null,
+    '9': null,
+    '0': null,
+    '-': null,
+    '=': null
+  },
+  qRow: {
+    q: {note: kick, label: 'Kick'},
+    w: {note: snare, label: 'Snare'},
+    e: {note: hat, label: 'Hat'},
+    r: {note: chord1, label: 'Chord 1'},
+    t: {note: chord2, label: 'Chord 2'},
+    y: {note: chord3, label: 'Chord 3'},
+    u: {note: chord4, label: 'Chord 4'},
+    i: {note: chord5, label: 'Chord 5'},
+    o: null,
+    p: null,
+    '[': null,
+    ']': null
+  },
+  aRow: {
+    a: null,
+    s: null,
+    d: null,
+    f: {note: cmaj7, label: 'C Maj 7'},
+    g: {note: dmin7, label: 'D Min 7'},
+    h: {note: emin7, label: 'E Min 7'},
+    j: {note: fmaj7, label: 'F Maj 7'},
+    k: {note: g7, label: 'G7'},
+    l: {note: amin7, label: 'A Min 7'},
+    ';': {note: bmin7b5, label: 'B Min 7'},
+    "'": {note: cmaj7Oct, label: 'C Maj 70ct'}
+  },
+  zRow: {
+    z: null,
+    x: null,
+    c: null,
+    v: null,
+    b: null,
+    n: null,
+    m: null,
+    ',': null,
+    '.': null,
+    '/': null
+  }
 }
 
 let metronomeOn = false
@@ -206,10 +164,11 @@ export default function BeetMaker2() {
     parts = new Tone.Part(beatLoop, samplerObj.samples).start(0)
   }
 
-  const handleKeyDown = function(identifier) {
-    let button = document.getElementById(identifier)
+  const handleKeyDown = (row, identifier) => {
+    const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
-    if (!isPlaying) keySounds[identifier].triggerAttackRelease('C3', '1m')
+
+    keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
 
     // find the current transport time
     let beat = Tone.Transport.position.split(':')[1]
@@ -240,8 +199,10 @@ export default function BeetMaker2() {
     const timing = `0:${beat}:${sixteenths}`
 
     //ensure note currently does not reside within the same beat, to prevent stacking
+
     const filteredNotes = samplerObj.samples.filter(
-      item => item.note === keySounds[identifier] && item.time === timing
+      item =>
+        item.note === keySounds[row][identifier].note && item.time === timing
     )
 
     if (!filteredNotes.length && isPlaying) {
@@ -252,16 +213,22 @@ export default function BeetMaker2() {
 
       samplerObj.samples = [
         ...samplerObj.samples,
-        {time: timing, tone: 'C3', note: keySounds[identifier]}
+        {
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note
+        }
       ]
 
       setSamplerObj({
         ...samplerObj,
         samples: [...samplerObj.samples]
       })
-
-      console.log('BEETMAKER2 SAMPLES: ', samplerObj.samples)
-      parts.add({time: timing, tone: 'C3', note: keySounds[identifier]})
+      parts.add({
+        time: timing,
+        tone: 'C3',
+        note: keySounds[row][identifier].note
+      })
     }
   }
   function stopLoop() {
@@ -286,57 +253,66 @@ export default function BeetMaker2() {
     Tone.Transport.bpm.value = value
   }
 
-  const handleKeyUp = identifier => {
-    if (keySounds[identifier]) {
-      const button = document.getElementById(identifier)
-      button.setAttribute('class', 'butts btn btn-primary')
-    }
+  const handleKeyUp = (row, identifier) => {
+    const button = document.getElementById(identifier)
+    button.setAttribute('class', 'butts btn btn-primary')
   }
 
   document.addEventListener('keydown', e => {
-    if (keySounds[e.key] && !e.repeat) handleKeyDown(e.key)
-  })
-  document.addEventListener('keyup', e => {
-    if (keySounds[e.key]) handleKeyUp(e.key)
+    Object.keys(keySounds).forEach(key => {
+      if (keySounds[key][e.key]) {
+        handleKeyDown(key, e.key)
+      }
+    })
   })
 
+  document.addEventListener('keyup', e => {
+    Object.keys(keySounds).forEach(key => {
+      if (keySounds[key][e.key]) {
+        handleKeyUp(key, e.key)
+      }
+    })
+  })
+
+  const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
+  let rowIndex = -1
+  const buttonClasses = []
+  let buttonIndex = -1
+
   return (
-    <div
-      className="outercontainer"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        backgroundColor: '#490769',
-        height: '100vh'
-      }}
-    >
+    <div className="outercontainer">
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
-      <div
-        className="dropzoneContainer draggable-dropzone--occupied"
-        style={{
-          backgroundColor: '#490769',
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          borderRadius: '2px',
-          flexWrap: 'wrap'
-        }}
-      >
-        {Object.keys(keySounds).map(key => {
-          return (
-            <div key={key} className="">
-              <Button
-                id={key}
-                className="butts sample"
-                onMouseDown={e => handleKeyDown(e.target.id)}
-                onMouseUp={e => handleKeyUp(e.target.id)}
-              >
-                press {key}
-              </Button>
-            </div>
-          )
-        })}
+      <div className="keyboard-wrap">
+        <div className="keyboard">
+          {Object.keys(keySounds).map(key => {
+            rowIndex++
+            return (
+              <div key={key} className={rowClasses[rowIndex]}>
+                {Object.keys(keySounds[key]).map(button => {
+                  buttonIndex++
+                  return (
+                    <div
+                      key={button}
+                      className={`${buttonClasses[buttonIndex]}`}
+                    >
+                      <Button
+                        id={button}
+                        key={button}
+                        className="butts sample"
+                        onMouseDown={e => handleKeyDown(key, e.target.id)}
+                        onMouseUp={e => handleKeyUp(key, e.target.id)}
+                      >
+                        {keySounds[key][button]
+                          ? `${keySounds[key][button].label}`
+                          : `Press ${button}`}
+                      </Button>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
       </div>
       <Button onClick={() => startLoop()} className="butts">
         Play loop
