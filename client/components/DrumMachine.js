@@ -77,7 +77,6 @@ export default function DrumMachine() {
   }
   function changeVolume(value) {
     Tone.Master.volume.value = value
-    console.log(Tone.Master.volume.value)
   }
 
   function changeTempo(value) {

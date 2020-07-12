@@ -14,7 +14,7 @@ export default function GuestHome() {
       }}
     >
       <h1 style={{color: '#FE1BCB'}}>Welcome!</h1>
-      <Carousel>
+      <Carousel fade={true}>
         <Carousel.Item>
           <Nav.Link href="/beetmaker">
             <img
