@@ -3,13 +3,19 @@ import Keyboard from 'react-simple-keyboard'
 import {defaultBoard} from './toneSamples'
 import DrumMachine from './DrumMachine'
 
+let keySounds = defaultBoard
+
 export default function BeetMaker() {
-  const handleKeyDown = identifier => {
-    keySounds[identifier].triggerAttackRelease('C3', '1m')
+  const handleKeyDown = (row, identifier) => {
+    keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
   }
 
   document.addEventListener('keydown', e => {
-    if (keySounds[e.key] && !e.repeat) handleKeyDown(e.key)
+    Object.keys(keySounds).forEach(key => {
+      if (keySounds[key][e.key]) {
+        handleKeyDown(key, e.key)
+      }
+    })
   })
 
   return (
@@ -42,51 +48,51 @@ export default function BeetMaker() {
         >
           <Keyboard
             display={{
-              '1': null,
-              '2': null,
-              '3': null,
-              '4': null,
-              '5': null,
-              '6': null,
-              '7': null,
-              '8': null,
-              '9': null,
-              '0': null,
-              '-': null,
-              '=': null,
-              q: 'kick',
-              w: 'snare',
-              e: 'hat',
-              r: 'chord1',
-              t: 'chord2',
-              y: 'chord3',
-              u: 'chord4',
-              i: 'chord5',
-              o: null,
-              p: null,
-              '[': null,
-              ']': null,
-              a: 'guitar2',
-              s: 'guitar1',
-              d: null,
-              f: 'cmaj7',
-              g: 'dmin7',
-              h: 'emin7',
-              j: 'fmaj7',
-              k: 'g7',
-              l: 'amin7',
-              ';': 'bmin7b5',
-              "'": 'cmaj7Oct',
-              z: 'guitar11',
-              x: 'guitar12',
-              c: 'guitar3',
-              v: 'guitar4',
-              b: 'guitar5',
-              n: 'guitar6',
-              m: 'guitar7',
-              ',': 'guitar8',
-              '.': 'guitar9',
-              '/': 'guitar10'
+              '1': 'kick',
+              '2': 'snare',
+              '3': 'closedHat',
+              '4': 'lit',
+              '5': 'sick',
+              '6': 'hotDamn',
+              '7': 'hahaha',
+              '8': 'wow',
+              '9': 'yeah',
+              '0': 'youGotIt',
+              '-': 'bigOof',
+              '=': 'iCantSwim',
+              q: 'badBitch',
+              w: 'lettuceTurnipDaBeet',
+              e: 'itsTime',
+              r: 'turnip',
+              t: 'daBeat',
+              y: 'flowerPower',
+              u: 'holyGuac',
+              i: 'wikiWiki',
+              o: 'oof',
+              p: 'skrrt',
+              '[': 'bonkers',
+              ']': 'hummus',
+              a: 'guitarGroove1',
+              s: 'guitarGroove2',
+              d: 'guitarGroove3',
+              f: 'guitarLick1',
+              g: 'guitarLick2',
+              h: 'guitarLick3',
+              j: 'guitarLick4',
+              k: 'guitarLick5',
+              l: 'guitarLick6',
+              ';': 'guitarLick7',
+              "'": 'guitarLick8',
+              z: 'keysCmaj7',
+              x: 'keysDmin7',
+              c: 'keysEmin7',
+              v: 'keysFmaj7',
+              b: 'keysG7',
+              n: 'keysAmin7',
+              m: 'keysBm7b5',
+              ',': 'keysCmaj7Oct',
+              '.': 'minRoll',
+              '/': null
             }}
             style={{
               backgroundColor: '#35054C',
