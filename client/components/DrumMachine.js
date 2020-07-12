@@ -46,25 +46,34 @@ export default function DrumMachine() {
 
   Tone.context.latencyHint = 'fastest'
 
-  let isPlaying = false
+  let loopKick
+  let loopSnare
+  let loopHat
+  let areDrumsPlaying = false
   function loopDrums() {
-    if (isPlaying) {
+    if (areDrumsPlaying) {
       Tone.Transport.cancel()
+      loopKick.cancel().stop()
+      loopSnare.cancel().stop()
+      loopHat.cancel().stop()
     }
-    isPlaying = true
-    let loopKick = new Tone.Loop(kickFunc, Pattern.kick)
-    let loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
-    let loopHat = new Tone.Loop(hatFunc, Pattern.hat)
+    areDrumsPlaying = true
     Tone.Transport.start()
+    loopKick = new Tone.Loop(kickFunc, Pattern.kick)
+    loopSnare = new Tone.Loop(snareFunc, Pattern.snare)
+    loopHat = new Tone.Loop(hatFunc, Pattern.hat)
     loopKick.start(0)
     loopSnare.start(0)
     loopHat.start(0)
   }
 
   function stopLoop() {
-    isPlaying = false
-
+    areDrumsPlaying = false
+    Tone.Transport.cancel()
     Tone.Transport.stop()
+    loopKick.cancel().stop()
+    loopSnare.cancel().stop()
+    loopHat.cancel().stop()
   }
   function changeVolume(value) {
     Tone.Master.volume.value = value
@@ -77,15 +86,12 @@ export default function DrumMachine() {
 
   function changePattern(target) {
     Pattern[target.name] = target.value
-    console.log(Pattern)
-    console.log('isPlaying: ', isPlaying)
-    if (isPlaying) {
+    if (areDrumsPlaying) {
       loopDrums()
     }
   }
 
   function handleButtonDown(e) {
-    console.log('clicked')
     const button = document.getElementById(e.target.id)
     button.setAttribute('class', 'butts btn active-button')
   }
