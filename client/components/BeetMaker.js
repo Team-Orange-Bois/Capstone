@@ -1,6 +1,6 @@
 import React from 'react'
 import Keyboard from 'react-simple-keyboard'
-import {keySounds} from './toneSamples'
+import {defaultBoard} from './toneSamples'
 import DrumMachine from './DrumMachine'
 
 export default function BeetMaker() {
