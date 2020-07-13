@@ -204,10 +204,13 @@ export default function Tracks(props) {
                   flexDirection: 'column',
                   alignItems: 'center'
                 }}
-                key={columnId}
+                key={columnId + 'column'}
               >
                 <div>
-                  <Droppable droppableId={columnId} key={columnId}>
+                  <Droppable
+                    droppableId={columnId + 'column'}
+                    key={columnId + 'column'}
+                  >
                     {(provided, snapshot) => {
                       return (
                         <div
@@ -230,7 +233,7 @@ export default function Tracks(props) {
                             return (
                               <Draggable
                                 key={`${[uuid()]} ${item.time}`}
-                                draggableId={`${[uuid()]} ${item.time}`}
+                                draggableId={`${[uuid()]}`}
                                 index={index}
                               >
                                 {(provided, snapshot) => {

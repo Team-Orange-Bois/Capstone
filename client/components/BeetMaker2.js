@@ -12,149 +12,37 @@ const woodblock = new Tone.Sampler({
 }).toMaster()
 
 const keySounds = defaultBoard
-
-// const kick = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
-// }).toMaster()
-// const snare = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
-// }).toMaster()
-// const hat = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
-// }).toMaster()
-// const chord1 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord1.mp3?alt=media&token=57981212-6cec-4d07-989e-a0d53b8aa39b'
-// }).toMaster()
-// const chord2 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord2.mp3?alt=media&token=e2dfac36-7c86-4d8f-916b-d1f49f1068c1'
-// }).toMaster()
-// const chord3 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fchord3.mp3?alt=media&token=6bbb174c-b951-4eed-ae84-de4dd65535da'
-// }).toMaster()
-
-// const chord4 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2FdarkRoll.mp3?alt=media&token=20112326-6e5c-48c2-8dd5-ae4fd7ada4a7'
-// }).toMaster()
-
-// const chord5 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2FhappyRoll.mp3?alt=media&token=757b53a4-30e7-4ad7-991e-42d83c6cc0b8'
-// }).toMaster()
-
-// const cmaj7 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fcmaj7.mp3?alt=media&token=a5c2533d-de33-4cc0-b986-25a13caea4d8'
-// }).toMaster()
-// const dmin7 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fdmin7.mp3?alt=media&token=9f5e426c-5728-4b53-8de6-d455033055a4'
-// }).toMaster()
-// const emin7 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Femin7.mp3?alt=media&token=4fa1c63d-2505-430e-8f9f-e4fca5393dd4'
-// }).toMaster()
-// const fmaj7 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Ffmaj7.mp3?alt=media&token=27eaee4f-b96a-4819-8c49-b7d31cff2f04'
-// }).toMaster()
-// const g7 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fg7.mp3?alt=media&token=f39ab8b3-1628-4090-b136-6ce3f1f32313'
-// }).toMaster()
-// const amin7 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Famin7.mp3?alt=media&token=98a0078e-5b4d-49f3-810e-aae19b4f6063'
-// }).toMaster()
-// const bmin7b5 = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fbdim7.mp3?alt=media&token=afc754a8-b1c7-4ca5-a911-1e641ca81d19'
-// }).toMaster()
-// const cmaj7Oct = new Tone.Sampler({
-//   C3:
-//     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/keys%2Fcmaj7Oct.mp3?alt=media&token=cbf85501-0217-434e-8497-f97625364e9a'
-// }).toMaster()
-
-// let keySounds = {
-//   numberRow: {
-//     '1': null,
-//     '2': null,
-//     '3': null,
-//     '4': null,
-//     '5': null,
-//     '6': null,
-//     '7': null,
-//     '8': null,
-//     '9': null,
-//     '0': null,
-//     '-': null,
-//     '=': null
-//   },
-//   qRow: {
-//     q: kick,
-//     w: snare,
-//     e: hat,
-//     r: chord1,
-//     t: chord2,
-//     y: chord3,
-//     u: chord4,
-//     i: chord5,
-//     o: null,
-//     p: null,
-//     '[': null,
-//     ']': null
-//   },
-//   aRow: {
-//     a: null,
-//     s: null,
-//     d: null,
-//     f: cmaj7,
-//     g: dmin7,
-//     h: emin7,
-//     j: fmaj7,
-//     k: g7,
-//     l: amin7,
-//     ';': bmin7b5,
-//     "'": cmaj7Oct
-//   },
-//   zRow: {
-//     z: null,
-//     x: null,
-//     c: null,
-//     v: null,
-//     b: null,
-//     n: null,
-//     m: null,
-//     ',': null,
-//     '.': null,
-//     '/': null
-//   }
-// }
+let parts
+let metronomeOn = false
+let isPlaying = false
+let firstRender
 
 const samples = {samples: []}
 
-//Loop initialization. Activates on button click
+const metronome = new Tone.Event(function(time) {
+  woodblock.triggerAttackRelease('C4', '4n')
+  woodblock.triggerAttackRelease('C3', '4n', '+4n')
+  woodblock.triggerAttackRelease('C3', '4n', '@2n')
+  woodblock.triggerAttackRelease('C3', '4n', '@2n.')
+})
+metronome.loop = true
+metronome.loopEnd = '1m'
+
+const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
+let rowIndex = -1
+let buttonIndex = -1
 
 export default function BeetMaker2() {
   const [samplerObj, setSamplerObj] = useState(samples)
 
-  // useEffect(() => {
-  //   console.log('updated samplerArr...hopefully')
-  // }, [samplerObj.samples])
+  useEffect(() => {
+    rowIndex = -1
+    buttonIndex = -1
+  }, [samplerObj])
 
   const beatLoop = function(time, value) {
     value.note.triggerAttackRelease(value.tone)
   }
-
-  let metronomeOn = false
-  let parts
-  let isPlaying = false
 
   function startLoop() {
     isPlaying = true
@@ -222,10 +110,10 @@ export default function BeetMaker2() {
         }
       ]
 
-      setSamplerObj({
-        ...samplerObj,
-        samples: [...samplerObj.samples]
-      })
+      // setSamplerObj({
+      //   ...samplerObj,
+      //   samples: [...samplerObj.samples]
+      // })
       parts.add({
         time: timing,
         tone: 'C3',
@@ -236,16 +124,8 @@ export default function BeetMaker2() {
   function stopLoop() {
     Tone.Transport.cancel()
     Tone.Transport.stop()
+    isPlaying = false
   }
-
-  const metronome = new Tone.Event(function(time) {
-    woodblock.triggerAttackRelease('C4', '4n')
-    woodblock.triggerAttackRelease('C3', '4n', '+4n')
-    woodblock.triggerAttackRelease('C3', '4n', '@2n')
-    woodblock.triggerAttackRelease('C3', '4n', '@2n.')
-  })
-  metronome.loop = true
-  metronome.loopEnd = '1m'
 
   function changeVolume(value) {
     Tone.Master.volume.value = value
@@ -276,11 +156,6 @@ export default function BeetMaker2() {
     })
   })
 
-  const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
-  let rowIndex = -1
-  const buttonClasses = []
-  let buttonIndex = -1
-
   return (
     <div className="outercontainer">
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
@@ -293,10 +168,7 @@ export default function BeetMaker2() {
                 {Object.keys(keySounds[key]).map(button => {
                   buttonIndex++
                   return (
-                    <div
-                      key={button}
-                      className={`${buttonClasses[buttonIndex]}`}
-                    >
+                    <div key={button} id={`${buttonIndex}`}>
                       <Button
                         id={button}
                         key={button}
@@ -304,9 +176,9 @@ export default function BeetMaker2() {
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
-                        {keySounds[key][button]
-                          ? `${keySounds[key][button].label}`
-                          : `Press ${button}`}
+                        {button === 'k0'
+                          ? `${keySounds[key][button].label}\n(0)`
+                          : `${keySounds[key][button].label}\n(${button})`}
                       </Button>
                     </div>
                   )
@@ -318,7 +190,14 @@ export default function BeetMaker2() {
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <div>
-          <Button onClick={() => startLoop()} className="butts">
+          <Button
+            onClick={() => {
+              rowIndex = -1
+              buttonIndex = -1
+              startLoop()
+            }}
+            className="butts"
+          >
             Play loop
           </Button>
           <Button onClick={() => stopLoop()} className="butts">
@@ -327,7 +206,6 @@ export default function BeetMaker2() {
           <Button
             onClick={() => {
               metronomeOn = !metronomeOn
-              console.log(metronomeOn)
 
               if (metronomeOn) {
                 metronome.start(0)
@@ -348,7 +226,7 @@ export default function BeetMaker2() {
               <Form.Control
                 name="Volume"
                 type="range"
-                min="-50"
+                min="-20"
                 max="5"
                 id="volume"
                 list="volTicks"
