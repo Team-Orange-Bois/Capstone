@@ -20,13 +20,15 @@ let firstRender
 const samples = {samples: []}
 
 const metronome = new Tone.Event(function(time) {
+  const transportTime = Tone.Time(time)
+    .toBarsBeatsSixteenths()
+    .split(':')[0]
+
   woodblock.triggerAttackRelease('C4', '4n')
   woodblock.triggerAttackRelease('C3', '4n', '+4n')
   woodblock.triggerAttackRelease('C3', '4n', '@2n')
-  woodblock.triggerAttackRelease('C3', '4n', '@2n.')
+  woodblock.triggerAttackRelease('C3', '4n', '+2n.')
 })
-metronome.loop = 4
-metronome.loopEnd = '1m'
 
 const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
 let rowIndex = -1
@@ -231,6 +233,8 @@ export default function BeetMaker2() {
 
               if (metronomeOn) {
                 metronome.start(0)
+                metronome.loop = true
+                metronome.loopEnd = '1m'
               } else {
                 metronome.cancel()
                 metronome.stop()
