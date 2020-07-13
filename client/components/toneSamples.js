@@ -249,7 +249,7 @@ export const defaultBoard = {
     '7': {note: hahaha, label: 'Hehehehe'},
     '8': {note: wow, label: 'Wow!'},
     '9': {note: yeah, label: 'Yeah'},
-    '0': {note: youGotIt, label: 'You got it!'},
+    k0: {note: youGotIt, label: 'You got it!'},
     '-': {note: bigOof, label: 'Big Oof'},
     '=': {note: iCantSwim, label: 'Swim'}
   },
@@ -290,6 +290,6 @@ export const defaultBoard = {
     m: {note: keysBm7b5, label: 'keysBm7b5'},
     ',': {note: keysCmaj7Oct, label: 'keysCmaj7Oct'},
     '.': {note: minRoll, label: 'minRoll'},
-    '/': null
+    '/': {note: ohYeah, label: 'Oh Yeah'}
   }
 }
