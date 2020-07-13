@@ -7,13 +7,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 export function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" id="navbar" bg="dark" variant="dark">
-      <Navbar.Brand href="/beetmaker2">Siq Beets</Navbar.Brand>
+      <Navbar.Brand href="/">Siq Beets</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/beetmaker">Beet Maker Alpha</Nav.Link>
           <Nav.Link href="/beetmaker2">Beet Maker Beta</Nav.Link>
-          <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link>
+          {/* <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link> */}
           {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
