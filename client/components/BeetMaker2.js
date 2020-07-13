@@ -20,10 +20,6 @@ let firstRender
 const samples = {samples: []}
 
 const metronome = new Tone.Event(function(time) {
-  const transportTime = Tone.Time(time)
-    .toBarsBeatsSixteenths()
-    .split(':')[0]
-
   woodblock.triggerAttackRelease('C4', '4n')
   woodblock.triggerAttackRelease('C3', '4n', '+4n')
   woodblock.triggerAttackRelease('C3', '4n', '@2n')
@@ -67,14 +63,14 @@ export default function BeetMaker2() {
     let beat = timingArr[1]
 
     // //convert current transport time sixteenths into nearest 32n for timing
-    let sixteenths
+    let sixteenths = timingArr[2]
 
-    if (parseInt(sixteenths, 10) >= 1 && parseInt(sixteenths, 10) <= 2) {
+    if (parseFloat(sixteenths) >= 1 && parseFloat(sixteenths) <= 2) {
       sixteenths = '2'
-    } else if (parseInt(sixteenths, 10) >= 3) {
+    } else if (parseFloat(sixteenths) >= 3) {
       beat = (parseFloat(beat) + 1).toString()
       sixteenths = '0'
-    } else if (parseInt(sixteenths, 10) > 2 && parseInt(sixteenths, 10) < 3) {
+    } else if (parseFloat(sixteenths) > 2 && parseFloat(sixteenths) < 3) {
       sixteenths = '2'
       keySounds[row][identifier].note.triggerAttackRelease('C3')
     } else {
@@ -91,7 +87,7 @@ export default function BeetMaker2() {
       measure = '0'
     }
 
-    console.log(Tone.Transport.position)
+    console.log(isRecording)
 
     const timing = `${measure}:${beat}:${sixteenths}`
 
@@ -107,6 +103,8 @@ export default function BeetMaker2() {
       // const tempArrOfSamples = [
       //   {time: timing, tone: 'C3', note: keySounds[identifier]}
       // ]
+
+      console.log(timing)
 
       samplerObj.samples = [
         ...samplerObj.samples,
