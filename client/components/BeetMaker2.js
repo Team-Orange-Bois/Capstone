@@ -22,10 +22,8 @@ const metronome = new Tone.Event(function(time) {
   woodblock.triggerAttackRelease('C4', '4n')
   woodblock.triggerAttackRelease('C3', '4n', '+4n')
   woodblock.triggerAttackRelease('C3', '4n', '@2n')
-  woodblock.triggerAttackRelease('C3', '4n', '@2n.')
+  woodblock.triggerAttackRelease('C3', '4n', '+2n.')
 })
-metronome.loop = 4
-metronome.loopEnd = '1m'
 
 const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
 let rowIndex = -1
@@ -42,6 +40,8 @@ export default function BeetMaker2() {
     //metronome
     if (metronomeStatus) {
       metronome.start(0)
+      metronome.loop = true
+      metronome.loopEnd = '1m'
     } else {
       metronome.cancel()
       metronome.stop()
@@ -78,14 +78,17 @@ export default function BeetMaker2() {
     let beat = timingArr[1]
 
     // //convert current transport time sixteenths into nearest 32n for timing
-    let sixteenths
+    let sixteenths = timingArr[2]
 
-    if (parseInt(sixteenths, 10) >= 1 && parseInt(sixteenths, 10) <= 2) {
+    if (parseFloat(sixteenths, 10) >= 1 && parseFloat(sixteenths, 10) <= 2) {
       sixteenths = '2'
-    } else if (parseInt(sixteenths, 10) >= 3) {
+    } else if (parseFloat(sixteenths, 10) >= 3) {
       beat = (parseFloat(beat) + 1).toString()
       sixteenths = '0'
-    } else if (parseInt(sixteenths, 10) > 2 && parseInt(sixteenths, 10) < 3) {
+    } else if (
+      parseFloat(sixteenths, 10) > 2 &&
+      parseFloat(sixteenths, 10) < 3
+    ) {
       sixteenths = '2'
       keySounds[row][identifier].note.triggerAttackRelease('C3')
     } else {
