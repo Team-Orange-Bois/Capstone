@@ -12,10 +12,9 @@ const woodblock = new Tone.Sampler({
 }).toMaster()
 
 const keySounds = defaultBoard
-let parts
-let metronomeOn = false
-let isRecording = false
-let firstRender
+// let parts
+// let metronomeOn = false
+// let isPlaying = false
 
 const samples = {samples: []}
 
@@ -34,23 +33,37 @@ let buttonIndex = -1
 
 export default function BeetMaker2() {
   const [samplerObj, setSamplerObj] = useState(samples)
+  const [metronomeStatus, setMetronomeStatus] = useState(false)
+  const [playStatus, setPlayStatus] = useState(false)
+  const [recordStatus, setRecordStatus] = useState(false)
+  const [parts, setParts] = useState({})
 
   useEffect(() => {
+    //metronome
+    if (metronomeStatus) {
+      metronome.start(0)
+    } else {
+      metronome.cancel()
+      metronome.stop()
+    }
+
     rowIndex = -1
     buttonIndex = -1
-  }, [samplerObj])
+  }, [samplerObj, metronomeStatus, playStatus, recordStatus, parts])
 
   const beatLoop = function(time, value) {
     value.note.triggerAttackRelease(value.tone)
   }
 
   function startLoop() {
+    setPlayStatus(true)
     Tone.Transport.cancel()
     Tone.Transport.stop()
     Tone.Transport.loop = true
     Tone.Transport.loopEnd = '4m'
     Tone.Transport.start()
-    parts = new Tone.Part(beatLoop, samplerObj.samples).start(0)
+    let newParts = new Tone.Part(beatLoop, samplerObj.samples).start(0)
+    setParts(newParts)
   }
 
   const handleKeyDown = (row, identifier) => {
@@ -100,12 +113,7 @@ export default function BeetMaker2() {
         item.note === keySounds[row][identifier].note && item.time === timing
     )
 
-    if (!filteredNotes.length && isRecording) {
-      // setSamplerArr(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
-      // const tempArrOfSamples = [
-      //   {time: timing, tone: 'C3', note: keySounds[identifier]}
-      // ]
-
+    if (!filteredNotes.length && recordStatus) {
       samplerObj.samples = [
         ...samplerObj.samples,
         {
@@ -115,21 +123,23 @@ export default function BeetMaker2() {
         }
       ]
 
-      // setSamplerObj({
-      //   ...samplerObj,
-      //   samples: [...samplerObj.samples]
-      // })
+      setSamplerObj({
+        ...samplerObj,
+        samples: [...samplerObj.samples]
+      })
       parts.add({
         time: timing,
         tone: 'C3',
         note: keySounds[row][identifier].note
       })
+      setParts(parts)
     }
   }
   function stopLoop() {
     Tone.Transport.cancel()
     Tone.Transport.stop()
-    isRecording = false
+    setPlayStatus(false)
+    setRecordStatus(false)
   }
 
   function changeVolume(value) {
@@ -205,7 +215,7 @@ export default function BeetMaker2() {
           </Button>
           <Button
             onClick={() => {
-              isRecording = !isRecording
+              setRecordStatus(!recordStatus)
               startLoop()
             }}
             className="butts"
@@ -220,6 +230,7 @@ export default function BeetMaker2() {
               samplerObj.samples = []
               parts.removeAll()
               stopLoop()
+              setParts(parts)
             }}
             className="butts"
           >
@@ -227,13 +238,8 @@ export default function BeetMaker2() {
           </Button>
           <Button
             onClick={() => {
-              metronomeOn = !metronomeOn
-
-              if (metronomeOn) {
-                metronome.start(0)
-              } else {
-                metronome.cancel()
-                metronome.stop()
+              if (playStatus) {
+                setMetronomeStatus(!metronomeStatus)
               }
             }}
             className="butts"
@@ -285,7 +291,7 @@ export default function BeetMaker2() {
           </Form>
         </div>
       </div>
-      <Tracks samplerObj={samplerObj} setSamples={setSamplerObj} />
+      {/* <Tracks samplerObj={samplerObj} setSamples={setSamplerObj} /> */}
     </div>
   )
 }
