@@ -39,7 +39,14 @@ export default function BeetMaker2() {
   const [parts, setParts] = useState({})
 
   useEffect(() => {
-    console.log('set row and button indexes to -1')
+    //metronome
+    if (metronomeStatus) {
+      metronome.start(0)
+    } else {
+      metronome.cancel()
+      metronome.stop()
+    }
+
     rowIndex = -1
     buttonIndex = -1
   }, [samplerObj, metronomeStatus, playStatus, recordStatus, parts])
@@ -110,10 +117,10 @@ export default function BeetMaker2() {
         }
       ]
 
-      // setSamplerObj({
-      //   ...samplerObj,
-      //   samples: [...samplerObj.samples]
-      // })
+      setSamplerObj({
+        ...samplerObj,
+        samples: [...samplerObj.samples]
+      })
       parts.add({
         time: timing,
         tone: 'C3',
@@ -206,22 +213,8 @@ export default function BeetMaker2() {
           </Button>
           <Button
             onClick={() => {
-              // metronomeOn = !metronomeOn
-
-              // if (metronomeOn) {
-              //   metronome.start(0)
-              // } else {
-              //   metronome.cancel()
-              //   metronome.stop()
-              // }
-
-              setMetronomeStatus(!metronomeStatus)
-
-              if (metronomeStatus) {
-                metronome.start(0)
-              } else {
-                metronome.cancel()
-                metronome.stop()
+              if (playStatus) {
+                setMetronomeStatus(!metronomeStatus)
               }
             }}
             className="butts"
