@@ -42,7 +42,7 @@ export default function GuestHome() {
             </Carousel.Caption>
           </Nav.Link>
         </Carousel.Item>
-        <Carousel.Item>
+        {/* <Carousel.Item>
           <Nav.Link href="/beetdropper">
             <img
               className="d-block w-100"
@@ -55,7 +55,7 @@ export default function GuestHome() {
               <p>Drop siq beets</p>
             </Carousel.Caption>
           </Nav.Link>
-        </Carousel.Item>
+        </Carousel.Item> */}
       </Carousel>
     </div>
   )
