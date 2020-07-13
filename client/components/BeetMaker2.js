@@ -14,7 +14,7 @@ const woodblock = new Tone.Sampler({
 const keySounds = defaultBoard
 let parts
 let metronomeOn = false
-let isPlaying = false
+let isRecording = false
 let firstRender
 
 const samples = {samples: []}
@@ -25,7 +25,7 @@ const metronome = new Tone.Event(function(time) {
   woodblock.triggerAttackRelease('C3', '4n', '@2n')
   woodblock.triggerAttackRelease('C3', '4n', '@2n.')
 })
-metronome.loop = true
+metronome.loop = 4
 metronome.loopEnd = '1m'
 
 const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
@@ -45,11 +45,10 @@ export default function BeetMaker2() {
   }
 
   function startLoop() {
-    isPlaying = true
     Tone.Transport.cancel()
     Tone.Transport.stop()
     Tone.Transport.loop = true
-    Tone.Transport.loopEnd = '1m'
+    Tone.Transport.loopEnd = '4m'
     Tone.Transport.start()
     parts = new Tone.Part(beatLoop, samplerObj.samples).start(0)
   }
@@ -58,35 +57,41 @@ export default function BeetMaker2() {
     const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
 
-    keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
+    const timingArr = Tone.Transport.position.split(':')
+
+    let measure = timingArr[0]
 
     // find the current transport time
-    let beat = Tone.Transport.position.split(':')[1]
+    let beat = timingArr[1]
 
     // //convert current transport time sixteenths into nearest 32n for timing
     let sixteenths
 
-    if (
-      parseInt(Tone.Transport.position.split(':')[2], 10) > 0 &&
-      parseInt(Tone.Transport.position.split(':')[2], 10) <= 2
-    ) {
+    if (parseInt(sixteenths, 10) >= 1 && parseInt(sixteenths, 10) <= 2) {
       sixteenths = '2'
-    } else if (parseInt(Tone.Transport.position.split(':')[2], 10) > 2) {
-      sixteenths = '4'
-    } else {
-      sixteenths = '0'
-    }
-
-    if (sixteenths === '4') {
+    } else if (parseInt(sixteenths, 10) >= 3) {
       beat = (parseFloat(beat) + 1).toString()
       sixteenths = '0'
+    } else if (parseInt(sixteenths, 10) > 2 && parseInt(sixteenths, 10) < 3) {
+      sixteenths = '2'
+      keySounds[row][identifier].note.triggerAttackRelease('C3')
+    } else {
+      sixteenths = '0'
+      keySounds[row][identifier].note.triggerAttackRelease('C3')
     }
 
     if (beat === '4') {
+      measure = (parseInt(measure, 10) + 1).toString()
       beat = '0'
     }
 
-    const timing = `0:${beat}:${sixteenths}`
+    if (measure === '4') {
+      measure = '0'
+    }
+
+    console.log(Tone.Transport.position)
+
+    const timing = `${measure}:${beat}:${sixteenths}`
 
     //ensure note currently does not reside within the same beat, to prevent stacking
 
@@ -95,7 +100,7 @@ export default function BeetMaker2() {
         item.note === keySounds[row][identifier].note && item.time === timing
     )
 
-    if (!filteredNotes.length && isPlaying) {
+    if (!filteredNotes.length && isRecording) {
       // setSamplerArr(samplerArr.push({time: timing, tone: 'C3', note: keySounds[identifier]}))
       // const tempArrOfSamples = [
       //   {time: timing, tone: 'C3', note: keySounds[identifier]}
@@ -124,7 +129,7 @@ export default function BeetMaker2() {
   function stopLoop() {
     Tone.Transport.cancel()
     Tone.Transport.stop()
-    isPlaying = false
+    isRecording = false
   }
 
   function changeVolume(value) {
@@ -191,17 +196,34 @@ export default function BeetMaker2() {
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <div>
           <Button
+            className="butts"
             onClick={() => {
-              rowIndex = -1
-              buttonIndex = -1
+              startLoop()
+            }}
+          >
+            <i className="material-icons">play_arrow</i>
+          </Button>
+          <Button
+            onClick={() => {
+              isRecording = !isRecording
               startLoop()
             }}
             className="butts"
           >
-            Play loop
+            <i className="material-icons">fiber_manual_record</i>
           </Button>
           <Button onClick={() => stopLoop()} className="butts">
-            Stop loop
+            <i className="material-icons">stop</i>
+          </Button>
+          <Button
+            onClick={() => {
+              samplerObj.samples = []
+              parts.removeAll()
+              stopLoop()
+            }}
+            className="butts"
+          >
+            Clear Loop
           </Button>
           <Button
             onClick={() => {
