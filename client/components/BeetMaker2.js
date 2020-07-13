@@ -137,8 +137,6 @@ const keySounds = defaultBoard
 //   }
 // }
 
-let metronomeOn = false
-
 const samples = {samples: []}
 
 //Loop initialization. Activates on button click
@@ -146,14 +144,15 @@ const samples = {samples: []}
 export default function BeetMaker2() {
   const [samplerObj, setSamplerObj] = useState(samples)
 
-  useEffect(() => {
-    console.log('updated samplerArr...hopefully')
-  }, [samplerObj.samples])
+  // useEffect(() => {
+  //   console.log('updated samplerArr...hopefully')
+  // }, [samplerObj.samples])
 
   const beatLoop = function(time, value) {
     value.note.triggerAttackRelease(value.tone)
   }
 
+  let metronomeOn = false
   let parts
   let isPlaying = false
 
@@ -317,68 +316,75 @@ export default function BeetMaker2() {
           })}
         </div>
       </div>
-      <Button onClick={() => startLoop()} className="butts">
-        Play loop
-      </Button>
-      <Button onClick={() => stopLoop()} className="butts">
-        Stop loop
-      </Button>
-      <Button
-        onClick={() => {
-          metronomeOn = !metronomeOn
+      <div style={{display: 'flex', flexDirection: 'row'}}>
+        <div>
+          <Button onClick={() => startLoop()} className="butts">
+            Play loop
+          </Button>
+          <Button onClick={() => stopLoop()} className="butts">
+            Stop loop
+          </Button>
+          <Button
+            onClick={() => {
+              metronomeOn = !metronomeOn
+              console.log(metronomeOn)
 
-          if (metronomeOn) {
-            metronome.start(0)
-          } else {
-            metronome.cancel()
-            metronome.stop()
-          }
-        }}
-        className="butts"
-      >
-        Toggle Metronome
-      </Button>
-      <Form style={{color: '#fe1bcb'}}>
-        <Form.Group>
-          <Form.Label>Volume</Form.Label>
-          <Form.Control
-            name="Volume"
-            type="range"
-            min="-50"
-            max="5"
-            id="volume"
-            list="volTicks"
-            defaultValue="0"
-            step="0.5"
-            onChange={e => changeVolume(e.target.value)}
-          />
-          <datalist id="volTicks">
-            <option value="-50" />
-            <option value="0" />
-            <option value="5" />
-          </datalist>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Speed</Form.Label>
-          <Form.Control
-            name="BPM"
-            type="range"
-            min="60"
-            max="200"
-            id="bpm"
-            list="bpmTicks"
-            defaultValue="120"
-            step="1"
-            size="lg"
-            onChange={e => changeTempo(e.target.value)}
-          />
-          <datalist id="bpmTicks">
-            <option value="60" />
-            <option value="120" />
-            <option value="200" />
-          </datalist>
-        </Form.Group>
-      </Form>
+              if (metronomeOn) {
+                metronome.start(0)
+              } else {
+                metronome.cancel()
+                metronome.stop()
+              }
+            }}
+            className="butts"
+          >
+            Toggle Metronome
+          </Button>
+        </div>
+        <div>
+          <Form>
+            <Form.Group>
+              <Form.Label>Volume</Form.Label>
+              <Form.Control
+                name="Volume"
+                type="range"
+                min="-50"
+                max="5"
+                id="volume"
+                list="volTicks"
+                defaultValue="0"
+                step="0.5"
+                onChange={e => changeVolume(e.target.value)}
+              />
+              <datalist id="volTicks">
+                <option value="-50" />
+                <option value="0" />
+                <option value="5" />
+              </datalist>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Speed</Form.Label>
+              <Form.Control
+                name="BPM"
+                type="range"
+                min="60"
+                max="200"
+                id="bpm"
+                list="bpmTicks"
+                defaultValue="120"
+                step="1"
+                size="lg"
+                onChange={e => changeTempo(e.target.value)}
+              />
+              <datalist id="bpmTicks">
+                <option value="60" />
+                <option value="120" />
+                <option value="200" />
+              </datalist>
+            </Form.Group>
+          </Form>
+        </div>
+      </div>
       <Tracks samplerObj={samplerObj} setSamples={setSamplerObj} />
     </div>
   )

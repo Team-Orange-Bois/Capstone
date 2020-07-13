@@ -102,7 +102,7 @@ export default function DrumMachine() {
   return (
     <div id="controlContainer">
       <h1 style={{color: '#FE1BCB'}}>Beet Dropper</h1>
-      <div id="controlSliders">
+      <div id="controlSliders" style={{display: 'flex', flexDirection: 'row'}}>
         <Button
           id="start"
           className="butts"
@@ -166,36 +166,38 @@ export default function DrumMachine() {
         </Form>
       </div>
       <div id="controlOptions" onChange={e => changePattern(e.target)}>
-        <div>
-          <Form.Label>Kick Pattern:</Form.Label>
-          <Form.Control as="select" defaultValue="1n" name="kick">
-            {/* <option value="null">None</option> */}
-            <option value="1n">Whole Notes</option>
-            <option value="2n">Half Notes </option>
-            <option value="4n">Quarter Notes</option>
-            <option value="8n">Eighth Notes</option>
-          </Form.Control>
-        </div>
-        <div>
-          <Form.Label>Snare Pattern:</Form.Label>
-          <Form.Control as="select" defaultValue="2n" name="snare">
-            <option value="null">None</option>
-            <option value="1n">Whole Notes</option>
-            <option value="2n">Half Notes </option>
-            <option value="4n">Quarter Notes</option>
-            <option value="8n">Eighth Notes</option>
-          </Form.Control>
-        </div>
-        <div>
-          <Form.Label>Hat Pattern:</Form.Label>
-          <Form.Control as="select" defaultValue="4n" name="hat">
-            <option value="null">None</option>
-            <option value="1n">Whole Notes</option>
-            <option value="2n">Half Notes </option>
-            <option value="4n">Quarter Notes</option>
-            <option value="8n">Eighth Notes</option>
-            <option value="16n">Sixteenth Notes</option>
-          </Form.Control>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+          <div>
+            <Form.Label>Kick Pattern:</Form.Label>
+            <Form.Control as="select" defaultValue="1n" name="kick">
+              {/* <option value="null">None</option> */}
+              <option value="1n">Whole Notes</option>
+              <option value="2n">Half Notes </option>
+              <option value="4n">Quarter Notes</option>
+              <option value="8n">Eighth Notes</option>
+            </Form.Control>
+          </div>
+          <div>
+            <Form.Label>Snare Pattern:</Form.Label>
+            <Form.Control as="select" defaultValue="2n" name="snare">
+              <option value="null">None</option>
+              <option value="1n">Whole Notes</option>
+              <option value="2n">Half Notes </option>
+              <option value="4n">Quarter Notes</option>
+              <option value="8n">Eighth Notes</option>
+            </Form.Control>
+          </div>
+          <div>
+            <Form.Label>Hat Pattern:</Form.Label>
+            <Form.Control as="select" defaultValue="4n" name="hat">
+              <option value="null">None</option>
+              <option value="1n">Whole Notes</option>
+              <option value="2n">Half Notes </option>
+              <option value="4n">Quarter Notes</option>
+              <option value="8n">Eighth Notes</option>
+              <option value="16n">Sixteenth Notes</option>
+            </Form.Control>
+          </div>
         </div>
       </div>
     </div>

@@ -150,7 +150,7 @@ export default function Tracks(props) {
   const [columns, setColumns] = useState(columnsFromBackend)
   //let samplerArr = props.samplerArr
   const {samplerObj, setSamples} = props
-  console.log('tracks: ', samplerObj)
+  //console.log('tracks: ', samplerObj)
 
   useEffect(() => {
     if (samplerObj.samples.length) {
@@ -160,8 +160,8 @@ export default function Tracks(props) {
         }
       })
     }
-    console.log(columns)
-    console.log(samplerObj.samples)
+    //console.log(columns)
+    //console.log(samplerObj.samples)
   }, [samplerObj.samples])
 
   // const handlekey =
