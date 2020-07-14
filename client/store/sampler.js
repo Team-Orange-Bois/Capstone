@@ -33,7 +33,7 @@ export default function(state = defaultSamples, action) {
     case SET_SAMPLES:
       return [...state, action.sample]
     case RESET_SAMPLES:
-      return
+      return []
     default:
       return state
   }
