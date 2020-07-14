@@ -1,14 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 import uuid from 'uuid/v4'
-
-// const itemsFromBackend = [
-//   {id: uuid(), content: 'First task'},
-//   {id: uuid(), content: 'Second task'},
-//   {id: uuid(), content: 'Third task'},
-//   {id: uuid(), content: 'Fourth task'},
-//   {id: uuid(), content: 'Fifth task'}
-// ]
+import {connect} from 'react-redux'
+import {setSamplesThunk} from '../store/sampler'
 
 const columnsFromBackend = {
   '0:0:0': {
@@ -106,6 +100,294 @@ const columnsFromBackend = {
   },
   '0:3:3.5': {
     items: []
+  },
+  '1:0:0': {
+    items: []
+  },
+  '1:0:0.5': {
+    items: []
+  },
+  '1:0:1': {
+    items: []
+  },
+  '1:0:1.5': {
+    items: []
+  },
+  '1:0:2': {
+    items: []
+  },
+  '1:0:2.5': {
+    items: []
+  },
+  '1:0:3': {
+    items: []
+  },
+  '1:0:3.5': {
+    items: []
+  },
+  '1:1:0': {
+    items: []
+  },
+  '1:1:0.5': {
+    items: []
+  },
+  '1:1:1': {
+    items: []
+  },
+  '1:1:1.5': {
+    items: []
+  },
+  '1:1:2': {
+    items: []
+  },
+  '1:1:2.5': {
+    items: []
+  },
+  '1:1:3': {
+    items: []
+  },
+  '1:1:3.5': {
+    items: []
+  },
+  '1:2:0': {
+    items: []
+  },
+  '1:2:0.5': {
+    items: []
+  },
+  '1:2:1': {
+    items: []
+  },
+  '1:2:1.5': {
+    items: []
+  },
+  '1:2:2': {
+    items: []
+  },
+  '1:2:2.5': {
+    items: []
+  },
+  '1:2:3': {
+    items: []
+  },
+  '1:2:3.5': {
+    items: []
+  },
+  '1:3:0': {
+    items: []
+  },
+  '1:3:0.5': {
+    items: []
+  },
+  '1:3:1': {
+    items: []
+  },
+  '1:3:1.5': {
+    items: []
+  },
+  '1:3:2': {
+    items: []
+  },
+  '1:3:2.5': {
+    items: []
+  },
+  '1:3:3': {
+    items: []
+  },
+  '1:3:3.5': {
+    items: []
+  },
+  '2:0:0': {
+    items: []
+  },
+  '2:0:0.5': {
+    items: []
+  },
+  '2:0:1': {
+    items: []
+  },
+  '2:0:1.5': {
+    items: []
+  },
+  '2:0:2': {
+    items: []
+  },
+  '2:0:2.5': {
+    items: []
+  },
+  '2:0:3': {
+    items: []
+  },
+  '2:0:3.5': {
+    items: []
+  },
+  '2:1:0': {
+    items: []
+  },
+  '2:1:0.5': {
+    items: []
+  },
+  '2:1:1': {
+    items: []
+  },
+  '2:1:1.5': {
+    items: []
+  },
+  '2:1:2': {
+    items: []
+  },
+  '2:1:2.5': {
+    items: []
+  },
+  '2:1:3': {
+    items: []
+  },
+  '2:1:3.5': {
+    items: []
+  },
+  '2:2:0': {
+    items: []
+  },
+  '2:2:0.5': {
+    items: []
+  },
+  '2:2:1': {
+    items: []
+  },
+  '2:2:1.5': {
+    items: []
+  },
+  '2:2:2': {
+    items: []
+  },
+  '2:2:2.5': {
+    items: []
+  },
+  '2:2:3': {
+    items: []
+  },
+  '2:2:3.5': {
+    items: []
+  },
+  '2:3:0': {
+    items: []
+  },
+  '2:3:0.5': {
+    items: []
+  },
+  '2:3:1': {
+    items: []
+  },
+  '2:3:1.5': {
+    items: []
+  },
+  '2:3:2': {
+    items: []
+  },
+  '2:3:2.5': {
+    items: []
+  },
+  '2:3:3': {
+    items: []
+  },
+  '2:3:3.5': {
+    items: []
+  },
+  '3:0:0': {
+    items: []
+  },
+  '3:0:0.5': {
+    items: []
+  },
+  '3:0:1': {
+    items: []
+  },
+  '3:0:1.5': {
+    items: []
+  },
+  '3:0:2': {
+    items: []
+  },
+  '3:0:2.5': {
+    items: []
+  },
+  '3:0:3': {
+    items: []
+  },
+  '3:0:3.5': {
+    items: []
+  },
+  '3:1:0': {
+    items: []
+  },
+  '3:1:0.5': {
+    items: []
+  },
+  '3:1:1': {
+    items: []
+  },
+  '3:1:1.5': {
+    items: []
+  },
+  '3:1:2': {
+    items: []
+  },
+  '3:1:2.5': {
+    items: []
+  },
+  '3:1:3': {
+    items: []
+  },
+  '3:1:3.5': {
+    items: []
+  },
+  '3:2:0': {
+    items: []
+  },
+  '3:2:0.5': {
+    items: []
+  },
+  '3:2:1': {
+    items: []
+  },
+  '3:2:1.5': {
+    items: []
+  },
+  '3:2:2': {
+    items: []
+  },
+  '3:2:2.5': {
+    items: []
+  },
+  '3:2:3': {
+    items: []
+  },
+  '3:2:3.5': {
+    items: []
+  },
+  '3:3:0': {
+    items: []
+  },
+  '3:3:0.5': {
+    items: []
+  },
+  '3:3:1': {
+    items: []
+  },
+  '3:3:1.5': {
+    items: []
+  },
+  '3:3:2': {
+    items: []
+  },
+  '3:3:2.5': {
+    items: []
+  },
+  '3:3:3': {
+    items: []
+  },
+  '3:3:3.5': {
+    items: []
   }
 }
 
@@ -146,25 +428,20 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 }
 
-export default function Tracks(props) {
+export function Tracks(props) {
   const [columns, setColumns] = useState(columnsFromBackend)
   //let samplerArr = props.samplerArr
-  const {samplerObj, setSamples} = props
-  //console.log('tracks: ', samplerObj)
+  const {samples, setSamples} = props
 
   useEffect(() => {
-    if (samplerObj.samples.length) {
-      samplerObj.samples.map(sample => {
+    if (samples && samples.length) {
+      samples.map(sample => {
         if (!columns[sample.time].items.includes(sample)) {
           columns[sample.time].items = [...columns[sample.time].items, sample]
         }
       })
     }
-    //console.log(columns)
-    //console.log(samplerObj.samples)
-  }, [samplerObj.samples])
-
-  // const handlekey =
+  }, [samples])
 
   return (
     <div
@@ -221,7 +498,7 @@ export default function Tracks(props) {
                             //   ? 'lightblue'
                             //   : 'lightgrey',
                             background: '#35054C',
-                            width: 22,
+                            width: 12,
                             minHeight: '52px',
                             border: '1px solid',
                             borderColor: '#24c0f9',
@@ -246,7 +523,7 @@ export default function Tracks(props) {
                                         userSelect: 'none',
                                         margin: '0 0 0 0',
                                         minHeight: '50px',
-                                        width: '20px',
+                                        width: '11px',
                                         background: snapshot.isDragging
                                           ? '#24C0F9'
                                           : '#fe34d2',
@@ -275,3 +552,17 @@ export default function Tracks(props) {
     </div>
   )
 }
+
+const mapState = state => {
+  return {
+    samples: state.samples
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    setSamples: sample => dispatch(setSamplesThunk(sample))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Tracks)
