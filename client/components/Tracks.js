@@ -3,6 +3,7 @@ import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 import uuid from 'uuid/v4'
 import {connect} from 'react-redux'
 import {setSamplesThunk} from '../store/sampler'
+import {newParts} from './BeetMaker2'
 
 const columnsFromBackend = {
   '0:0:0': {
@@ -439,6 +440,10 @@ export function Tracks(props) {
         if (!columns[sample.time].items.includes(sample)) {
           columns[sample.time].items = [...columns[sample.time].items, sample]
         }
+      })
+    } else {
+      Object.keys(columns).forEach(key => {
+        columns[key].items = []
       })
     }
   }, [samples])
