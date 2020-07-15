@@ -6,6 +6,8 @@ import Tracks from './Tracks'
 import {defaultBoard} from './toneSamples'
 import {connect} from 'react-redux'
 import {setSamplesThunk} from '../store/sampler'
+import axios from 'axios'
+import SavedLoops from './SavedLoops'
 
 Tone.context.latencyHint = 'fastest'
 const woodblock = new Tone.Sampler({
@@ -106,7 +108,8 @@ export function BeetMaker2(props) {
       samplerObj.samples.push({
         time: timing,
         tone: 'C3',
-        note: keySounds[row][identifier].note
+        note: keySounds[row][identifier].note,
+        label: keySounds[row][identifier].label
       })
 
       newParts.add({
@@ -118,7 +121,8 @@ export function BeetMaker2(props) {
       props.setSamples({
         time: timing,
         tone: 'C3',
-        note: keySounds[row][identifier].note
+        note: keySounds[row][identifier].note,
+        label: keySounds[row][identifier].label
       })
     }
   }
@@ -166,6 +170,23 @@ export function BeetMaker2(props) {
       })
     }
   })
+
+  const saveLoop = async () => {
+    //parse song to have no Tone.Sampler objects
+    if (!samplerObj.samples.length) {
+      return
+    }
+
+    const songify = samplerObject =>
+      JSON.stringify(samplerObject, function(key, value) {
+        if (key === 'note') return
+        else {
+          return value
+        }
+      })
+    const {data} = await axios.post('/api/songs', songify(samplerObj))
+    console.log(data[0])
+  }
 
   return (
     <div className="outercontainer">
@@ -249,6 +270,9 @@ export function BeetMaker2(props) {
           >
             Toggle Metronome
           </Button>
+          <Button onClick={saveLoop} className="butts">
+            Save Loop
+          </Button>
         </div>
         <div>
           <Form>
@@ -295,6 +319,7 @@ export function BeetMaker2(props) {
         </div>
       </div>
       <Tracks />
+      <SavedLoops />
     </div>
   )
 }

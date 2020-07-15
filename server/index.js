@@ -24,7 +24,7 @@ const createApp = () => {
     session({
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: false
     })
   )
 
@@ -41,6 +41,8 @@ const createApp = () => {
       next()
     }
   })
+
+  app.use('/api', require('./api'))
 
   // sends index.html
   app.use('*', (req, res) => {
