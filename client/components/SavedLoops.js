@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getSongsThunk, getSongThunk} from '../store/savedSongs'
+import {setSamplesThunk} from '../store/sampler'
 import axios from 'axios'
 
 const SavedLoopsComponent = ({getSong, song, getSongs, songs}) => {
@@ -40,14 +41,15 @@ const SavedLoopsComponent = ({getSong, song, getSongs, songs}) => {
 const mapDispatch = dispatch => {
   return {
     getSongs: () => dispatch(getSongsThunk()),
-    getSong: songName => dispatch(getSongThunk(songName))
+    getSong: songName => dispatch(getSongThunk(songName)),
+    setSamples: sample => dispatch(setSamplesThunk(sample))
   }
 }
 
 const mapState = state => {
   return {
-    songs: state.songs.songs,
-    song: state.songs.song
+    songs: state.savedSongs.songs,
+    song: state.savedSongs.song
   }
 }
 
