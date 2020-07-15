@@ -19,14 +19,22 @@ const SavedLoopsComponent = ({getSong, song, getSongs, songs, setSamples}) => {
   function findSample(label) {
     let sample
     Object.keys(defaultBoard).forEach(row =>
-      Object.keys(defaultBoard[row]).forEach(key => defaultBoard[row][key])
+      Object.keys(defaultBoard[row]).forEach(key => {
+        if (defaultBoard[row][key].label === label) {
+          sample = defaultBoard[row][key].note
+        }
+      })
     )
+    return sample
   }
+
   if (song.length) {
     //de-songify then setSamples
     //song is an arr of length 1
-    let songToConvert = song[0]
-
+    let songToConvert = song[0][0]
+    console.log(songToConvert)
+    let foundSample = findSample('Bad Bitch')
+    console.log('found sample: ', foundSample)
     // await setSamples(song)
   }
 

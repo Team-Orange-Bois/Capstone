@@ -177,15 +177,17 @@ export function BeetMaker2(props) {
       return
     }
 
-    const songify = samplerObject =>
-      JSON.stringify(samplerObject, function(key, value) {
-        if (key === 'note') return
-        else {
-          return value
-        }
-      })
+    const songify = samplerObject => {
+      let newSamples = samplerObject.samples.map(sample => ({
+        time: sample.time,
+        tone: sample.tone,
+        label: sample.label
+      }))
+      samplerObject.samples = newSamples
+      return samplerObject
+    }
     const {data} = await axios.post('/api/songs', songify(samplerObj))
-    console.log(data[0])
+    //console.log(data)
   }
 
   return (
