@@ -291,34 +291,34 @@ button {
 
 [id='1'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb158;
+  background-color: #fc9068;
 }
 
 [id='1'].active-button {
-  background-color: #fffaeb;
+  background-color: #f5c288;
 }
 
 [id='2'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb258;
+  background-color: #fc9565;
 }
 
 [id='2'].active-button {
-  background-color: #fff5d7;
+  background-color: #ffc788;
 }
 
 [id='3'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb455;
+  background-color: #fc9b62;
 }
 
 [id='3'].active-button {
-  background-color: #fef0c2;
+  background-color: #ecb56e;
 }
 
 [id='4'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb555;
+  background-color: #fca15f;
 }
 
 [id='4'].active-button {
@@ -327,7 +327,7 @@ button {
 
 [id='5'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb654;
+  background-color: #fda75c;
 }
 
 [id='5'].active-button {
@@ -336,7 +336,7 @@ button {
 
 [id='6'].butts.btn.btn-primary {
   color: black;
-  background-color: #feb655;
+  background-color: #fdad59;
 }
 
 [id='6'].active-button {
@@ -345,7 +345,7 @@ button {
 
 [id='7'].butts.btn.btn-primary {
   color: black;
-  background-color: #febd51;
+  background-color: #fdb356;
 }
 
 [id='7'].active-button {
@@ -354,7 +354,7 @@ button {
 
 [id='8'].butts.btn.btn-primary {
   color: black;
-  background-color: #fec24e;
+  background-color: #fdb953;
 }
 
 [id='8'].active-button {
@@ -363,7 +363,7 @@ button {
 
 [id='9'].butts.btn.btn-primary {
   color: black;
-  background-color: #fec74b;
+  background-color: #febf50;
 }
 
 [id='9'].active-button {
@@ -372,7 +372,7 @@ button {
 
 [id='k0'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffcd4a;
+  background-color: #fec54d;
 }
 
 [id='k0'].active-button {
@@ -381,11 +381,11 @@ button {
 
 [id='-'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #fecb4a;
 }
 
 [id='-'].active-button {
-  background-color: #fef0c2;
+  background-color: #ffd147;
 }
 
 [id='='].butts.btn.btn-primary {
