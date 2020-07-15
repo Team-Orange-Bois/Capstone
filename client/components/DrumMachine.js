@@ -8,21 +8,15 @@ export default function DrumMachine() {
     snare: '2n',
     hat: '4n'
   }
-  let kick = new Tone.Sampler(
-    {
-      c4:
-        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
-    },
-    () => console.log('loaded kick')
-  ).toMaster()
+  let kick = new Tone.Sampler({
+    c4:
+      'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fkick.mp3?alt=media&token=fc8bddf1-7ee7-4337-9a72-89459291bc89'
+  }).toMaster()
 
-  let snare = new Tone.Sampler(
-    {
-      c4:
-        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
-    },
-    () => console.log('loaded snare')
-  ).toMaster()
+  let snare = new Tone.Sampler({
+    c4:
+      'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
+  }).toMaster()
 
   let hat = new Tone.Sampler(
     {
