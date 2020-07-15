@@ -51,6 +51,7 @@ export function BeetMaker2(props) {
 
   const handleKeyDown = (row, identifier) => {
     const button = document.getElementById(identifier)
+    console.log(button)
     button.setAttribute('class', 'butts btn active-button')
 
     const timingArr = Tone.Transport.position.split(':')
@@ -166,7 +167,7 @@ export function BeetMaker2(props) {
                       <Button
                         id={button}
                         key={button}
-                        className="butts sample"
+                        className="butts btn btn-primary"
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
