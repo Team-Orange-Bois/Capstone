@@ -14,14 +14,18 @@ const SavedLoopsComponent = ({getSong, song, getSongs, songs}) => {
     await getSong(songName)
   }
 
+  if (song.length) {
+    console.log('de-songify the saved loop')
+  }
+
   return (
     <>
       {songs.length ? (
         <form onSubmit={e => handleSubmit(e)}>
           <select name="song">
             <option defaultValue>Load a Saved Loop</option>
-            {songs[0].map(song => (
-              <option key={song.name}>{song.name}</option>
+            {songs[0].map(songLoop => (
+              <option key={songLoop.name}>{songLoop.name}</option>
             ))}
           </select>
           <button type="submit">Load Sample</button>
