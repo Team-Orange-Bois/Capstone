@@ -115,6 +115,7 @@ export function BeetMaker2(props) {
       })
     }
   }
+
   function stopLoop() {
     Tone.Transport.cancel()
     Tone.Transport.stop()
@@ -136,19 +137,27 @@ export function BeetMaker2(props) {
   }
 
   document.addEventListener('keydown', e => {
-    Object.keys(keySounds).forEach(key => {
-      if (keySounds[key][e.key]) {
-        handleKeyDown(key, e.key)
-      }
-    })
+    if (e.key === '0') {
+      handleKeyDown('numberRow', 'k0')
+    } else {
+      Object.keys(keySounds).forEach(key => {
+        if (keySounds[key][e.key]) {
+          handleKeyDown(key, e.key)
+        }
+      })
+    }
   })
 
   document.addEventListener('keyup', e => {
-    Object.keys(keySounds).forEach(key => {
-      if (keySounds[key][e.key]) {
-        handleKeyUp(key, e.key)
-      }
-    })
+    if (e.key === '0') {
+      handleKeyUp('numberRow', 'k0')
+    } else {
+      Object.keys(keySounds).forEach(key => {
+        if (keySounds[key][e.key]) {
+          handleKeyUp(key, e.key)
+        }
+      })
+    }
   })
 
   return (

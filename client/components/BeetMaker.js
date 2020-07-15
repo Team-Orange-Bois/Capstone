@@ -99,7 +99,7 @@ export default function BeetMaker() {
               color: '#24C0F9'
             }}
             layoutName="default"
-            onKeyPress={button => handleKeyDown(button)}
+            onKeyPress={button => handleKeyDown(null, button)}
           />
         </div>
       </form>
