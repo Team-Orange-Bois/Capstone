@@ -1,13 +1,13 @@
 /* eslint-disable complexity */
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import * as Tone from 'tone'
 import {Button, Form} from 'react-bootstrap'
 import Tracks from './Tracks'
 import {defaultBoard} from './toneSamples'
 import {connect} from 'react-redux'
-import {setSamplesThunk} from '../store/sampler'
 import axios from 'axios'
 import SavedLoops from './SavedLoops'
+import {setSamplesThunk, resetSamplesThunk} from '../store/sampler'
 
 Tone.context.latencyHint = 'fastest'
 const woodblock = new Tone.Sampler({
@@ -16,15 +16,17 @@ const woodblock = new Tone.Sampler({
 }).toMaster()
 
 const keySounds = defaultBoard
-// let parts
-// let metronomeOn = false
-// let isPlaying = false
 
 const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
 let playStatus = false
-let newParts
+
+const beatLoop = function(time, value) {
+  value.note.triggerAttackRelease(value.tone)
+}
+
+export let newParts = new Tone.Part(beatLoop, samplerObj.samples)
 
 const metronome = new Tone.Event(function(time) {
   woodblock.triggerAttackRelease('C4', '4n')
@@ -38,16 +40,6 @@ let rowIndex = -1
 let buttonIndex = -1
 
 export function BeetMaker2(props) {
-  // const [samplerObj, setSamplerObj] = useState(samples)
-  // const [metronomeStatus, setMetronomeStatus] = useState(false)
-  // const [playStatus, setPlayStatus] = useState(false)
-  // const [recordStatus, setRecordStatus] = useState(false)
-  // const [parts, setParts] = useState({})
-
-  const beatLoop = function(time, value) {
-    value.note.triggerAttackRelease(value.tone)
-  }
-
   function startLoop() {
     playStatus = true
     Tone.Transport.cancel()
@@ -55,7 +47,7 @@ export function BeetMaker2(props) {
     Tone.Transport.loop = true
     Tone.Transport.loopEnd = '4m'
     Tone.Transport.start()
-    newParts = new Tone.Part(beatLoop, samplerObj.samples).start(0)
+    newParts.start(0)
     // setParts(newParts)
   }
 
@@ -249,7 +241,7 @@ export function BeetMaker2(props) {
               samplerObj.samples = []
               newParts.removeAll()
               stopLoop()
-              // setParts(parts)
+              props.resetSamples()
             }}
             className="butts"
           >
@@ -328,7 +320,8 @@ export function BeetMaker2(props) {
 
 const mapDispatch = dispatch => {
   return {
-    setSamples: sample => dispatch(setSamplesThunk(sample))
+    setSamples: sample => dispatch(setSamplesThunk(sample)),
+    resetSamples: () => dispatch(resetSamplesThunk())
   }
 }
 
