@@ -289,388 +289,393 @@ button {
   margin-left: 100px;
 }
 
+.butts.btn.active-button {
+  transform: scale(0.8);
+  opacity: 0.9;
+}
+
 [id='1'].butts.btn.btn-primary {
-  color: black;
-  background-color: #fc9068;
+  color: white;
+  background-color: #40338b;
 }
 
 [id='1'].active-button {
-  background-color: #f5c288;
+  background-color: #c6b2ff;
 }
 
 [id='2'].butts.btn.btn-primary {
-  color: black;
-  background-color: #fc9565;
+  color: white;
+  background-color: #412a84;
 }
 
 [id='2'].active-button {
-  background-color: #ffc788;
+  background-color: #c6b2ff;
 }
 
 [id='3'].butts.btn.btn-primary {
-  color: black;
-  background-color: #fc9b62;
+  color: white;
+  background-color: #43217d;
 }
 
 [id='3'].active-button {
-  background-color: #ecb56e;
+  background-color: #c6b2ff;
 }
 
 [id='4'].butts.btn.btn-primary {
   color: black;
-  background-color: #fca15f;
+  background-color: #fc9b58;
 }
 
 [id='4'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='5'].butts.btn.btn-primary {
   color: black;
-  background-color: #fda75c;
+  background-color: #fca153;
 }
 
 [id='5'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='6'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdad59;
+  background-color: #fca64d;
 }
 
 [id='6'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='7'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb356;
+  background-color: #fcac46;
 }
 
 [id='7'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='8'].butts.btn.btn-primary {
   color: black;
-  background-color: #fdb953;
+  background-color: #fcb23f;
 }
 
 [id='8'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='9'].butts.btn.btn-primary {
   color: black;
-  background-color: #febf50;
+  background-color: #fcb739;
 }
 
 [id='9'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='k0'].butts.btn.btn-primary {
   color: black;
-  background-color: #fec54d;
+  background-color: #fcbd32;
 }
 
 [id='k0'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='-'].butts.btn.btn-primary {
   color: black;
-  background-color: #fecb4a;
+  background-color: #fcc325;
 }
 
 [id='-'].active-button {
-  background-color: #ffd147;
+  background-color: #fffaeb;
 }
 
 [id='='].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #fdc925;
 }
 
 [id='='].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='q'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe5d9b;
+  background-color: #fc9068;
 }
 
 [id='q'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='w'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe6792;
+  background-color: #fc9264;
 }
 
 [id='w'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='e'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe728a;
+  background-color: #fc9561;
 }
 
 [id='e'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='r'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe7c82;
+  background-color: #fc985d;
 }
 
 [id='r'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='t'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe8779;
+  background-color: #fc9e57;
 }
 
 [id='t'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='y'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe9171;
+  background-color: #fca350;
 }
 
 [id='y'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='u'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe9c69;
+  background-color: #fca949;
 }
 
 [id='u'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='i'].butts.btn.btn-primary {
   color: black;
-  background-color: #fea661;
+  background-color: #fcaf43;
 }
 
 [id='i'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='o'].butts.btn.btn-primary {
   color: black;
-  background-color: #feb158;
+  background-color: #fcb53c;
 }
 
 [id='o'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='p'].butts.btn.btn-primary {
   color: black;
-  background-color: #febb50;
+  background-color: #fcba35;
 }
 
 [id='p'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='['].butts.btn.btn-primary {
   color: black;
-  background-color: #fec648;
+  background-color: #fcc024;
 }
 
 [id='['].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id=']'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd140;
+  background-color: #fcc628;
 }
 
 [id=']'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
 
 [id='a'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe1bcb;
+  background-color: #8b71e3;
 }
 
 [id='a'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 
 [id='s'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe26c0;
+  background-color: #7f7ae5;
 }
 
 [id='s'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='d'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe32b6;
+  background-color: #7483e8;
 }
 
 [id='d'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='f'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe3eab;
+  background-color: #7483e8;
 }
 
 [id='f'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='g'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe49a1;
+  background-color: #688bea;
 }
 
 [id='g'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='h'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe5597;
+  background-color: #5d94ec;
 }
 
 [id='h'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='j'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe618c;
+  background-color: #519def;
 }
 
 [id='j'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='k'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe6d82;
+  background-color: #46a5f1;
 }
 
 [id='k'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='l'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe7878;
+  background-color: #3aaef4;
 }
 
 [id='l'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id=';'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe846d;
+  background-color: #2fb7f6;
 }
 
 [id=';'].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id="'"].butts.btn.btn-primary {
   color: black;
-  background-color: #fe9063;
+  background-color: #24c0f9;
 }
 
 [id="'"].active-button {
-  background-color: #fef0c2;
+  background-color: #9ce3fc;
 }
 [id='z'].butts.btn.btn-primary {
   color: black;
-  background-color: #fe9c59;
+  background-color: #ad57db;
 }
 
 [id='z'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='x'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #b74fd9;
 }
 
 [id='x'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='c'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #c148d7;
 }
 
 [id='c'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='v'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #cb40d5;
 }
 
 [id='v'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='b'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #d539d3;
 }
 
 [id='b'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='n'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #df31d1;
 }
 
 [id='n'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='m'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #e92acf;
 }
 
 [id='m'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id=','].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #f322cd;
 }
 
 [id=','].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='.'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #fe1bcb;
 }
 
 [id='.'].active-button {
-  background-color: #fef0c2;
+  background-color: #dba0f8;
 }
 [id='/'].butts.btn.btn-primary {
   color: black;
-  background-color: #ffd147;
+  background-color: #fcc624;
 }
 
 [id='/'].active-button {
-  background-color: #fef0c2;
+  background-color: #fffaeb;
 }
