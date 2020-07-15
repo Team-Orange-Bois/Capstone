@@ -2,9 +2,10 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getSongsThunk, getSongThunk} from '../store/savedSongs'
 import {setSamplesThunk} from '../store/sampler'
+import {defaultBoard} from './toneSamples'
 import axios from 'axios'
 
-const SavedLoopsComponent = ({getSong, song, getSongs, songs}) => {
+const SavedLoopsComponent = ({getSong, song, getSongs, songs, setSamples}) => {
   useEffect(() => {
     getSongs()
   }, [])
@@ -15,8 +16,18 @@ const SavedLoopsComponent = ({getSong, song, getSongs, songs}) => {
     await getSong(songName)
   }
 
+  function findSample(label) {
+    let sample
+    Object.keys(defaultBoard).forEach(row =>
+      Object.keys(defaultBoard[row]).forEach(key => defaultBoard[row][key])
+    )
+  }
   if (song.length) {
-    console.log('de-songify the saved loop')
+    //de-songify then setSamples
+    //song is an arr of length 1
+    let songToConvert = song[0]
+
+    // await setSamples(song)
   }
 
   return (
