@@ -8,7 +8,11 @@ import {defaultBoard} from './toneSamples'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import SavedLoops from './SavedLoops'
-import {setSamplesThunk, resetSamplesThunk} from '../store/sampler'
+import {
+  setSamplesThunk,
+  resetSamplesThunk,
+  setArrayThunk
+} from '../store/sampler'
 import {getSongsThunk} from '../store/savedSongs'
 import {session} from 'passport'
 
@@ -43,28 +47,9 @@ function findSample(label) {
   return sample
 }
 
-let loadedSong
-
-async function getLoadedSong() {
-  const {data} = await axios.get('/api/songs/currentSong')
-  loadedSong = data
-  if (loadedSong) {
-    loadedSong.map(sample => {
-      samplerObj.samples.push({
-        time: sample.time,
-        tone: sample.tone,
-        note: findSample(sample.label),
-        label: sample.label
-      })
-    })
-  }
-}
-
-getLoadedSong()
-
 export let newParts = new Tone.Part(beatLoop, samplerObj.samples)
 
-console.log(newParts)
+let loadedSong
 
 const metronome = new Tone.Event(function(time) {
   woodblock.triggerAttackRelease('C4', '4n')
@@ -96,22 +81,35 @@ export function BeetMaker2(props) {
     newParts.cancel().stop()
   }, [])
 
-  // if (props.savedSamples) {
-  //   newParts.removeAll()
-  //   props.savedSamples.map(sample => {
-  //     samplerObj.samples.push({
-  //       time: sample.time,
-  //       tone: sample.tone,
-  //       note: sample.note,
-  //       label: findLabel(sample.note)
-  //     })
-  //     newParts.add({
-  //       time: sample.time,
-  //       tone: sample.tone,
-  //       note: sample.note
-  //     })
-  //   })
-  // }
+  async function getLoadedSong() {
+    const {data} = await axios.get('/api/songs/currentSong')
+    loadedSong = data
+    if (loadedSong) {
+      newParts.removeAll()
+      loadedSong[0].samples.map(sample => {
+        samplerObj.samples.push({
+          time: sample.time,
+          tone: sample.tone,
+          note: findSample(sample.label),
+          label: sample.label
+        })
+        newParts.add({
+          time: sample.time,
+          tone: sample.tone,
+          note: findSample(sample.label),
+          label: sample.label
+        })
+        // props.setSamples({
+        //   time: sample.time,
+        //   tone: sample.tone,
+        //   note: findSample(sample.label),
+        //   label: sample.label
+        // })
+      })
+    }
+  }
+
+  getLoadedSong()
 
   function startLoop() {
     playStatus = true
@@ -184,7 +182,6 @@ export function BeetMaker2(props) {
           tone: 'C3',
           note: keySounds[row][identifier].note
         })
-
         props.setSamples({
           time: timing,
           tone: 'C3',
@@ -402,7 +399,8 @@ const mapDispatch = dispatch => {
   return {
     setSamples: sample => dispatch(setSamplesThunk(sample)),
     resetSamples: () => dispatch(resetSamplesThunk()),
-    getSongs: () => dispatch(getSongsThunk())
+    getSongs: () => dispatch(getSongsThunk()),
+    setArrayOnRedux: sample => dispatch(setArrayThunk(sample))
   }
 }
 

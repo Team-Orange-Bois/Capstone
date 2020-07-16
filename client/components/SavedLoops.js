@@ -65,8 +65,9 @@ const SavedLoopsComponent = ({
     //   }))
     // }
     // await getSong(songName)
-
-    window.location.reload(false)
+    console.log(data)
+    // setArrayOnRedux(data)
+    // window.location.reload(false)
   }
 
   return (
