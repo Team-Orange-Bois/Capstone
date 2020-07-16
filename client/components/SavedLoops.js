@@ -1,5 +1,6 @@
 /* eslint-disable no-inner-declarations*/
 import React, {useEffect, useState} from 'react'
+import {Button, Form} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {getSongsThunk} from '../store/savedSongs'
 import axios from 'axios'
@@ -21,21 +22,30 @@ const SavedLoopsComponent = ({getSongs, songs}) => {
   }
 
   return (
-    <>
+    <div>
       {songs.length ? (
-        <form onSubmit={e => handleSubmit(e)}>
-          <select name="song">
+        <Form
+          onSubmit={e => handleSubmit(e)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyItems: 'center'
+          }}
+        >
+          <Form.Control as="select" name="song">
             <option defaultValue>Load a Saved Loop</option>
             {songs[0].map(songLoop => (
               <option key={songLoop.name}>{songLoop.name}</option>
             ))}
-          </select>
-          <button type="submit">Load Sample</button>
-        </form>
+          </Form.Control>
+          <Button className="butts" type="submit" style={{height: '33%'}}>
+            Load Sample
+          </Button>
+        </Form>
       ) : (
         <h1 style={{color: '#FE1BCB'}}>No saved Loops</h1>
       )}
-    </>
+    </div>
   )
 }
 

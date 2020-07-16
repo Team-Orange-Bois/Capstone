@@ -285,8 +285,8 @@ export function BeetMaker2(props) {
               </div>
             )
           })}
-          {(rowIndex = -1)}
-          {(buttonIndex = -1)}
+          {/* {(rowIndex = -1)}
+          {(buttonIndex = -1)} */}
         </div>
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -403,11 +403,11 @@ const mapDispatch = dispatch => {
   }
 }
 
-const mapState = state => {
-  //this breaks the buttons
-  return {
-    savedSamples: state.samples
-  }
-}
+// const mapState = state => {
+//   //this breaks the buttons
+//   return {
+//     savedSamples: state.samples
+//   }
+// }
 
-export default connect(mapState, mapDispatch)(BeetMaker2)
+export default connect(null, mapDispatch)(BeetMaker2)
