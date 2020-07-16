@@ -1,11 +1,12 @@
 /* eslint-disable complexity */
 import React from 'react'
 import * as Tone from 'tone'
-import {Button, Form} from 'react-bootstrap'
+import {Button, Form, Modal} from 'react-bootstrap'
 import Tracks from './Tracks'
 import {defaultBoard} from './toneSamples'
 import {connect} from 'react-redux'
 import {setSamplesThunk, resetSamplesThunk} from '../store/sampler'
+import OurDumbModal from '../components/Modal'
 
 Tone.context.latencyHint = 'fastest'
 const woodblock = new Tone.Sampler({
@@ -15,10 +16,13 @@ const woodblock = new Tone.Sampler({
 
 const keySounds = defaultBoard
 
+//let firstLoad = true
+
 const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
 let playStatus = false
+let show = true
 
 const beatLoop = function(time, value) {
   value.note.triggerAttackRelease(value.tone)
@@ -140,6 +144,10 @@ export function BeetMaker2(props) {
     button.setAttribute('class', 'butts btn btn-primary')
   }
 
+  function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
   document.addEventListener('keydown', e => {
     if (e.key === '0') {
       handleKeyDown('numberRow', 'k0')
@@ -207,8 +215,17 @@ export function BeetMaker2(props) {
             <i className="material-icons">play_arrow</i>
           </Button>
           <Button
-            onClick={() => {
-              recordStatus = true
+            onClick={async () => {
+              console.log('beginning of startloop', newParts.context.state)
+              console.log('beginning of startloop', Tone.context.state)
+              if (newParts.context.state !== 'running') {
+                await Tone.start()
+                await newParts.context.resume()
+              }
+              await timeout(100)
+              console.log('beginning of startloop', newParts.context.state)
+              console.log('beginning of startloop', Tone.context.state)
+              recordStatus = !recordStatus
               startLoop()
             }}
             className="butts"
@@ -291,6 +308,7 @@ export function BeetMaker2(props) {
           </Form>
         </div>
       </div>
+      {/* <OurDumbModal /> */}
       <Tracks />
     </div>
   )
