@@ -358,7 +358,6 @@ export function BeetMaker2(props) {
                 }
               }}
             />
-            Toggle Metronome
             <label className="react-switch-label" htmlFor="react-switch-new">
               <span className="react-switch-button" />
             </label>
