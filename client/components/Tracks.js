@@ -435,7 +435,7 @@ export function Tracks(props) {
   const {samples, setSamples} = props
 
   useEffect(() => {
-    if (samples && samples.length) {
+    if (samples && samples.length && columns['3:3:3.5']) {
       samples.map(sample => {
         if (!columns[sample.time].items.includes(sample)) {
           columns[sample.time].items = [...columns[sample.time].items, sample]

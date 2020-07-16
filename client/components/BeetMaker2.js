@@ -39,7 +39,35 @@ const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
 let rowIndex = -1
 let buttonIndex = -1
 
+//helper for finding the label to reconstruct the samplerObj
+function findLabel(note) {
+  let label
+  Object.keys(defaultBoard).forEach(row =>
+    Object.keys(defaultBoard[row]).forEach(key => {
+      if (defaultBoard[row][key].note === note) {
+        label = defaultBoard[row][key].label
+      }
+    })
+  )
+  return label
+}
+
 export function BeetMaker2(props) {
+  if (props.savedSamples) {
+    props.savedSamples.map(sample => {
+      samplerObj.samples.push({
+        time: sample.time,
+        tone: sample.tone,
+        note: sample.note,
+        label: findLabel(sample.note)
+      })
+      newParts.add({
+        time: sample.time,
+        tone: sample.tone,
+        note: sample.note
+      })
+    })
+  }
   function startLoop() {
     playStatus = true
     Tone.Transport.cancel()
@@ -172,11 +200,12 @@ export function BeetMaker2(props) {
     const songify = samplerObject => {
       let newSamples = samplerObject.samples.map(sample => ({
         time: sample.time,
+        //could get rid of tone and just put 'C3' back later
         tone: sample.tone,
         label: sample.label
       }))
-      samplerObject.samples = newSamples
-      return samplerObject
+
+      return {samples: newSamples}
     }
     const {data} = await axios.post('/api/songs', songify(samplerObj))
     //console.log(data)
@@ -212,6 +241,8 @@ export function BeetMaker2(props) {
               </div>
             )
           })}
+          {(rowIndex = -1)}
+          {(buttonIndex = -1)}
         </div>
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -312,8 +343,8 @@ export function BeetMaker2(props) {
           </Form>
         </div>
       </div>
-      <Tracks />
       <SavedLoops />
+      {/* <Tracks /> */}
     </div>
   )
 }
@@ -326,7 +357,10 @@ const mapDispatch = dispatch => {
 }
 
 const mapState = state => {
-  return 'boop'
+  //this breaks the buttons
+  return {
+    savedSamples: state.samples
+  }
 }
 
 export default connect(mapState, mapDispatch)(BeetMaker2)

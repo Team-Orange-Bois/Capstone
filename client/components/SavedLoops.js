@@ -1,21 +1,23 @@
+/* eslint-disable no-inner-declarations*/
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getSongsThunk, getSongThunk} from '../store/savedSongs'
-import {setSamplesThunk} from '../store/sampler'
+import {setArrayThunk} from '../store/sampler'
 import {defaultBoard} from './toneSamples'
 import axios from 'axios'
 
-const SavedLoopsComponent = ({getSong, song, getSongs, songs, setSamples}) => {
+const SavedLoopsComponent = ({
+  getSong,
+  song,
+  getSongs,
+  songs,
+  setArrayOnRedux
+}) => {
   useEffect(() => {
     getSongs()
   }, [])
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    let songName = event.target.song.value
-    await getSong(songName)
-  }
-
+  //helper for finding the Tone.sampler obj to reconstruct the samplerObj
   function findSample(label) {
     let sample
     Object.keys(defaultBoard).forEach(row =>
@@ -27,15 +29,31 @@ const SavedLoopsComponent = ({getSong, song, getSongs, songs, setSamples}) => {
     )
     return sample
   }
+  //will be the sample array we set to redux state
+  let loadedSong
 
+  //if getSong thunk set a song to redux on submit
   if (song.length) {
-    //de-songify then setSamples
-    //song is an arr of length 1
-    let songToConvert = song[0][0]
-    console.log(songToConvert)
-    let foundSample = findSample('Bad Bitch')
-    console.log('found sample: ', foundSample)
-    // await setSamples(song)
+    //song is an arr of an arr of length 1
+    let dataToConvert = song[0][0]
+
+    loadedSong = dataToConvert.samples.map(sample => ({
+      time: sample.time,
+      tone: sample.tone,
+      label: sample.label,
+      note: findSample(sample.label)
+    }))
+    async function fireSetSamples() {
+      await setArrayOnRedux(loadedSong)
+    }
+    fireSetSamples()
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    let songName = event.target.song.value
+
+    await getSong(songName)
   }
 
   return (
@@ -61,7 +79,7 @@ const mapDispatch = dispatch => {
   return {
     getSongs: () => dispatch(getSongsThunk()),
     getSong: songName => dispatch(getSongThunk(songName)),
-    setSamples: sample => dispatch(setSamplesThunk(sample))
+    setArrayOnRedux: sample => dispatch(setArrayThunk(sample))
   }
 }
 
