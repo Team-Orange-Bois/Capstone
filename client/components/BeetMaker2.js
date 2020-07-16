@@ -232,6 +232,7 @@ export function BeetMaker2(props) {
           >
             <i className="material-icons">fiber_manual_record</i>
           </Button>
+          --
           <Button onClick={() => stopLoop()} className="butts">
             <i className="material-icons">stop</i>
           </Button>
@@ -246,9 +247,13 @@ export function BeetMaker2(props) {
           >
             Clear Loop
           </Button>
-          <Button
-            onClick={() => {
-              if (playStatus) {
+          <>
+            <input
+              className="react-switch-checkbox"
+              id="react-switch-new"
+              type="checkbox"
+              onChange={() => {
+                console.log(metronomeStatus)
                 metronomeStatus = !metronomeStatus
                 if (metronomeStatus) {
                   metronome.start(0)
@@ -257,12 +262,12 @@ export function BeetMaker2(props) {
                 } else {
                   metronome.cancel().stop()
                 }
-              }
-            }}
-            className="butts"
-          >
-            Toggle Metronome
-          </Button>
+              }}
+            />
+            <label className="react-switch-label" htmlFor="react-switch-new">
+              <span className="react-switch-button" />
+            </label>
+          </>
         </div>
         <div>
           <Form>
