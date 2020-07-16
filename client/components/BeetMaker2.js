@@ -14,7 +14,6 @@ import {
   setArrayThunk
 } from '../store/sampler'
 import {getSongsThunk} from '../store/savedSongs'
-import {session} from 'passport'
 
 // Tone.context.resume()
 Tone.context.latencyHint = 'fastest'
@@ -62,18 +61,18 @@ const rowClasses = ['number-row', 'q-row', 'a-row', 'z-row']
 let rowIndex = -1
 let buttonIndex = -1
 
-//helper for finding the label to reconstruct the samplerObj
-function findLabel(note) {
-  let label
-  Object.keys(keySounds).forEach(row =>
-    Object.keys(keySounds[row]).forEach(key => {
-      if (keySounds[row][key].note === note) {
-        label = keySounds[row][key].label
-      }
-    })
-  )
-  return label
-}
+// //helper for finding the label to reconstruct the samplerObj
+// function findLabel(note) {
+//   let label
+//   Object.keys(keySounds).forEach(row =>
+//     Object.keys(keySounds[row]).forEach(key => {
+//       if (keySounds[row][key].note === note) {
+//         label = keySounds[row][key].label
+//       }
+//     })
+//   )
+//   return label
+// }
 
 export function BeetMaker2(props) {
   useEffect(() => {
@@ -84,7 +83,7 @@ export function BeetMaker2(props) {
   async function getLoadedSong() {
     const {data} = await axios.get('/api/songs/currentSong')
     loadedSong = data
-    if (loadedSong) {
+    if (loadedSong[0]) {
       newParts.removeAll()
       loadedSong[0].samples.map(sample => {
         samplerObj.samples.push({
@@ -99,13 +98,8 @@ export function BeetMaker2(props) {
           note: findSample(sample.label),
           label: sample.label
         })
-        // props.setSamples({
-        //   time: sample.time,
-        //   tone: sample.tone,
-        //   note: findSample(sample.label),
-        //   label: sample.label
-        // })
       })
+      props.setArrayOnRedux(samplerObj.samples)
     }
   }
 
@@ -257,6 +251,10 @@ export function BeetMaker2(props) {
     props.getSongs()
   }
 
+  const clearCurrentSong = async () => {
+    await axios.put('/api/songs/currentSong')
+  }
+
   return (
     <div className="outercontainer">
       <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
@@ -319,6 +317,7 @@ export function BeetMaker2(props) {
               newParts.removeAll()
               stopLoop()
               props.resetSamples()
+              clearCurrentSong()
             }}
             className="butts"
           >

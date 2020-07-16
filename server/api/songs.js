@@ -53,6 +53,15 @@ router.get('/:songName', (req, res, next) => {
   }
 })
 
+router.put('/currentSong', (req, res, next) => {
+  try {
+    req.session.currentSong = []
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.use((req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404
