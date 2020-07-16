@@ -434,6 +434,7 @@ export function Tracks(props) {
   //let samplerArr = props.samplerArr
   const {samples, setSamples} = props
 
+  console.log(newParts._events)
   useEffect(() => {
     if (samples && samples.length) {
       samples.map(sample => {
