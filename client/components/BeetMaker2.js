@@ -325,7 +325,6 @@ export function BeetMaker2(props) {
           >
             <i className="material-icons">fiber_manual_record</i>
           </Button>
-          --
           <Button onClick={() => stopLoop()} className="butts">
             <i className="material-icons">stop</i>
           </Button>
@@ -341,33 +340,33 @@ export function BeetMaker2(props) {
           >
             Clear Loop
           </Button>
-          <>
-            <input
-              className="react-switch-checkbox"
-              id="react-switch-new"
-              type="checkbox"
-              onChange={() => {
-                console.log(metronomeStatus)
-                metronomeStatus = !metronomeStatus
-                if (metronomeStatus) {
-                  metronome.start(0)
-                  metronome.loop = true
-                  metronome.loopEnd = '1m'
-                } else {
-                  metronome.cancel().stop()
-                }
-              }}
-            />
-            <label className="react-switch-label" htmlFor="react-switch-new">
-              <span className="react-switch-button" />
-            </label>
-          </>
           <Button onClick={saveLoop} className="butts">
             Save Loop
           </Button>
         </div>
         <div>
           <Form>
+            <div>
+              <input
+                className="react-switch-checkbox"
+                id="react-switch-new"
+                type="checkbox"
+                onChange={() => {
+                  console.log(metronomeStatus)
+                  metronomeStatus = !metronomeStatus
+                  if (metronomeStatus) {
+                    metronome.start(0)
+                    metronome.loop = true
+                    metronome.loopEnd = '1m'
+                  } else {
+                    metronome.cancel().stop()
+                  }
+                }}
+              />
+              <label className="react-switch-label" htmlFor="react-switch-new">
+                <span className="react-switch-button" />
+              </label>
+            </div>
             <Form.Group>
               <Form.Label>Volume</Form.Label>
               <Form.Control
