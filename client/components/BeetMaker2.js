@@ -2,7 +2,7 @@
 /* eslint-disable no-return-assign*/
 import React, {useEffect} from 'react'
 import * as Tone from 'tone'
-import {Button, Form} from 'react-bootstrap'
+import {Button, Form, Modal} from 'react-bootstrap'
 import Tracks from './Tracks'
 import {defaultBoard} from './toneSamples'
 import {connect} from 'react-redux'
@@ -14,6 +14,7 @@ import {
   setArrayThunk
 } from '../store/sampler'
 import {getSongsThunk} from '../store/savedSongs'
+import OurDumbModal from '../components/Modal'
 
 // Tone.context.resume()
 Tone.context.latencyHint = 'fastest'
@@ -24,10 +25,13 @@ const woodblock = new Tone.Sampler({
 
 const keySounds = defaultBoard
 
+//let firstLoad = true
+
 const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
 let playStatus = false
+let show = true
 
 const beatLoop = function(time, value) {
   value.note.triggerAttackRelease(value.tone)
@@ -208,6 +212,10 @@ export function BeetMaker2(props) {
     button.setAttribute('class', 'butts btn btn-primary')
   }
 
+  function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
   document.addEventListener('keydown', e => {
     if (e.key === '0') {
       handleKeyDown('numberRow', 'k0')
@@ -300,14 +308,24 @@ export function BeetMaker2(props) {
             <i className="material-icons">play_arrow</i>
           </Button>
           <Button
-            onClick={() => {
-              recordStatus = true
+            onClick={async () => {
+              console.log('beginning of startloop', newParts.context.state)
+              console.log('beginning of startloop', Tone.context.state)
+              if (newParts.context.state !== 'running') {
+                await Tone.start()
+                await newParts.context.resume()
+              }
+              await timeout(100)
+              console.log('beginning of startloop', newParts.context.state)
+              console.log('beginning of startloop', Tone.context.state)
+              recordStatus = !recordStatus
               startLoop()
             }}
             className="butts"
           >
             <i className="material-icons">fiber_manual_record</i>
           </Button>
+          --
           <Button onClick={() => stopLoop()} className="butts">
             <i className="material-icons">stop</i>
           </Button>
@@ -323,9 +341,13 @@ export function BeetMaker2(props) {
           >
             Clear Loop
           </Button>
-          <Button
-            onClick={() => {
-              if (playStatus) {
+          <>
+            <input
+              className="react-switch-checkbox"
+              id="react-switch-new"
+              type="checkbox"
+              onChange={() => {
+                console.log(metronomeStatus)
                 metronomeStatus = !metronomeStatus
                 if (metronomeStatus) {
                   metronome.start(0)
@@ -334,12 +356,13 @@ export function BeetMaker2(props) {
                 } else {
                   metronome.cancel().stop()
                 }
-              }
-            }}
-            className="butts"
-          >
+              }}
+            />
             Toggle Metronome
-          </Button>
+            <label className="react-switch-label" htmlFor="react-switch-new">
+              <span className="react-switch-button" />
+            </label>
+          </>
           <Button onClick={saveLoop} className="butts">
             Save Loop
           </Button>
@@ -389,6 +412,7 @@ export function BeetMaker2(props) {
         </div>
       </div>
       <SavedLoops />
+      {/* <OurDumbModal /> */}
       <Tracks />
     </div>
   )
