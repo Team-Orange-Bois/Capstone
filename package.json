@@ -69,6 +69,7 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-firebase-hooks": "^2.2.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-simple-keyboard": "^2.3.88",
