@@ -36,7 +36,6 @@ export default function LoopStation() {
         clonedNode.style.display = 'none'
       } else {
         originalNode.setAttribute('class', 'loopStationButt')
-        console.log('new style:', originalNode.style)
       }
     }
 

@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
-import React from 'react'
+/* eslint-disable no-return-assign*/
+import React, {useEffect} from 'react'
 import * as Tone from 'tone'
 import {Button, Form} from 'react-bootstrap'
 import Tracks from './Tracks'
@@ -8,7 +9,9 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import SavedLoops from './SavedLoops'
 import {setSamplesThunk, resetSamplesThunk} from '../store/sampler'
+import {session} from 'passport'
 
+// Tone.context.resume()
 Tone.context.latencyHint = 'fastest'
 const woodblock = new Tone.Sampler({
   C3:
@@ -21,6 +24,7 @@ const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
 let playStatus = false
+let savedSongs
 
 const beatLoop = function(time, value) {
   value.note.triggerAttackRelease(value.tone)
@@ -42,108 +46,152 @@ let buttonIndex = -1
 //helper for finding the label to reconstruct the samplerObj
 function findLabel(note) {
   let label
-  Object.keys(defaultBoard).forEach(row =>
-    Object.keys(defaultBoard[row]).forEach(key => {
-      if (defaultBoard[row][key].note === note) {
-        label = defaultBoard[row][key].label
+  Object.keys(keySounds).forEach(row =>
+    Object.keys(keySounds[row]).forEach(key => {
+      if (keySounds[row][key].note === note) {
+        label = keySounds[row][key].label
       }
     })
   )
   return label
 }
 
+//helper for finding the Tone.sampler obj to reconstruct the samplerObj
+function findSample(label) {
+  let sample
+  Object.keys(keySounds).forEach(row =>
+    Object.keys(keySounds[row]).forEach(key => {
+      if (keySounds[row][key].label === label) {
+        sample = keySounds[row][key].note
+      }
+    })
+  )
+  return sample
+}
+
 export function BeetMaker2(props) {
-  if (props.savedSamples) {
-    props.savedSamples.map(sample => {
+  useEffect(() => {
+    Tone.Transport.cancel().stop()
+    newParts.cancel().stop()
+  }, [])
+
+  if (sessionStorage.getItem('loadedSong')) {
+    let loadedSong = JSON.parse(sessionStorage.getItem('loadedSong'))
+    console.log(loadedSong)
+    newParts.removeAll()
+    loadedSong.map(sample => {
       samplerObj.samples.push({
         time: sample.time,
         tone: sample.tone,
-        note: sample.note,
-        label: findLabel(sample.note)
+        note: findSample(sample.label),
+        label: sample.label
       })
       newParts.add({
         time: sample.time,
         tone: sample.tone,
-        note: sample.note
+        note: findSample(sample.label)
       })
     })
   }
+
+  // if (props.savedSamples) {
+  //   newParts.removeAll()
+  //   props.savedSamples.map(sample => {
+  //     samplerObj.samples.push({
+  //       time: sample.time,
+  //       tone: sample.tone,
+  //       note: sample.note,
+  //       label: findLabel(sample.note)
+  //     })
+  //     newParts.add({
+  //       time: sample.time,
+  //       tone: sample.tone,
+  //       note: sample.note
+  //     })
+  //   })
+  // }
+
   function startLoop() {
     playStatus = true
     Tone.Transport.cancel()
     Tone.Transport.stop()
+    Tone.Transport.start()
     Tone.Transport.loop = true
     Tone.Transport.loopEnd = '4m'
-    Tone.Transport.start()
+    newParts.cancel()
+    newParts.stop()
     newParts.start(0)
-    // setParts(newParts)
   }
 
   const handleKeyDown = (row, identifier) => {
     const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
 
-    const timingArr = Tone.Transport.position.split(':')
+    if (recordStatus) {
+      const timingArr = Tone.Transport.position.split(':')
 
-    let measure = timingArr[0]
+      let measure = timingArr[0]
 
-    // find the current transport time
-    let beat = timingArr[1]
+      // find the current transport time
+      let beat = timingArr[1]
 
-    // //convert current transport time sixteenths into nearest 32n for timing
-    let sixteenths = timingArr[2]
+      // //convert current transport time sixteenths into nearest 32n for timing
+      let sixteenths = timingArr[2]
 
-    if (parseFloat(sixteenths) >= 1 && parseFloat(sixteenths) <= 2) {
-      sixteenths = '2'
-    } else if (parseFloat(sixteenths) >= 3) {
-      beat = (parseFloat(beat) + 1).toString()
-      sixteenths = '0'
-    } else if (parseFloat(sixteenths) > 2 && parseFloat(sixteenths) < 3) {
-      sixteenths = '2'
-      keySounds[row][identifier].note.triggerAttackRelease('C3')
+      if (parseFloat(sixteenths) >= 1 && parseFloat(sixteenths) <= 2) {
+        sixteenths = '2'
+      } else if (parseFloat(sixteenths) >= 3) {
+        beat = (parseFloat(beat) + 1).toString()
+        sixteenths = '0'
+      } else if (parseFloat(sixteenths) > 2 && parseFloat(sixteenths) < 3) {
+        sixteenths = '2'
+        keySounds[row][identifier].note.triggerAttackRelease('C3')
+      } else {
+        sixteenths = '0'
+        keySounds[row][identifier].note.triggerAttackRelease('C3')
+      }
+
+      if (beat === '4') {
+        measure = (parseInt(measure, 10) + 1).toString()
+        beat = '0'
+      }
+
+      if (measure === '4') {
+        measure = '0'
+      }
+
+      const timing = `${measure}:${beat}:${sixteenths}`
+
+      //ensure note currently does not reside within the same beat, to prevent stacking
+
+      const filteredNotes = samplerObj.samples.filter(
+        item =>
+          item.note === keySounds[row][identifier].note && item.time === timing
+      )
+
+      if (!filteredNotes.length && recordStatus) {
+        samplerObj.samples.push({
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note,
+          label: keySounds[row][identifier].label
+        })
+
+        newParts.add({
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note
+        })
+
+        props.setSamples({
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note,
+          label: keySounds[row][identifier].label
+        })
+      }
     } else {
-      sixteenths = '0'
-      keySounds[row][identifier].note.triggerAttackRelease('C3')
-    }
-
-    if (beat === '4') {
-      measure = (parseInt(measure, 10) + 1).toString()
-      beat = '0'
-    }
-
-    if (measure === '4') {
-      measure = '0'
-    }
-
-    const timing = `${measure}:${beat}:${sixteenths}`
-
-    //ensure note currently does not reside within the same beat, to prevent stacking
-
-    const filteredNotes = samplerObj.samples.filter(
-      item =>
-        item.note === keySounds[row][identifier].note && item.time === timing
-    )
-
-    if (!filteredNotes.length && recordStatus) {
-      samplerObj.samples.push({
-        time: timing,
-        tone: 'C3',
-        note: keySounds[row][identifier].note,
-        label: keySounds[row][identifier].label
-      })
-
-      newParts.add({
-        time: timing,
-        tone: 'C3',
-        note: keySounds[row][identifier].note
-      })
-
-      props.setSamples({
-        time: timing,
-        tone: 'C3',
-        note: keySounds[row][identifier].note,
-        label: keySounds[row][identifier].label
-      })
+      keySounds[row][identifier].note.triggerAttackRelease('c3')
     }
   }
 
@@ -204,11 +252,20 @@ export function BeetMaker2(props) {
         tone: sample.tone,
         label: sample.label
       }))
-
       return {samples: newSamples}
     }
     const {data} = await axios.post('/api/songs', songify(samplerObj))
-    //console.log(data)
+
+    savedSongs = data
+  }
+
+  const handleLoadSong = async e => {
+    e.preventDefault()
+    let songName = event.target.song.value
+
+    const {data} = await axios.get('/api/songs/' + songName)
+    console.log(data)
+    // await getSong(songName)
   }
 
   return (
@@ -227,7 +284,7 @@ export function BeetMaker2(props) {
                       <Button
                         id={button}
                         key={button}
-                        className="butts sample"
+                        className="butts btn btn-primary"
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
@@ -257,7 +314,7 @@ export function BeetMaker2(props) {
           </Button>
           <Button
             onClick={() => {
-              recordStatus = !recordStatus
+              recordStatus = true
               startLoop()
             }}
             className="butts"
@@ -343,8 +400,8 @@ export function BeetMaker2(props) {
           </Form>
         </div>
       </div>
-      <SavedLoops />
-      {/* <Tracks /> */}
+      <SavedLoops songList={savedSongs} />
+      <Tracks />
     </div>
   )
 }

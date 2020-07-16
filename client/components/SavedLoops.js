@@ -11,12 +11,12 @@ const SavedLoopsComponent = ({
   song,
   getSongs,
   songs,
-  setArrayOnRedux
+  setArrayOnRedux,
+  songList
 }) => {
   useEffect(() => {
     getSongs()
   }, [])
-
   //helper for finding the Tone.sampler obj to reconstruct the samplerObj
   function findSample(label) {
     let sample
@@ -33,36 +33,46 @@ const SavedLoopsComponent = ({
   let loadedSong
 
   //if getSong thunk set a song to redux on submit
-  if (song.length) {
-    //song is an arr of an arr of length 1
-    let dataToConvert = song[0][0]
+  // if (song.length) {
+  //   //song is an arr of an arr of length 1
+  //   let dataToConvert = song[0][0]
 
-    loadedSong = dataToConvert.samples.map(sample => ({
-      time: sample.time,
-      tone: sample.tone,
-      label: sample.label,
-      note: findSample(sample.label)
-    }))
-    async function fireSetSamples() {
-      await setArrayOnRedux(loadedSong)
-    }
-    fireSetSamples()
-  }
+  //   loadedSong = dataToConvert.samples.map(sample => ({
+  //     time: sample.time,
+  //     tone: sample.tone,
+  //     label: sample.label,
+  //     note: findSample(sample.label)
+  //   }))
+  //   async function fireSetSamples() {
+  //     await setArrayOnRedux(loadedSong)
+  //   }
+  //   fireSetSamples()
+  // }
 
   const handleSubmit = async e => {
     e.preventDefault()
     let songName = event.target.song.value
 
-    await getSong(songName)
+    const {data} = await axios.get('/api/songs/' + songName)
+    if (data) {
+      loadedSong = data[0].samples.map(sample => ({
+        time: sample.time,
+        tone: sample.tone,
+        label: sample.label
+      }))
+    }
+    sessionStorage.clear()
+    sessionStorage.setItem('loadedSong', JSON.stringify(loadedSong))
+    // await getSong(songName)
   }
 
   return (
     <>
-      {songs.length ? (
+      {songList ? (
         <form onSubmit={e => handleSubmit(e)}>
           <select name="song">
             <option defaultValue>Load a Saved Loop</option>
-            {songs[0].map(songLoop => (
+            {songList.map(songLoop => (
               <option key={songLoop.name}>{songLoop.name}</option>
             ))}
           </select>
