@@ -1,5 +1,5 @@
 /* eslint-disable no-inner-declarations*/
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {getSongsThunk, getSongThunk} from '../store/savedSongs'
 import {setArrayThunk} from '../store/sampler'
@@ -11,26 +11,29 @@ const SavedLoopsComponent = ({
   song,
   getSongs,
   songs,
-  setArrayOnRedux,
-  songList
+  setArrayOnRedux
 }) => {
+  const [savedSongs, setSavedSongs] = useState(songs)
+
   useEffect(() => {
     getSongs()
   }, [])
+
   //helper for finding the Tone.sampler obj to reconstruct the samplerObj
-  function findSample(label) {
-    let sample
-    Object.keys(defaultBoard).forEach(row =>
-      Object.keys(defaultBoard[row]).forEach(key => {
-        if (defaultBoard[row][key].label === label) {
-          sample = defaultBoard[row][key].note
-        }
-      })
-    )
-    return sample
-  }
+  // function findSample(label) {
+  //   let sample
+  //   Object.keys(defaultBoard).forEach(row =>
+  //     Object.keys(defaultBoard[row]).forEach(key => {
+  //       if (defaultBoard[row][key].label === label) {
+  //         sample = defaultBoard[row][key].note
+  //       }
+  //     })
+  //   )
+  //   return sample
+  // }
+
   //will be the sample array we set to redux state
-  let loadedSong
+  // let loadedSong
 
   //if getSong thunk set a song to redux on submit
   // if (song.length) {
@@ -54,25 +57,25 @@ const SavedLoopsComponent = ({
     let songName = event.target.song.value
 
     const {data} = await axios.get('/api/songs/' + songName)
-    if (data) {
-      loadedSong = data[0].samples.map(sample => ({
-        time: sample.time,
-        tone: sample.tone,
-        label: sample.label
-      }))
-    }
-    sessionStorage.clear()
-    sessionStorage.setItem('loadedSong', JSON.stringify(loadedSong))
+    // if (data) {
+    //   loadedSong = data[0].samples.map(sample => ({
+    //     time: sample.time,
+    //     tone: sample.tone,
+    //     label: sample.label
+    //   }))
+    // }
     // await getSong(songName)
+
+    window.location.reload(false)
   }
 
   return (
     <>
-      {songList ? (
+      {songs.length ? (
         <form onSubmit={e => handleSubmit(e)}>
           <select name="song">
             <option defaultValue>Load a Saved Loop</option>
-            {songList.map(songLoop => (
+            {songs[0].map(songLoop => (
               <option key={songLoop.name}>{songLoop.name}</option>
             ))}
           </select>

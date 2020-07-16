@@ -1,6 +1,17 @@
 const router = require('express').Router()
 module.exports = router
 
+//get to api/songs
+//gets all songs on session
+router.get('/', (req, res, next) => {
+  try {
+    // console.log('get route to /api/songs')
+    res.json(req.session.songs)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // post to api/songs
 router.post('/', (req, res, next) => {
   try {
@@ -22,12 +33,9 @@ router.post('/', (req, res, next) => {
   }
 })
 
-//get to api/songs
-//gets all songs on session
-router.get('/', (req, res, next) => {
+router.get('/currentSong', (req, res, next) => {
   try {
-    // console.log('get route to /api/songs')
-    res.json(req.session.songs)
+    res.json(req.session.currentSong)
   } catch (error) {
     next(error)
   }
@@ -38,6 +46,7 @@ router.get('/:songName', (req, res, next) => {
     let songsOnSesh = req.session.songs
     let songName = Number(req.params.songName)
     let songToLoad = songsOnSesh.filter(song => song.name === songName)
+    req.session.currentSong = songToLoad
     res.json(songToLoad)
   } catch (err) {
     next(err)

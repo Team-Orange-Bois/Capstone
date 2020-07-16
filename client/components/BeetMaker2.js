@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import SavedLoops from './SavedLoops'
 import {setSamplesThunk, resetSamplesThunk} from '../store/sampler'
+import {getSongsThunk} from '../store/savedSongs'
 import {session} from 'passport'
 
 // Tone.context.resume()
@@ -24,13 +25,46 @@ const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
 let playStatus = false
-let savedSongs
 
 const beatLoop = function(time, value) {
   value.note.triggerAttackRelease(value.tone)
 }
 
+//helper for finding the Tone.sampler obj to reconstruct the samplerObj
+function findSample(label) {
+  let sample
+  Object.keys(keySounds).forEach(row =>
+    Object.keys(keySounds[row]).forEach(key => {
+      if (keySounds[row][key].label === label) {
+        sample = keySounds[row][key].note
+      }
+    })
+  )
+  return sample
+}
+
+let loadedSong
+
+async function getLoadedSong() {
+  const {data} = await axios.get('/api/songs/currentSong')
+  loadedSong = data
+  if (loadedSong) {
+    loadedSong.map(sample => {
+      samplerObj.samples.push({
+        time: sample.time,
+        tone: sample.tone,
+        note: findSample(sample.label),
+        label: sample.label
+      })
+    })
+  }
+}
+
+getLoadedSong()
+
 export let newParts = new Tone.Part(beatLoop, samplerObj.samples)
+
+console.log(newParts)
 
 const metronome = new Tone.Event(function(time) {
   woodblock.triggerAttackRelease('C4', '4n')
@@ -56,43 +90,11 @@ function findLabel(note) {
   return label
 }
 
-//helper for finding the Tone.sampler obj to reconstruct the samplerObj
-function findSample(label) {
-  let sample
-  Object.keys(keySounds).forEach(row =>
-    Object.keys(keySounds[row]).forEach(key => {
-      if (keySounds[row][key].label === label) {
-        sample = keySounds[row][key].note
-      }
-    })
-  )
-  return sample
-}
-
 export function BeetMaker2(props) {
   useEffect(() => {
     Tone.Transport.cancel().stop()
     newParts.cancel().stop()
   }, [])
-
-  if (sessionStorage.getItem('loadedSong')) {
-    let loadedSong = JSON.parse(sessionStorage.getItem('loadedSong'))
-    console.log(loadedSong)
-    newParts.removeAll()
-    loadedSong.map(sample => {
-      samplerObj.samples.push({
-        time: sample.time,
-        tone: sample.tone,
-        note: findSample(sample.label),
-        label: sample.label
-      })
-      newParts.add({
-        time: sample.time,
-        tone: sample.tone,
-        note: findSample(sample.label)
-      })
-    })
-  }
 
   // if (props.savedSamples) {
   //   newParts.removeAll()
@@ -255,17 +257,7 @@ export function BeetMaker2(props) {
       return {samples: newSamples}
     }
     const {data} = await axios.post('/api/songs', songify(samplerObj))
-
-    savedSongs = data
-  }
-
-  const handleLoadSong = async e => {
-    e.preventDefault()
-    let songName = event.target.song.value
-
-    const {data} = await axios.get('/api/songs/' + songName)
-    console.log(data)
-    // await getSong(songName)
+    props.getSongs()
   }
 
   return (
@@ -400,7 +392,7 @@ export function BeetMaker2(props) {
           </Form>
         </div>
       </div>
-      <SavedLoops songList={savedSongs} />
+      <SavedLoops />
       <Tracks />
     </div>
   )
@@ -409,7 +401,8 @@ export function BeetMaker2(props) {
 const mapDispatch = dispatch => {
   return {
     setSamples: sample => dispatch(setSamplesThunk(sample)),
-    resetSamples: () => dispatch(resetSamplesThunk())
+    resetSamples: () => dispatch(resetSamplesThunk()),
+    getSongs: () => dispatch(getSongsThunk())
   }
 }
 
