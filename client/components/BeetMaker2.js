@@ -46,76 +46,81 @@ export function BeetMaker2(props) {
     playStatus = true
     Tone.Transport.cancel()
     Tone.Transport.stop()
+    Tone.Transport.start()
     Tone.Transport.loop = true
     Tone.Transport.loopEnd = '4m'
-    Tone.Transport.start()
+    newParts.cancel()
+    newParts.stop()
     newParts.start(0)
-    // setParts(newParts)
   }
 
   const handleKeyDown = (row, identifier) => {
     const button = document.getElementById(identifier)
     button.setAttribute('class', 'butts btn active-button')
 
-    const timingArr = Tone.Transport.position.split(':')
+    if (recordStatus) {
+      const timingArr = Tone.Transport.position.split(':')
 
-    let measure = timingArr[0]
+      let measure = timingArr[0]
 
-    // find the current transport time
-    let beat = timingArr[1]
+      // find the current transport time
+      let beat = timingArr[1]
 
-    // //convert current transport time sixteenths into nearest 32n for timing
-    let sixteenths = timingArr[2]
+      // //convert current transport time sixteenths into nearest 32n for timing
+      let sixteenths = timingArr[2]
 
-    if (parseFloat(sixteenths) >= 1 && parseFloat(sixteenths) <= 2) {
-      sixteenths = '2'
-    } else if (parseFloat(sixteenths) >= 3) {
-      beat = (parseFloat(beat) + 1).toString()
-      sixteenths = '0'
-    } else if (parseFloat(sixteenths) > 2 && parseFloat(sixteenths) < 3) {
-      sixteenths = '2'
-      keySounds[row][identifier].note.triggerAttackRelease('C3')
+      if (parseFloat(sixteenths) >= 1 && parseFloat(sixteenths) <= 2) {
+        sixteenths = '2'
+      } else if (parseFloat(sixteenths) >= 3) {
+        beat = (parseFloat(beat) + 1).toString()
+        sixteenths = '0'
+      } else if (parseFloat(sixteenths) > 2 && parseFloat(sixteenths) < 3) {
+        sixteenths = '2'
+        keySounds[row][identifier].note.triggerAttackRelease('C3')
+      } else {
+        sixteenths = '0'
+        keySounds[row][identifier].note.triggerAttackRelease('C3')
+      }
+
+      if (beat === '4') {
+        measure = (parseInt(measure, 10) + 1).toString()
+        beat = '0'
+      }
+
+      if (measure === '4') {
+        measure = '0'
+      }
+
+      const timing = `${measure}:${beat}:${sixteenths}`
+
+      //ensure note currently does not reside within the same beat, to prevent stacking
+
+      const filteredNotes = samplerObj.samples.filter(
+        item =>
+          item.note === keySounds[row][identifier].note && item.time === timing
+      )
+
+      if (!filteredNotes.length && recordStatus) {
+        samplerObj.samples.push({
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note
+        })
+
+        newParts.add({
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note
+        })
+
+        props.setSamples({
+          time: timing,
+          tone: 'C3',
+          note: keySounds[row][identifier].note
+        })
+      }
     } else {
-      sixteenths = '0'
-      keySounds[row][identifier].note.triggerAttackRelease('C3')
-    }
-
-    if (beat === '4') {
-      measure = (parseInt(measure, 10) + 1).toString()
-      beat = '0'
-    }
-
-    if (measure === '4') {
-      measure = '0'
-    }
-
-    const timing = `${measure}:${beat}:${sixteenths}`
-
-    //ensure note currently does not reside within the same beat, to prevent stacking
-
-    const filteredNotes = samplerObj.samples.filter(
-      item =>
-        item.note === keySounds[row][identifier].note && item.time === timing
-    )
-
-    if (!filteredNotes.length && recordStatus) {
-      samplerObj.samples.push({
-        time: timing,
-        tone: 'C3',
-        note: keySounds[row][identifier].note
-      })
-
-      newParts.add({
-        time: timing,
-        tone: 'C3',
-        note: keySounds[row][identifier].note
-      })
-
-      props.setSamples({
-        time: timing,
-        tone: 'C3',
-        note: keySounds[row][identifier].note
-      })
+      keySounds[row][identifier].note.triggerAttackRelease('c3')
     }
   }
 
@@ -183,7 +188,7 @@ export function BeetMaker2(props) {
                       <Button
                         id={button}
                         key={button}
-                        className="butts sample"
+                        className="butts btn btn-primary"
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
