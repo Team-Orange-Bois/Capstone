@@ -3,13 +3,13 @@ module.exports = router
 
 //get to api/songs
 //gets all songs on session
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     // console.log('get route to /api/songs')
     if (!req.session.songs) {
       req.session.songs = []
     }
-    res.json(req.session.songs)
+    await res.json(req.session.songs)
   } catch (error) {
     next(error)
   }
