@@ -4,6 +4,7 @@ import {Button, Form} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {getSongsThunk} from '../store/savedSongs'
 import axios from 'axios'
+import {object} from 'prop-types'
 
 const SavedLoopsComponent = ({getSongs, songs}) => {
   const [savedSongs, setSavedSongs] = useState(songs)
@@ -34,9 +35,10 @@ const SavedLoopsComponent = ({getSongs, songs}) => {
         >
           <Form.Control as="select" name="song">
             <option defaultValue>Load a Saved Loop</option>
-            {songs[0].map(songLoop => (
-              <option key={songLoop.name}>{songLoop.name}</option>
-            ))}
+            {songs.length &&
+              songs[0].map(songLoop => (
+                <option key={songLoop.name}>{songLoop.name}</option>
+              ))}
           </Form.Control>
           <Button className="butts" type="submit" style={{height: '33%'}}>
             Load Sample

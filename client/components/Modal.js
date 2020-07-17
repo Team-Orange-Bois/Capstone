@@ -8,13 +8,9 @@ export default function OurDumbModal() {
 
   const handleClose = async () => {
     if (newParts.context.state !== 'running') {
-      console.log('beginning of startloop', newParts.context.state)
-      console.log('beginning of startloop', Tone.context.state)
       await Tone.start()
       await newParts.context.resume()
     }
-    console.log('beginning of startloop', newParts.context.state)
-    console.log('beginning of startloop', Tone.context.state)
     setShow(false)
   }
   const handleShow = () => setShow(true)

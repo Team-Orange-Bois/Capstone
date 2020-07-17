@@ -18,13 +18,10 @@ export default function DrumMachine() {
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
   }).toMaster()
 
-  let hat = new Tone.Sampler(
-    {
-      c4:
-        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
-    },
-    () => console.log('loaded hat')
-  ).toMaster()
+  let hat = new Tone.Sampler({
+    c4:
+      'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
+  }).toMaster()
 
   function hatFunc() {
     hat.triggerAttackRelease('c4', '4n')
@@ -160,38 +157,36 @@ export default function DrumMachine() {
         </Form>
       </div>
       <div id="controlOptions" onChange={e => changePattern(e.target)}>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <div>
-            <Form.Label>Kick Pattern:</Form.Label>
-            <Form.Control as="select" defaultValue="1n" name="kick">
-              {/* <option value="null">None</option> */}
-              <option value="1n">Whole Notes</option>
-              <option value="2n">Half Notes </option>
-              <option value="4n">Quarter Notes</option>
-              <option value="8n">Eighth Notes</option>
-            </Form.Control>
-          </div>
-          <div>
-            <Form.Label>Snare Pattern:</Form.Label>
-            <Form.Control as="select" defaultValue="2n" name="snare">
-              <option value="null">None</option>
-              <option value="1n">Whole Notes</option>
-              <option value="2n">Half Notes </option>
-              <option value="4n">Quarter Notes</option>
-              <option value="8n">Eighth Notes</option>
-            </Form.Control>
-          </div>
-          <div>
-            <Form.Label>Hat Pattern:</Form.Label>
-            <Form.Control as="select" defaultValue="4n" name="hat">
-              <option value="null">None</option>
-              <option value="1n">Whole Notes</option>
-              <option value="2n">Half Notes </option>
-              <option value="4n">Quarter Notes</option>
-              <option value="8n">Eighth Notes</option>
-              <option value="16n">Sixteenth Notes</option>
-            </Form.Control>
-          </div>
+        <div>
+          <Form.Label>Kick Pattern:</Form.Label>
+          <Form.Control as="select" defaultValue="1n" name="kick">
+            {/* <option value="null">None</option> */}
+            <option value="1n">Whole Notes</option>
+            <option value="2n">Half Notes </option>
+            <option value="4n">Quarter Notes</option>
+            <option value="8n">Eighth Notes</option>
+          </Form.Control>
+        </div>
+        <div>
+          <Form.Label>Snare Pattern:</Form.Label>
+          <Form.Control as="select" defaultValue="2n" name="snare">
+            <option value="null">None</option>
+            <option value="1n">Whole Notes</option>
+            <option value="2n">Half Notes </option>
+            <option value="4n">Quarter Notes</option>
+            <option value="8n">Eighth Notes</option>
+          </Form.Control>
+        </div>
+        <div>
+          <Form.Label>Hat Pattern:</Form.Label>
+          <Form.Control as="select" defaultValue="4n" name="hat">
+            <option value="null">None</option>
+            <option value="1n">Whole Notes</option>
+            <option value="2n">Half Notes </option>
+            <option value="4n">Quarter Notes</option>
+            <option value="8n">Eighth Notes</option>
+            <option value="16n">Sixteenth Notes</option>
+          </Form.Control>
         </div>
       </div>
     </div>

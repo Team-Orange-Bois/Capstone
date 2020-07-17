@@ -309,15 +309,11 @@ export function BeetMaker2(props) {
           </Button>
           <Button
             onClick={async () => {
-              console.log('beginning of startloop', newParts.context.state)
-              console.log('beginning of startloop', Tone.context.state)
               if (newParts.context.state !== 'running') {
                 await Tone.start()
                 await newParts.context.resume()
               }
               await timeout(100)
-              console.log('beginning of startloop', newParts.context.state)
-              console.log('beginning of startloop', Tone.context.state)
               recordStatus = !recordStatus
               startLoop()
             }}
@@ -352,7 +348,6 @@ export function BeetMaker2(props) {
                 id="react-switch-new"
                 type="checkbox"
                 onChange={() => {
-                  console.log(metronomeStatus)
                   metronomeStatus = !metronomeStatus
                   if (metronomeStatus) {
                     metronome.start(0)
