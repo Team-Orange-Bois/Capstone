@@ -447,6 +447,7 @@ export function Tracks(props) {
         columns[key].items = []
       })
     }
+    setColumns({...columns})
   }, [samples])
 
   return (
