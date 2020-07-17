@@ -7,15 +7,32 @@ let keySounds = defaultBoard
 
 export default function BeetMaker() {
   const handleKeyDown = (row, identifier) => {
-    keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
+    if (identifier === '0') {
+      keySounds.numberRow.k0.note.triggerAttackRelease('C3', '1m')
+    }
+    if (!row) {
+      Object.keys(keySounds).forEach(keyRow => {
+        Object.keys(keySounds[keyRow]).forEach(key => {
+          if (key === identifier) {
+            keySounds[keyRow][key].note.triggerAttackRelease('C3', '1m')
+          }
+        })
+      })
+    } else {
+      keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
+    }
   }
 
   document.addEventListener('keydown', e => {
-    Object.keys(keySounds).forEach(key => {
-      if (keySounds[key][e.key]) {
-        handleKeyDown(key, e.key)
-      }
-    })
+    if (e.key === '0') {
+      handleKeyDown('numberRow', 'k0')
+    } else {
+      Object.keys(keySounds).forEach(key => {
+        if (keySounds[key][e.key]) {
+          handleKeyDown(key, e.key)
+        }
+      })
+    }
   })
 
   return (
@@ -48,30 +65,30 @@ export default function BeetMaker() {
         >
           <Keyboard
             display={{
-              '1': 'kick',
-              '2': 'snare',
-              '3': 'closedHat',
-              '4': 'lit',
-              '5': 'sick',
-              '6': 'hotDamn',
-              '7': 'hahaha',
-              '8': 'wow',
-              '9': 'yeah',
-              '0': 'youGotIt',
-              '-': 'bigOof',
-              '=': 'iCantSwim',
-              q: 'badBitch',
-              w: 'lettuceTurnipDaBeet',
-              e: 'itsTime',
-              r: 'turnip',
-              t: 'daBeat',
-              y: 'flowerPower',
-              u: 'holyGuac',
-              i: 'wikiWiki',
-              o: 'oof',
-              p: 'skrrt',
-              '[': 'bonkers',
-              ']': 'hummus',
+              '1': 'Kick',
+              '2': 'Snare',
+              '3': 'Hat',
+              '4': 'Lit',
+              '5': 'Sick',
+              '6': 'Hot Damn',
+              '7': 'Hehehehe',
+              '8': 'Wow!',
+              '9': 'Yeah',
+              '0': 'You got it!',
+              '-': 'Big Oof',
+              '=': 'Swim',
+              q: 'Bad Bitch',
+              w: 'Lettuce',
+              e: 'Thyme',
+              r: 'Turnip',
+              t: 'Da Beat',
+              y: 'Flowers!',
+              u: 'Guac',
+              i: 'Wiki',
+              o: 'Oof',
+              p: 'Skrrt!',
+              '[': 'Bonkers!',
+              ']': 'Hummus!',
               a: 'guitarGroove1',
               s: 'guitarGroove2',
               d: 'guitarGroove3',
@@ -92,7 +109,7 @@ export default function BeetMaker() {
               m: 'keysBm7b5',
               ',': 'keysCmaj7Oct',
               '.': 'minRoll',
-              '/': null
+              '/': 'Oh Yeah'
             }}
             style={{
               backgroundColor: '#35054C',

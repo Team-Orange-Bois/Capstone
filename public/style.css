@@ -28,6 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url('./vaaaaape.jpg');
 }
 
 a {
@@ -232,12 +233,10 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #490769;
+
   height: 100vh;
-  background-image: url('./vaaaaape.jpg');
+
   color: #24c0f9;
-  background-color: #35054c;
-  border-color: #24c0f9;
 }
 
 #controlSliders {
@@ -249,9 +248,9 @@ button {
 }
 
 #controlOptions {
-  width: 25vw;
+  width: 50vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }

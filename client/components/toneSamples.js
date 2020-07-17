@@ -256,7 +256,7 @@ export const defaultBoard = {
   qRow: {
     q: {note: badBitch, label: 'Bad Bitch'},
     w: {note: lettuceTurnipDaBeet, label: 'Lettuce'},
-    e: {note: itsTime, label: 'Time'},
+    e: {note: itsTime, label: 'Thyme'},
     r: {note: turnip, label: 'Turnip'},
     t: {note: daBeat, label: 'Da Beat'},
     y: {note: flowerPower, label: 'Flowers!'},
