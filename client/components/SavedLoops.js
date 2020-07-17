@@ -17,7 +17,7 @@ const SavedLoopsComponent = ({getSongs, songs}) => {
     e.preventDefault()
     let songName = event.target.song.value
 
-    const {data} = await axios.get('/api/songs/' + songName)
+    const {data} = await axios.get(`/api/songs?song=${songName}`)
 
     window.location.reload(false)
   }

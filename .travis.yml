@@ -32,7 +32,6 @@ install:
   - npm install
 script:
   - npm run build-client
-  - npm start
 deploy:
   provider: firebase
   skip_cleanup: true
