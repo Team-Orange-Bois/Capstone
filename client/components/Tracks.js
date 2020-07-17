@@ -431,10 +431,9 @@ const onDragEnd = (result, columns, setColumns) => {
 
 export function Tracks(props) {
   const [columns, setColumns] = useState(columnsFromBackend)
-  //let samplerArr = props.samplerArr
+
   const {samples, setSamples} = props
 
-  // console.log(newParts._events)
   useEffect(() => {
     if (samples && samples.length && columns['3:3:3.5']) {
       samples.map(sample => {

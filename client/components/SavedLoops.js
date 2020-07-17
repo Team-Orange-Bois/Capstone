@@ -4,6 +4,7 @@ import {Button, Form} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {getSongsThunk} from '../store/savedSongs'
 import axios from 'axios'
+import {object} from 'prop-types'
 
 const SavedLoopsComponent = ({getSongs, songs}) => {
   const [savedSongs, setSavedSongs] = useState(songs)

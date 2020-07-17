@@ -18,13 +18,10 @@ export default function DrumMachine() {
       'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2Fsnare.mp3?alt=media&token=09b8ea4e-8b37-4c98-beb9-a2460cdf509c'
   }).toMaster()
 
-  let hat = new Tone.Sampler(
-    {
-      c4:
-        'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
-    },
-    () => console.log('loaded hat')
-  ).toMaster()
+  let hat = new Tone.Sampler({
+    c4:
+      'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/lofi-siq-beets%2FclosedHat.mp3?alt=media&token=dfdd2ffc-317b-465a-9499-55e4ac07a6b2'
+  }).toMaster()
 
   function hatFunc() {
     hat.triggerAttackRelease('c4', '4n')
