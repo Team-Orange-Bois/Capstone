@@ -34,9 +34,10 @@ const SavedLoopsComponent = ({getSongs, songs}) => {
         >
           <Form.Control as="select" name="song">
             <option defaultValue>Load a Saved Loop</option>
-            {songs[0].map(songLoop => (
-              <option key={songLoop.name}>{songLoop.name}</option>
-            ))}
+            {songs.length &&
+              songs[0].map(songLoop => (
+                <option key={songLoop.name}>{songLoop.name}</option>
+              ))}
           </Form.Control>
           <Button className="butts" type="submit" style={{height: '33%'}}>
             Load Sample
