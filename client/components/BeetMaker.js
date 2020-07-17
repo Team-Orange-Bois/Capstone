@@ -8,18 +8,18 @@ let keySounds = defaultBoard
 export default function BeetMaker() {
   const handleKeyDown = (row, identifier) => {
     if (identifier === '0') {
-      keySounds.numberRow.k0.note.triggerAttackRelease('C3', '1m')
+      keySounds.numberRow.k0.note.triggerAttackRelease('C3')
     }
     if (!row) {
       Object.keys(keySounds).forEach(keyRow => {
         Object.keys(keySounds[keyRow]).forEach(key => {
           if (key === identifier) {
-            keySounds[keyRow][key].note.triggerAttackRelease('C3', '1m')
+            keySounds[keyRow][key].note.triggerAttackRelease('C3')
           }
         })
       })
     } else {
-      keySounds[row][identifier].note.triggerAttackRelease('C3', '1m')
+      keySounds[row][identifier].note.triggerAttackRelease('C3')
     }
   }
 

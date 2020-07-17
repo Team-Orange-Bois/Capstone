@@ -6,6 +6,9 @@ module.exports = router
 router.get('/', (req, res, next) => {
   try {
     // console.log('get route to /api/songs')
+    if (!req.session.songs) {
+      req.session.songs = []
+    }
     res.json(req.session.songs)
   } catch (error) {
     next(error)
