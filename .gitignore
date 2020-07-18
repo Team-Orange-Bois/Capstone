@@ -6,3 +6,5 @@ secrets.js
 npm-debug.log
 yarn-error.log
 client/components/firebaseConfig.js
+.firebase
+siqbeets-23b66-firebase-adminsdk-k1srt-00366a4f37.json
