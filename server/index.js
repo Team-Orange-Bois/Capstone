@@ -5,21 +5,35 @@ const admin = require('firebase-admin')
 const path = require('path')
 const cors = require('cors')
 const serviceAccount = require('../siqbeets-23b66-firebase-adminsdk-k1srt-00366a4f37.json')
+// const socketio = require('socket.io')
+// const PORT = process.env.PORT || 5000
+const morgan = require('morgan')
 
 // const bodyParser = require('body-parser')
-// const morgan = require('morgan')
 // const compression = require('compression')
-// const socketio = require('socket.io')
-// const PORT = process.env.PORT || 8080
 
 const ref = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://siqbeets-23b66.firebaseio.com'
 })
 
+// .use(express.urlencoded({extended: true}))
 const cleanPathServer = express()
+  .use(morgan('dev'))
   .use(cors({origin: true}))
-  .use(express.static(path.join(__dirname, '..', 'public')))
+  .use(express.json())
+  .use(
+    session({
+      store: new FirebaseStore({
+        database: ref.database()
+      }),
+      name: '__session',
+      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      resave: true,
+      saveUninitialized: true
+    })
+  )
+  .use(express.static(path.join(__dirname, '..', '/public')))
   .use((req, res, next) => {
     if (path.extname(req.path).length) {
       const err = new Error('Not found')
@@ -29,22 +43,24 @@ const cleanPathServer = express()
       next()
     }
   })
-  .use(
-    session({
-      store: new FirebaseStore({
-        database: ref.database()
-      }),
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-      resave: false,
-      saveUninitialized: false
-    })
-  )
   .use('/api', require('./api'))
   .use((err, req, res, next) => {
     console.error(err)
     console.error(err.stack)
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
+
+const server = require('http').Server(cleanPathServer)
+const io = require('socket.io')(server)
+require('./socket')(io)
+
+// const server = cleanPathServer.listen(PORT, () =>
+//   console.log(`Mixing it up on port ${PORT}`)
+// )
+
+// set up our socket control center
+// const io = socketio(server)
+// require('./socket')(io)
 
 module.exports = {cleanPathServer}
 
@@ -94,9 +110,9 @@ module.exports = {cleanPathServer}
 //     console.log(`Mixing it up on port ${PORT}`)
 //   )
 
-//   // set up our socket control center
-//   const io = socketio(server)
-//   require('./socket')(io)
+// set up our socket control center
+// const io = socketio(cleanPathServer)
+// require('./socket')(io)
 // }
 
 // async function bootApp() {

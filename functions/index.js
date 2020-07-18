@@ -1,4 +1,16 @@
 const functions = require('firebase-functions')
+
+const {cleanPathServer} = require('../server/index.js')
+
+const cleanPath = functions.https.onRequest((request, response) => {
+  if (!request.path) {
+    request.url = `/${request.url}` // Prepend '/' to keep query params if any
+  }
+
+  return cleanPathServer(request, response)
+})
+
+module.exports = {cleanPath}
 // const admin = require('firebase-admin')
 // const serviceAccount = require('../siqbeets-23b66-firebase-adminsdk-k1srt-00366a4f37.json')
 
@@ -17,18 +29,6 @@ const functions = require('firebase-functions')
 //       secret: 'keyboard cat'
 //     })
 //   )
-
-const {cleanPathServer} = require('../server')
-
-const cleanPath = functions.https.onRequest((request, response) => {
-  if (!request.path) {
-    request.url = `/${request.url}` // Prepend '/' to keep query params if any
-  }
-
-  return cleanPathServer(request, response)
-})
-
-module.exports = {cleanPath}
 // const functions = require('firebase-functions')
 // const path = require('path')
 // const express = require('express')
