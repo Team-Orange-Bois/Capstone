@@ -1,6 +1,6 @@
 const functions = require('firebase-functions')
 
-const {cleanPathServer} = require('../server/index.js')
+const {cleanPathServer} = require('./server')
 
 const cleanPath = functions.https.onRequest((request, response) => {
   if (!request.path) {

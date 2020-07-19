@@ -1,3 +1,4 @@
+/* eslint-disable callback-return */
 const router = require('express').Router()
 module.exports = router
 

@@ -1,3 +1,4 @@
+/* eslint-disable callback-return */
 const express = require('express')
 const session = require('express-session')
 const FirebaseStore = require('connect-session-firebase')(session)
@@ -33,7 +34,7 @@ const cleanPathServer = express()
       saveUninitialized: true
     })
   )
-  .use(express.static(path.join(__dirname, '..', '/public')))
+  .use(express.static(path.join(__dirname, '..', '/../public')))
   .use((req, res, next) => {
     if (path.extname(req.path).length) {
       const err = new Error('Not found')

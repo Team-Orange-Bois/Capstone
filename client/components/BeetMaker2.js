@@ -25,8 +25,6 @@ const woodblock = new Tone.Sampler({
 
 const keySounds = defaultBoard
 
-//let firstLoad = true
-
 const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
