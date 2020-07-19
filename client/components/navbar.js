@@ -11,8 +11,8 @@ export function NavBar() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/beetmaker">Beet Maker Alpha</Nav.Link>
-          <Nav.Link href="/beetmaker2">Beet Maker Beta</Nav.Link>
+          <Nav.Link href="/beetmaker">The Playground</Nav.Link>
+          <Nav.Link href="/beetmaker2">Beet Maker</Nav.Link>
           {/* <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link> */}
           {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

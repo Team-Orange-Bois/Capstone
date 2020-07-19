@@ -293,389 +293,389 @@ button {
   opacity: 0.9;
 }
 
-[id='1'].butts.btn.btn-primary {
+[class='1'].butts.btn.btn-primary {
   color: white;
   background-color: #43217d;
 }
 
-[id='1'].active-button {
+[class='1'].active-button {
   background-color: #c6b2ff;
 }
 
-[id='2'].butts.btn.btn-primary {
+[class='2'].butts.btn.btn-primary {
   color: white;
   background-color: #412a84;
 }
 
-[id='2'].active-button {
+[class='2'].active-button {
   background-color: #c6b2ff;
 }
 
-[id='3'].butts.btn.btn-primary {
+[class='3'].butts.btn.btn-primary {
   color: white;
   background-color: #40338b;
 }
 
-[id='3'].active-button {
+[class='3'].active-button {
   background-color: #c6b2ff;
 }
 
-[id='4'].butts.btn.btn-primary {
+[class='4'].butts.btn.btn-primary {
   color: black;
   background-color: #fc9b58;
 }
 
-[id='4'].active-button {
+[class='4'].active-button {
   background-color: #fffaeb;
 }
 
-[id='5'].butts.btn.btn-primary {
+[class='5'].butts.btn.btn-primary {
   color: black;
   background-color: #fca153;
 }
 
-[id='5'].active-button {
+[class='5'].active-button {
   background-color: #fffaeb;
 }
 
-[id='6'].butts.btn.btn-primary {
+[class='6'].butts.btn.btn-primary {
   color: black;
   background-color: #fca64d;
 }
 
-[id='6'].active-button {
+[class='6'].active-button {
   background-color: #fffaeb;
 }
 
-[id='7'].butts.btn.btn-primary {
+[class='7'].butts.btn.btn-primary {
   color: black;
   background-color: #fcac46;
 }
 
-[id='7'].active-button {
+[class='7'].active-button {
   background-color: #fffaeb;
 }
 
-[id='8'].butts.btn.btn-primary {
+[class='8'].butts.btn.btn-primary {
   color: black;
   background-color: #fcb23f;
 }
 
-[id='8'].active-button {
+[class='8'].active-button {
   background-color: #fffaeb;
 }
 
-[id='9'].butts.btn.btn-primary {
+[class='9'].butts.btn.btn-primary {
   color: black;
   background-color: #fcb739;
 }
 
-[id='9'].active-button {
+[class='9'].active-button {
   background-color: #fffaeb;
 }
 
-[id='k0'].butts.btn.btn-primary {
+[class='k0'].butts.btn.btn-primary {
   color: black;
   background-color: #fcbd32;
 }
 
-[id='k0'].active-button {
+[class='k0'].active-button {
   background-color: #fffaeb;
 }
 
-[id='-'].butts.btn.btn-primary {
+[class='-'].butts.btn.btn-primary {
   color: black;
   background-color: #fcc325;
 }
 
-[id='-'].active-button {
+[class='-'].active-button {
   background-color: #fffaeb;
 }
 
-[id='='].butts.btn.btn-primary {
+[class='='].butts.btn.btn-primary {
   color: black;
   background-color: #fdc925;
 }
 
-[id='='].active-button {
+[class='='].active-button {
   background-color: #fffaeb;
 }
 
-[id='q'].butts.btn.btn-primary {
+[class='q'].butts.btn.btn-primary {
   color: black;
   background-color: #fc9068;
 }
 
-[id='q'].active-button {
+[class='q'].active-button {
   background-color: #fffaeb;
 }
 
-[id='w'].butts.btn.btn-primary {
+[class='w'].butts.btn.btn-primary {
   color: black;
   background-color: #fc9264;
 }
 
-[id='w'].active-button {
+[class='w'].active-button {
   background-color: #fffaeb;
 }
 
-[id='e'].butts.btn.btn-primary {
+[class='e'].butts.btn.btn-primary {
   color: black;
   background-color: #fc9561;
 }
 
-[id='e'].active-button {
+[class='e'].active-button {
   background-color: #fffaeb;
 }
 
-[id='r'].butts.btn.btn-primary {
+[class='r'].butts.btn.btn-primary {
   color: black;
   background-color: #fc985d;
 }
 
-[id='r'].active-button {
+[class='r'].active-button {
   background-color: #fffaeb;
 }
 
-[id='t'].butts.btn.btn-primary {
+[class='t'].butts.btn.btn-primary {
   color: black;
   background-color: #fc9e57;
 }
 
-[id='t'].active-button {
+[class='t'].active-button {
   background-color: #fffaeb;
 }
 
-[id='y'].butts.btn.btn-primary {
+[class='y'].butts.btn.btn-primary {
   color: black;
   background-color: #fca350;
 }
 
-[id='y'].active-button {
+[class='y'].active-button {
   background-color: #fffaeb;
 }
 
-[id='u'].butts.btn.btn-primary {
+[class='u'].butts.btn.btn-primary {
   color: black;
   background-color: #fca949;
 }
 
-[id='u'].active-button {
+[class='u'].active-button {
   background-color: #fffaeb;
 }
 
-[id='i'].butts.btn.btn-primary {
+[class='i'].butts.btn.btn-primary {
   color: black;
   background-color: #fcaf43;
 }
 
-[id='i'].active-button {
+[class='i'].active-button {
   background-color: #fffaeb;
 }
 
-[id='o'].butts.btn.btn-primary {
+[class='o'].butts.btn.btn-primary {
   color: black;
   background-color: #fcb53c;
 }
 
-[id='o'].active-button {
+[class='o'].active-button {
   background-color: #fffaeb;
 }
 
-[id='p'].butts.btn.btn-primary {
+[class='p'].butts.btn.btn-primary {
   color: black;
   background-color: #fcba35;
 }
 
-[id='p'].active-button {
+[class='p'].active-button {
   background-color: #fffaeb;
 }
 
-[id='['].butts.btn.btn-primary {
+[class='['].butts.btn.btn-primary {
   color: black;
   background-color: #fcc024;
 }
 
-[id='['].active-button {
+[class='['].active-button {
   background-color: #fffaeb;
 }
 
-[id=']'].butts.btn.btn-primary {
+[class=']'].butts.btn.btn-primary {
   color: black;
   background-color: #fcc628;
 }
 
-[id=']'].active-button {
+[class=']'].active-button {
   background-color: #fffaeb;
 }
 
-[id='a'].butts.btn.btn-primary {
+[class='a'].butts.btn.btn-primary {
   color: black;
   background-color: #fd3ead;
 }
 
-[id='a'].active-button {
+[class='a'].active-button {
   background-color: #ff99a7;
 }
 
-[id='s'].butts.btn.btn-primary {
+[class='s'].butts.btn.btn-primary {
   color: black;
   background-color: #fc46a6;
 }
 
-[id='s'].active-button {
+[class='s'].active-button {
   background-color: #ff99a7;
 }
-[id='d'].butts.btn.btn-primary {
+[class='d'].butts.btn.btn-primary {
   color: black;
   background-color: #fc4e9f;
 }
 
-[id='d'].active-button {
+[class='d'].active-button {
   background-color: #ff99a7;
 }
-[id='f'].butts.btn.btn-primary {
+[class='f'].butts.btn.btn-primary {
   color: black;
   background-color: #fc5698;
 }
 
-[id='f'].active-button {
+[class='f'].active-button {
   background-color: #ff99a7;
 }
-[id='g'].butts.btn.btn-primary {
+[class='g'].butts.btn.btn-primary {
   color: black;
   background-color: #fc5e91;
 }
 
-[id='g'].active-button {
+[class='g'].active-button {
   background-color: #ff99a7;
 }
-[id='h'].butts.btn.btn-primary {
+[class='h'].butts.btn.btn-primary {
   color: black;
   background-color: #fc678a;
 }
 
-[id='h'].active-button {
+[class='h'].active-button {
   background-color: #ff99a7;
 }
-[id='j'].butts.btn.btn-primary {
+[class='j'].butts.btn.btn-primary {
   color: black;
   background-color: #fc6f83;
 }
 
-[id='j'].active-button {
+[class='j'].active-button {
   background-color: #ff99a7;
 }
-[id='k'].butts.btn.btn-primary {
+[class='k'].butts.btn.btn-primary {
   color: black;
   background-color: #fc777c;
 }
 
-[id='k'].active-button {
+[class='k'].active-button {
   background-color: #ff99a7;
 }
-[id='l'].butts.btn.btn-primary {
+[class='l'].butts.btn.btn-primary {
   color: black;
   background-color: #fc7f75;
 }
 
-[id='l'].active-button {
+[class='l'].active-button {
   background-color: #ff99a7;
 }
-[id=';'].butts.btn.btn-primary {
+[class=';'].butts.btn.btn-primary {
   color: black;
   background-color: #fc876e;
 }
 
-[id=';'].active-button {
+[class=';'].active-button {
   background-color: #ff99a7;
 }
-[id="'"].butts.btn.btn-primary {
+[class="'"].butts.btn.btn-primary {
   color: black;
   background-color: #fc9068;
 }
 
-[id="'"].active-button {
+[class="'"].active-button {
   background-color: #ff99a7;
 }
-[id='z'].butts.btn.btn-primary {
+[class='z'].butts.btn.btn-primary {
   color: black;
   background-color: #4f9fef;
 }
 
-[id='z'].active-button {
+[class='z'].active-button {
   background-color: #b2beff;
 }
-[id='x'].butts.btn.btn-primary {
+[class='x'].butts.btn.btn-primary {
   color: black;
   background-color: #5798ed;
 }
 
-[id='x'].active-button {
+[class='x'].active-button {
   background-color: #b2beff;
 }
-[id='c'].butts.btn.btn-primary {
+[class='c'].butts.btn.btn-primary {
   color: black;
   background-color: #6091eb;
 }
 
-[id='c'].active-button {
+[class='c'].active-button {
   background-color: #b2beff;
 }
-[id='v'].butts.btn.btn-primary {
+[class='v'].butts.btn.btn-primary {
   color: black;
   background-color: #698be9;
 }
 
-[id='v'].active-button {
+[class='v'].active-button {
   background-color: #b2beff;
 }
-[id='b'].butts.btn.btn-primary {
+[class='b'].butts.btn.btn-primary {
   color: black;
   background-color: #7184e7;
 }
 
-[id='b'].active-button {
+[class='b'].active-button {
   background-color: #b2beff;
 }
-[id='n'].butts.btn.btn-primary {
+[class='n'].butts.btn.btn-primary {
   color: black;
   background-color: #7a7ee6;
 }
 
-[id='n'].active-button {
+[class='n'].active-button {
   background-color: #b2beff;
 }
-[id='m'].butts.btn.btn-primary {
+[class='m'].butts.btn.btn-primary {
   color: black;
   background-color: #8377e4;
 }
 
-[id='m'].active-button {
+[class='m'].active-button {
   background-color: #b2beff;
 }
-[id=','].butts.btn.btn-primary {
+[class=','].butts.btn.btn-primary {
   color: black;
   background-color: #8b70e2;
 }
 
-[id=','].active-button {
+[class=','].active-button {
   background-color: #b2beff;
 }
-[id='.'].butts.btn.btn-primary {
+[class='.'].butts.btn.btn-primary {
   color: black;
   background-color: #946ae0;
 }
 
-[id='.'].active-button {
+[class='.'].active-button {
   background-color: #b2beff;
 }
-[id='/'].butts.btn.btn-primary {
+[class='/'].butts.btn.btn-primary {
   color: black;
   background-color: #fcc624;
 }
 
-[id='/'].active-button {
+[class='/'].active-button {
   background-color: #fffaeb;
 }
 

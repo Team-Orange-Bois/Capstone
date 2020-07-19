@@ -277,7 +277,7 @@ export function BeetMaker2(props) {
                       <Button
                         id={button}
                         key={button}
-                        className="butts btn btn-primary"
+                        className={`${button} butts btn btn-primary`}
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
