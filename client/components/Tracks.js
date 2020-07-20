@@ -130,24 +130,26 @@ export function Tracks(props) {
                             return (
                               <Draggable
                                 key={`${[uuid()]} ${item.time}`}
-                                className={`${item.label} butts btn btn-primary`}
                                 draggableId={`${[uuid()]}`}
                                 index={index}
                               >
                                 {(provided, snapshot) => {
                                   return (
                                     <div
+                                      id={`${item.key}`}
+                                      className="butts"
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
                                       style={{
                                         userSelect: 'none',
                                         margin: '0 0 0 0',
-                                        minHeight: '50px',
+                                        height: '50px',
                                         width: '11px',
-                                        background: snapshot.isDragging
-                                          ? '#24C0F9'
-                                          : '#fe34d2',
+                                        padding: '0',
+                                        // background: snapshot.isDragging
+                                        //   ? '#24C0F9'
+                                        //   : '#fe34d2',
                                         color: 'white',
                                         ...provided.draggableProps.style
                                       }}

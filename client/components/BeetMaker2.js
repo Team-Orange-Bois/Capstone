@@ -121,7 +121,7 @@ export function BeetMaker2(props) {
 
   const handleKeyDown = (row, identifier) => {
     const button = document.getElementById(identifier)
-    button.setAttribute('class', 'butts btn active-button')
+    button.setAttribute('class', `${identifier} butts btn active-button`)
 
     if (recordStatus) {
       const timingArr = Tone.Transport.position.split(':')
@@ -182,7 +182,8 @@ export function BeetMaker2(props) {
           time: timing,
           tone: 'C3',
           note: keySounds[row][identifier].note,
-          label: keySounds[row][identifier].label
+          label: keySounds[row][identifier].label,
+          key: identifier
         })
       }
     } else {
@@ -207,7 +208,7 @@ export function BeetMaker2(props) {
 
   const handleKeyUp = (row, identifier) => {
     const button = document.getElementById(identifier)
-    button.setAttribute('class', 'butts btn btn-primary')
+    button.setAttribute('class', `${identifier} butts btn btn-primary`)
   }
 
   function timeout(ms) {
