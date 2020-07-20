@@ -267,7 +267,7 @@ export function BeetMaker2(props) {
 
   return (
     <div className="outercontainer">
-      <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
+      <h1 style={{color: '#FE1BCB'}}>Beetmaker</h1>
       <div className="keyboard-wrap">
         <div className="keyboard">
           {Object.keys(keySounds).map(key => {

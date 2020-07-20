@@ -42,14 +42,14 @@ export default function BeetMaker() {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        backgroundColor: '#490769',
+        // backgroundColor: '#490769',
         height: '100vh'
       }}
     >
-      <h1 style={{color: '#FE1BCB'}}>Siq Beets</h1>
+      <h1 style={{color: '#FE1BCB'}}>Playground</h1>
       <form
         style={{
-          backgroundColor: '#490769',
+          // backgroundColor: '#490769',
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'column',
