@@ -14,31 +14,53 @@ export default function GuestHome() {
       }}
     >
       <h1 style={{color: '#FE1BCB'}}>Welcome!</h1>
-      <img src="./SiqBeets_Large.png" />
+      <img
+        src="./SiqBeets_Large.png"
+        style={{width: '250px', height: '250px', marginTop: '30px'}}
+      />
       <Carousel fade={true}>
         <Carousel.Item>
           <Nav.Link href="/beetmaker">
-            <img
-              className="d-block w-100"
-              src="./Beetmaker1.png"
-              alt="First slide"
-            />
+            <div
+              style={{display: 'flex', flexDirection: 'column', width: '500px'}}
+            >
+              <p>
+                The Playground is a place for you to get acquainted with the
+                many sound possabilities available to you. Choose your own
+                settings on the drum machine and jam away. Once you have enough
+                practice in and want to lay down your own siq beet head on over
+                to the beet maker!
+              </p>
+              <img
+                className="d-block w-100"
+                src="./Beetmaker1.png"
+                alt="First slide"
+              />
+            </div>
             <Carousel.Caption>
-              <h3>Beetmaker 1</h3>
+              <h2>The Playground</h2>
               <p>Plant a seedling beet</p>
             </Carousel.Caption>
           </Nav.Link>
         </Carousel.Item>
         <Carousel.Item>
           <Nav.Link href="/beetmaker2">
-            <img
-              className="d-block w-100"
-              src="./Beetmaker2.png"
-              alt="Third slide"
-            />
-
+            <div
+              style={{display: 'flex', flexDirection: 'column', width: '500px'}}
+            >
+              <p>
+                Beet Maker is when it gets real! It's time to record songs and
+                show them to your friends! Take some time to practice and when
+                you have a song that you like save it!
+              </p>
+              <img
+                className="d-block w-100"
+                src="./Beetmaker2.png"
+                alt="Second slide"
+              />
+            </div>
             <Carousel.Caption>
-              <h3>Beetmaker 2</h3>
+              <h2>Beet Maker</h2>
               <p>Lettuce turnip da beet</p>
             </Carousel.Caption>
           </Nav.Link>
