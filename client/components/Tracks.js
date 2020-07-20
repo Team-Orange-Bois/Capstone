@@ -80,7 +80,7 @@ export function Tracks(props) {
           alignItems: 'center'
         }}
       >
-        <h1 style={{color: '#FE1BCB'}}>Loop Station</h1>
+        <h1 style={{color: '#FE1BCB'}}>Visualizer</h1>
       </div>
       <div
         style={{

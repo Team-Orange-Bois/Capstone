@@ -92,7 +92,8 @@ export function BeetMaker2(props) {
           time: sample.time,
           tone: sample.tone,
           note: findSample(sample.label),
-          label: sample.label
+          label: sample.label,
+          key: sample.key
         })
         newParts.add({
           time: sample.time,
@@ -170,7 +171,8 @@ export function BeetMaker2(props) {
           time: timing,
           tone: 'C3',
           note: keySounds[row][identifier].note,
-          label: keySounds[row][identifier].label
+          label: keySounds[row][identifier].label,
+          key: identifier
         })
 
         newParts.add({
@@ -250,7 +252,8 @@ export function BeetMaker2(props) {
         time: sample.time,
         //could get rid of tone and just put 'C3' back later
         tone: sample.tone,
-        label: sample.label
+        label: sample.label,
+        key: sample.key
       }))
       return {samples: newSamples}
     }
