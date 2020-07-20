@@ -1,3 +1,4 @@
+/* eslint-disable callback-return */
 const router = require('express').Router()
 module.exports = router
 
@@ -9,7 +10,8 @@ router.get('/', async (req, res, next) => {
     if (!req.session.songs) {
       req.session.songs = []
     }
-    await res.json(req.session.songs)
+    res.set('Access-Control-Allow-Origin', '*')
+    res.json(req.session.songs)
   } catch (error) {
     next(error)
   }
@@ -30,6 +32,7 @@ router.post('/', (req, res, next) => {
       newSong.name = req.session.songs.length + 1
       req.session.songs = [...req.session.songs, newSong]
     }
+    res.set('Access-Control-Allow-Origin', '*')
     res.status(201).json(req.session.songs)
   } catch (error) {
     next(error)
@@ -38,6 +41,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/currentSong', (req, res, next) => {
   try {
+    res.set('Access-Control-Allow-Origin', '*')
     res.json(req.session.currentSong)
   } catch (error) {
     next(error)
@@ -50,6 +54,7 @@ router.get('/:songName', (req, res, next) => {
     let songName = Number(req.params.songName)
     let songToLoad = songsOnSesh.filter(song => song.name === songName)
     req.session.currentSong = songToLoad
+    res.set('Access-Control-Allow-Origin', '*')
     res.json(songToLoad)
   } catch (err) {
     next(err)
@@ -59,6 +64,7 @@ router.get('/:songName', (req, res, next) => {
 router.put('/currentSong', (req, res, next) => {
   try {
     req.session.currentSong = []
+    res.set('Access-Control-Allow-Origin', '*')
     res.sendStatus(204)
   } catch (error) {
     next(error)

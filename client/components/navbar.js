@@ -7,12 +7,27 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 export function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" id="navbar" bg="dark" variant="dark">
-      <Navbar.Brand href="/">Siq Beets</Navbar.Brand>
+      <Navbar.Brand href="/" style={{paddingTop: 0, paddingBottom: 0}}>
+        <img
+          src="/SiqBeets_Face.png"
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt="Siq Beets logo"
+        />
+        <img
+          src="/SiqBeets_Text_S.png"
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt="Siq Beets Text logo"
+        />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/beetmaker">Beet Maker Alpha</Nav.Link>
-          <Nav.Link href="/beetmaker2">Beet Maker Beta</Nav.Link>
+          <Nav.Link href="/beetmaker">The Playground</Nav.Link>
+          <Nav.Link href="/beetmaker2">Beet Maker</Nav.Link>
           {/* <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link> */}
           {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

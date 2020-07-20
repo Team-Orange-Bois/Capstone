@@ -3,394 +3,8 @@ import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 import uuid from 'uuid/v4'
 import {connect} from 'react-redux'
 import {setSamplesThunk} from '../store/sampler'
-import {newParts} from './BeetMaker2'
-
-const columnsFromBackend = {
-  '0:0:0': {
-    items: []
-  },
-  '0:0:0.5': {
-    items: []
-  },
-  '0:0:1': {
-    items: []
-  },
-  '0:0:1.5': {
-    items: []
-  },
-  '0:0:2': {
-    items: []
-  },
-  '0:0:2.5': {
-    items: []
-  },
-  '0:0:3': {
-    items: []
-  },
-  '0:0:3.5': {
-    items: []
-  },
-  '0:1:0': {
-    items: []
-  },
-  '0:1:0.5': {
-    items: []
-  },
-  '0:1:1': {
-    items: []
-  },
-  '0:1:1.5': {
-    items: []
-  },
-  '0:1:2': {
-    items: []
-  },
-  '0:1:2.5': {
-    items: []
-  },
-  '0:1:3': {
-    items: []
-  },
-  '0:1:3.5': {
-    items: []
-  },
-  '0:2:0': {
-    items: []
-  },
-  '0:2:0.5': {
-    items: []
-  },
-  '0:2:1': {
-    items: []
-  },
-  '0:2:1.5': {
-    items: []
-  },
-  '0:2:2': {
-    items: []
-  },
-  '0:2:2.5': {
-    items: []
-  },
-  '0:2:3': {
-    items: []
-  },
-  '0:2:3.5': {
-    items: []
-  },
-  '0:3:0': {
-    items: []
-  },
-  '0:3:0.5': {
-    items: []
-  },
-  '0:3:1': {
-    items: []
-  },
-  '0:3:1.5': {
-    items: []
-  },
-  '0:3:2': {
-    items: []
-  },
-  '0:3:2.5': {
-    items: []
-  },
-  '0:3:3': {
-    items: []
-  },
-  '0:3:3.5': {
-    items: []
-  },
-  '1:0:0': {
-    items: []
-  },
-  '1:0:0.5': {
-    items: []
-  },
-  '1:0:1': {
-    items: []
-  },
-  '1:0:1.5': {
-    items: []
-  },
-  '1:0:2': {
-    items: []
-  },
-  '1:0:2.5': {
-    items: []
-  },
-  '1:0:3': {
-    items: []
-  },
-  '1:0:3.5': {
-    items: []
-  },
-  '1:1:0': {
-    items: []
-  },
-  '1:1:0.5': {
-    items: []
-  },
-  '1:1:1': {
-    items: []
-  },
-  '1:1:1.5': {
-    items: []
-  },
-  '1:1:2': {
-    items: []
-  },
-  '1:1:2.5': {
-    items: []
-  },
-  '1:1:3': {
-    items: []
-  },
-  '1:1:3.5': {
-    items: []
-  },
-  '1:2:0': {
-    items: []
-  },
-  '1:2:0.5': {
-    items: []
-  },
-  '1:2:1': {
-    items: []
-  },
-  '1:2:1.5': {
-    items: []
-  },
-  '1:2:2': {
-    items: []
-  },
-  '1:2:2.5': {
-    items: []
-  },
-  '1:2:3': {
-    items: []
-  },
-  '1:2:3.5': {
-    items: []
-  },
-  '1:3:0': {
-    items: []
-  },
-  '1:3:0.5': {
-    items: []
-  },
-  '1:3:1': {
-    items: []
-  },
-  '1:3:1.5': {
-    items: []
-  },
-  '1:3:2': {
-    items: []
-  },
-  '1:3:2.5': {
-    items: []
-  },
-  '1:3:3': {
-    items: []
-  },
-  '1:3:3.5': {
-    items: []
-  },
-  '2:0:0': {
-    items: []
-  },
-  '2:0:0.5': {
-    items: []
-  },
-  '2:0:1': {
-    items: []
-  },
-  '2:0:1.5': {
-    items: []
-  },
-  '2:0:2': {
-    items: []
-  },
-  '2:0:2.5': {
-    items: []
-  },
-  '2:0:3': {
-    items: []
-  },
-  '2:0:3.5': {
-    items: []
-  },
-  '2:1:0': {
-    items: []
-  },
-  '2:1:0.5': {
-    items: []
-  },
-  '2:1:1': {
-    items: []
-  },
-  '2:1:1.5': {
-    items: []
-  },
-  '2:1:2': {
-    items: []
-  },
-  '2:1:2.5': {
-    items: []
-  },
-  '2:1:3': {
-    items: []
-  },
-  '2:1:3.5': {
-    items: []
-  },
-  '2:2:0': {
-    items: []
-  },
-  '2:2:0.5': {
-    items: []
-  },
-  '2:2:1': {
-    items: []
-  },
-  '2:2:1.5': {
-    items: []
-  },
-  '2:2:2': {
-    items: []
-  },
-  '2:2:2.5': {
-    items: []
-  },
-  '2:2:3': {
-    items: []
-  },
-  '2:2:3.5': {
-    items: []
-  },
-  '2:3:0': {
-    items: []
-  },
-  '2:3:0.5': {
-    items: []
-  },
-  '2:3:1': {
-    items: []
-  },
-  '2:3:1.5': {
-    items: []
-  },
-  '2:3:2': {
-    items: []
-  },
-  '2:3:2.5': {
-    items: []
-  },
-  '2:3:3': {
-    items: []
-  },
-  '2:3:3.5': {
-    items: []
-  },
-  '3:0:0': {
-    items: []
-  },
-  '3:0:0.5': {
-    items: []
-  },
-  '3:0:1': {
-    items: []
-  },
-  '3:0:1.5': {
-    items: []
-  },
-  '3:0:2': {
-    items: []
-  },
-  '3:0:2.5': {
-    items: []
-  },
-  '3:0:3': {
-    items: []
-  },
-  '3:0:3.5': {
-    items: []
-  },
-  '3:1:0': {
-    items: []
-  },
-  '3:1:0.5': {
-    items: []
-  },
-  '3:1:1': {
-    items: []
-  },
-  '3:1:1.5': {
-    items: []
-  },
-  '3:1:2': {
-    items: []
-  },
-  '3:1:2.5': {
-    items: []
-  },
-  '3:1:3': {
-    items: []
-  },
-  '3:1:3.5': {
-    items: []
-  },
-  '3:2:0': {
-    items: []
-  },
-  '3:2:0.5': {
-    items: []
-  },
-  '3:2:1': {
-    items: []
-  },
-  '3:2:1.5': {
-    items: []
-  },
-  '3:2:2': {
-    items: []
-  },
-  '3:2:2.5': {
-    items: []
-  },
-  '3:2:3': {
-    items: []
-  },
-  '3:2:3.5': {
-    items: []
-  },
-  '3:3:0': {
-    items: []
-  },
-  '3:3:0.5': {
-    items: []
-  },
-  '3:3:1': {
-    items: []
-  },
-  '3:3:1.5': {
-    items: []
-  },
-  '3:3:2': {
-    items: []
-  },
-  '3:3:2.5': {
-    items: []
-  },
-  '3:3:3': {
-    items: []
-  },
-  '3:3:3.5': {
-    items: []
-  }
-}
+import {dragFrom} from './DragFrom'
+//import {newParts} from './BeetMaker2'
 
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return
@@ -430,7 +44,7 @@ const onDragEnd = (result, columns, setColumns) => {
 }
 
 export function Tracks(props) {
-  const [columns, setColumns] = useState(columnsFromBackend)
+  const [columns, setColumns] = useState(dragFrom)
 
   const {samples, setSamples} = props
 
@@ -466,7 +80,7 @@ export function Tracks(props) {
           alignItems: 'center'
         }}
       >
-        <h1 style={{color: '#FE1BCB'}}>Loop Station</h1>
+        <h1 style={{color: '#FE1BCB'}}>Visualizer</h1>
       </div>
       <div
         style={{
@@ -522,17 +136,20 @@ export function Tracks(props) {
                                 {(provided, snapshot) => {
                                   return (
                                     <div
+                                      id={`${item.key}`}
+                                      className="butts"
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
                                       style={{
                                         userSelect: 'none',
                                         margin: '0 0 0 0',
-                                        minHeight: '50px',
+                                        height: '50px',
                                         width: '11px',
-                                        background: snapshot.isDragging
-                                          ? '#24C0F9'
-                                          : '#fe34d2',
+                                        padding: '0',
+                                        // background: snapshot.isDragging
+                                        //   ? '#24C0F9'
+                                        //   : '#fe34d2',
                                         color: 'white',
                                         ...provided.draggableProps.style
                                       }}

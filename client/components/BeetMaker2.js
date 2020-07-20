@@ -25,8 +25,6 @@ const woodblock = new Tone.Sampler({
 
 const keySounds = defaultBoard
 
-//let firstLoad = true
-
 const samplerObj = {samples: []}
 let metronomeStatus = false
 let recordStatus = false
@@ -94,7 +92,8 @@ export function BeetMaker2(props) {
           time: sample.time,
           tone: sample.tone,
           note: findSample(sample.label),
-          label: sample.label
+          label: sample.label,
+          key: sample.key
         })
         newParts.add({
           time: sample.time,
@@ -123,7 +122,7 @@ export function BeetMaker2(props) {
 
   const handleKeyDown = (row, identifier) => {
     const button = document.getElementById(identifier)
-    button.setAttribute('class', 'butts btn active-button')
+    button.setAttribute('class', `${identifier} butts btn active-button`)
 
     if (recordStatus) {
       const timingArr = Tone.Transport.position.split(':')
@@ -172,7 +171,8 @@ export function BeetMaker2(props) {
           time: timing,
           tone: 'C3',
           note: keySounds[row][identifier].note,
-          label: keySounds[row][identifier].label
+          label: keySounds[row][identifier].label,
+          key: identifier
         })
 
         newParts.add({
@@ -184,7 +184,8 @@ export function BeetMaker2(props) {
           time: timing,
           tone: 'C3',
           note: keySounds[row][identifier].note,
-          label: keySounds[row][identifier].label
+          label: keySounds[row][identifier].label,
+          key: identifier
         })
       }
     } else {
@@ -209,7 +210,7 @@ export function BeetMaker2(props) {
 
   const handleKeyUp = (row, identifier) => {
     const button = document.getElementById(identifier)
-    button.setAttribute('class', 'butts btn btn-primary')
+    button.setAttribute('class', `${identifier} butts btn btn-primary`)
   }
 
   function timeout(ms) {
@@ -251,7 +252,8 @@ export function BeetMaker2(props) {
         time: sample.time,
         //could get rid of tone and just put 'C3' back later
         tone: sample.tone,
-        label: sample.label
+        label: sample.label,
+        key: sample.key
       }))
       return {samples: newSamples}
     }
@@ -279,7 +281,7 @@ export function BeetMaker2(props) {
                       <Button
                         id={button}
                         key={button}
-                        className="butts btn btn-primary"
+                        className={`${button} butts btn btn-primary`}
                         onMouseDown={e => handleKeyDown(key, e.target.id)}
                         onMouseUp={e => handleKeyUp(key, e.target.id)}
                       >
