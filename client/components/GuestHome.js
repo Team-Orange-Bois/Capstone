@@ -26,10 +26,10 @@ export default function GuestHome() {
             >
               <p>
                 The Playground is a place for you to get acquainted with the
-                many sound possabilities available to you. Choose your own
+                many sound possibilities available to you. Choose your own
                 settings on the drum machine and jam away. Once you have enough
                 practice in and want to lay down your own siq beet head on over
-                to the beet maker!
+                to the Beet Maker!
               </p>
               <img
                 className="d-block w-100"
@@ -49,9 +49,9 @@ export default function GuestHome() {
               style={{display: 'flex', flexDirection: 'column', width: '500px'}}
             >
               <p>
-                Beet Maker is when it gets real! It's time to record songs and
-                show them to your friends! Take some time to practice and when
-                you have a song that you like save it!
+                Beet Maker is when it gets real! It's time to record actual
+                songs! Take some time to practice and when you have a song that
+                you like save it!
               </p>
               <img
                 className="d-block w-100"
