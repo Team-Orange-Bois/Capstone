@@ -45,7 +45,7 @@ const SavedLoopsComponent = ({getSongs, songs}) => {
           </Button>
         </Form>
       ) : (
-        <h1 style={{color: '#FE1BCB'}}>No saved Loops</h1>
+        <h1 style={{fontWeight: 'bolder', color: '#FE1BCB'}}>No saved Loops</h1>
       )}
     </div>
   )

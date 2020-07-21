@@ -365,7 +365,7 @@ export function BeetMaker2(props) {
               </label>
             </div>
             <Form.Group>
-              <Form.Label>Volume</Form.Label>
+              <Form.Label style={{fontWeight: 'bolder'}}>Volume</Form.Label>
               <Form.Control
                 name="Volume"
                 type="range"
@@ -384,7 +384,7 @@ export function BeetMaker2(props) {
               </datalist>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Speed</Form.Label>
+              <Form.Label style={{fontWeight: 'bolder'}}>Speed</Form.Label>
               <Form.Control
                 name="BPM"
                 type="range"

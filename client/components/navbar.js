@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Coffee from './Coffee'
 
 export function NavBar() {
   return (
@@ -28,6 +29,7 @@ export function NavBar() {
         <Nav className="mr-auto">
           <Nav.Link href="/beetmaker">The Playground</Nav.Link>
           <Nav.Link href="/beetmaker2">Beet Maker</Nav.Link>
+
           {/* <Nav.Link href="/beetdropper">Beet Dropper</Nav.Link> */}
           {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -41,12 +43,13 @@ export function NavBar() {
             </NavDropdown.Item>
           </NavDropdown> */}
         </Nav>
-        {/* <Nav>
-          <Nav.Link href="#deets">More deets</Nav.Link>
+        <Nav>
+          {/* <Nav.Link href="#deets">More deets</Nav.Link>
           <Nav.Link eventKey={2} href="#memes">
             Dank memes
-          </Nav.Link>
-        </Nav> */}
+          </Nav.Link> */}
+          <Coffee />
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   )
