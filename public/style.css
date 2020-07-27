@@ -321,35 +321,35 @@ button {
 }
 
 [id='1'].butts {
-  color: white;
-  background-color: #43217d;
+  color: black;
+  background-color: #fdcb25;
 }
 
 [id='1'].active-button {
-  background-color: #c6b2ff;
+  background-color: #fffaeb;
 }
 
 [id='2'].butts {
-  color: white;
-  background-color: #412a84;
+  color: black;
+  background-color: #fdcf37;
 }
 
 [id='2'].active-button {
-  background-color: #c6b2ff;
+  background-color: #fffaeb;
 }
 
 [id='3'].butts {
-  color: white;
-  background-color: #40338b;
+  color: black;
+  background-color: #fdd349;
 }
 
 [id='3'].active-button {
-  background-color: #c6b2ff;
+  background-color: #fffaeb;
 }
 
 [id='4'].butts {
   color: black;
-  background-color: #fc9b58;
+  background-color: #fdd85b;
 }
 
 [id='4'].active-button {
@@ -358,7 +358,7 @@ button {
 
 [id='5'].butts {
   color: black;
-  background-color: #fca153;
+  background-color: #fddc6d;
 }
 
 [id='5'].active-button {
@@ -367,7 +367,7 @@ button {
 
 [id='6'].butts {
   color: black;
-  background-color: #fca64d;
+  background-color: #fde07f;
 }
 
 [id='6'].active-button {
@@ -376,7 +376,7 @@ button {
 
 [id='7'].butts {
   color: black;
-  background-color: #fcac46;
+  background-color: #fee592;
 }
 
 [id='7'].active-button {
@@ -385,7 +385,7 @@ button {
 
 [id='8'].butts {
   color: black;
-  background-color: #fcb23f;
+  background-color: #fee9a4;
 }
 
 [id='8'].active-button {
@@ -394,7 +394,7 @@ button {
 
 [id='9'].butts {
   color: black;
-  background-color: #fcb739;
+  background-color: #feedb6;
 }
 
 [id='9'].active-button {
@@ -403,7 +403,7 @@ button {
 
 [id='k0'].butts {
   color: black;
-  background-color: #fcbd32;
+  background-color: #fef2c8;
 }
 
 [id='k0'].active-button {
@@ -412,7 +412,7 @@ button {
 
 [id='-'].butts {
   color: black;
-  background-color: #fcc325;
+  background-color: #fef6da;
 }
 
 [id='-'].active-button {
@@ -421,7 +421,7 @@ button {
 
 [id='='].butts {
   color: black;
-  background-color: #fdc925;
+  background-color: #fefaec;
 }
 
 [id='='].active-button {
@@ -627,7 +627,7 @@ button {
 }
 [id='z'].butts {
   color: black;
-  background-color: #4f9fef;
+  background-color: #7945d9;
 }
 
 [id='z'].active-button {
@@ -635,7 +635,7 @@ button {
 }
 [id='x'].butts {
   color: black;
-  background-color: #5798ed;
+  background-color: #744fdb;
 }
 
 [id='x'].active-button {
@@ -643,7 +643,7 @@ button {
 }
 [id='c'].butts {
   color: black;
-  background-color: #6091eb;
+  background-color: #6f59dd;
 }
 
 [id='c'].active-button {
@@ -651,7 +651,7 @@ button {
 }
 [id='v'].butts {
   color: black;
-  background-color: #698be9;
+  background-color: #6b63e0;
 }
 
 [id='v'].active-button {
@@ -659,7 +659,7 @@ button {
 }
 [id='b'].butts {
   color: black;
-  background-color: #7184e7;
+  background-color: #666de2;
 }
 
 [id='b'].active-button {
@@ -667,7 +667,7 @@ button {
 }
 [id='n'].butts {
   color: black;
-  background-color: #7a7ee6;
+  background-color: #6177e5;
 }
 
 [id='n'].active-button {
@@ -675,7 +675,7 @@ button {
 }
 [id='m'].butts {
   color: black;
-  background-color: #8377e4;
+  background-color: #5d81e7;
 }
 
 [id='m'].active-button {
@@ -683,7 +683,7 @@ button {
 }
 [id=','].butts {
   color: black;
-  background-color: #8b70e2;
+  background-color: #588bea;
 }
 
 [id=','].active-button {
@@ -691,7 +691,7 @@ button {
 }
 [id='.'].butts {
   color: black;
-  background-color: #946ae0;
+  background-color: #5395ec;
 }
 
 [id='.'].active-button {
@@ -699,7 +699,7 @@ button {
 }
 [id='/'].butts {
   color: black;
-  background-color: #7945d9;
+  background-color: #4f9fef;
 }
 
 [id='/'].active-button {

@@ -343,8 +343,13 @@ export function BeetMaker2(props) {
           </Button>
         </div>
         <div>
-          <Form>
+          <Form
+            style={{display: 'flex', flexDirection: 'row', alignItems: 'start'}}
+          >
             <div>
+              <Form.Label style={{fontWeight: 'bolder', color: '#490769'}}>
+                Metronome
+              </Form.Label>
               <input
                 className="react-switch-checkbox"
                 id="react-switch-new"
@@ -364,8 +369,10 @@ export function BeetMaker2(props) {
                 <span className="react-switch-button" />
               </label>
             </div>
-            <Form.Group>
-              <Form.Label style={{fontWeight: 'bolder'}}>Volume</Form.Label>
+            <div>
+              <Form.Label style={{fontWeight: 'bolder', color: '#490769'}}>
+                Volume
+              </Form.Label>
               <Form.Control
                 name="Volume"
                 type="range"
@@ -382,9 +389,11 @@ export function BeetMaker2(props) {
                 <option value="0" />
                 <option value="5" />
               </datalist>
-            </Form.Group>
+            </div>
             <Form.Group>
-              <Form.Label style={{fontWeight: 'bolder'}}>Speed</Form.Label>
+              <Form.Label style={{fontWeight: 'bolder', color: '#490769'}}>
+                Speed
+              </Form.Label>
               <Form.Control
                 name="BPM"
                 type="range"

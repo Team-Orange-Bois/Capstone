@@ -83,19 +83,39 @@ const minRoll = new Tone.Sampler({
   C3:
     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Keys%2FminRoll.mp3?alt=media&token=3c835536-9700-4942-9fd4-cdfc77ea1c1b'
 }).toMaster()
+const majRoll = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Keys%2FmajRoll.mp3?alt=media&token=8f01dffc-18ec-4f14-a3a6-4ccd1a7b6725'
+}).toMaster()
 
 //Drums
-const kick = new Tone.Sampler({
+const kick1 = new Tone.Sampler({
   C3:
     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2Fkick.mp3?alt=media&token=bb2eaaf7-136f-48a6-bc2d-0edb58528677'
 }).toMaster()
-const snare = new Tone.Sampler({
+const kick2 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2Fkick2.mp3?alt=media&token=a456f202-ff8e-4c9c-864d-6207f6084394'
+}).toMaster()
+const snare1 = new Tone.Sampler({
   C3:
     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2Fsnare.mp3?alt=media&token=d1a67583-0750-4c12-9285-2914be98ad94'
 }).toMaster()
-const closedHat = new Tone.Sampler({
+const snare2 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2Fsnare2.mp3?alt=media&token=be0562b7-d990-44d2-a1a9-65653d924962'
+}).toMaster()
+const hat1 = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2FopenHat.mp3?alt=media&token=7e1207ee-bda6-4756-9ae6-9f1bf3f74326'
+}).toMaster()
+const hat2 = new Tone.Sampler({
   C3:
     'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2FclosedHat.mp3?alt=media&token=9ab0be4d-c670-49bd-bb6f-bb5e6fbe1ac8'
+}).toMaster()
+const clap = new Tone.Sampler({
+  C3:
+    'https://firebasestorage.googleapis.com/v0/b/siqbeets-23b66.appspot.com/o/Drums%2Fclap.mp3?alt=media&token=70b3c602-e4f4-4163-b026-3cb509e997c9'
 }).toMaster()
 
 //Vocals
@@ -240,22 +260,22 @@ const youGotIt = new Tone.Sampler({
 
 export const defaultBoard = {
   numberRow: {
-    '1': {note: kick, label: 'Kick'},
-    '2': {note: snare, label: 'Snare'},
-    '3': {note: closedHat, label: 'Hat'},
-    '4': {note: lit, label: 'Lit'},
-    '5': {note: sick, label: 'Sick'},
-    '6': {note: hotDamn, label: 'Hot Damn'},
-    '7': {note: hahaha, label: 'Hehehehe'},
-    '8': {note: wow, label: 'Wow!'},
-    '9': {note: yeah, label: 'Yeah'},
+    '1': {note: kick1, label: 'Kick 1'},
+    '2': {note: kick2, label: 'Kick 2'},
+    '3': {note: snare1, label: 'Snare 1'},
+    '4': {note: snare2, label: 'Snare 2'},
+    '5': {note: hat1, label: 'Hat 1'},
+    '6': {note: hat2, label: 'Hat 2'},
+    '7': {note: clap, label: 'Clap'},
+    '8': {note: sick, label: 'Sick'},
+    '9': {note: hotDamn, label: 'Hot Damn'},
     k0: {note: youGotIt, label: 'You got it!'},
-    '-': {note: bigOof, label: 'Big Oof'},
+    '-': {note: hahaha, label: 'Hehehehe'},
     '=': {note: iCantSwim, label: 'Swim'}
   },
   qRow: {
     q: {note: badBitch, label: 'Bad Bitch'},
-    w: {note: lettuceTurnipDaBeet, label: 'Lettuce'},
+    w: {note: ohYeah, label: 'Oh Yeah'},
     e: {note: itsTime, label: 'Thyme'},
     r: {note: turnip, label: 'Turnip'},
     t: {note: daBeat, label: 'Da Beat'},
@@ -265,12 +285,12 @@ export const defaultBoard = {
     o: {note: oof, label: 'Oof'},
     p: {note: skrrt, label: 'Skrrt!'},
     '[': {note: bonkers, label: 'Bonkers!'},
-    ']': {note: hummus, label: 'Hummus!'}
+    ']': {note: snapCracklePop, label: 'Snap!'}
   },
   aRow: {
-    a: {note: guitarGroove1, label: 'guitarGroove1'},
-    s: {note: guitarGroove2, label: 'guitarGroove2'},
-    d: {note: guitarGroove3, label: 'guitarGroove3'},
+    a: {note: guitarGroove1, label: 'guitar1'},
+    s: {note: guitarGroove2, label: 'guitar2'},
+    d: {note: guitarGroove3, label: 'guitar3'},
     f: {note: guitarLick1, label: 'guitarLick1'},
     g: {note: guitarLick2, label: 'guitarLick2'},
     h: {note: guitarLick3, label: 'guitarLick3'},
@@ -288,8 +308,8 @@ export const defaultBoard = {
     b: {note: keysG7, label: 'keysG7'},
     n: {note: keysAmin7, label: 'keysAmin7'},
     m: {note: keysBm7b5, label: 'keysBm7b5'},
-    ',': {note: keysCmaj7Oct, label: 'keysCmaj7Oct'},
+    ',': {note: keysCmaj7Oct, label: 'keysCOctave'},
     '.': {note: minRoll, label: 'minRoll'},
-    '/': {note: ohYeah, label: 'Oh Yeah'}
+    '/': {note: majRoll, label: 'majRoll'}
   }
 }
