@@ -1,6 +1,6 @@
 Welcome to SIQ BEETS
 
-A porject brought to you by Thaddeus Metz, Niko Sward and Daniel Sprague
+A project brought to you by Thaddeus Metz, Niko Sward and Daniel Sprague
 
 Siq Beets is an audio playground that allows the user to make their own music without having any experience or knowledge of music creation.
 
