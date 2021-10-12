@@ -46,7 +46,7 @@
   "license": "MIT",
   "dependencies": {
     "@shopify/draggable": "^1.0.0-beta.8",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bootstrap": "^4.5.0",
     "compression": "^1.7.3",
     "connect": "^3.7.0",
